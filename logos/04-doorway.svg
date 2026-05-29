@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" role="img" aria-labelledby="title desc">
+  <title id="title">Archolith doorway</title>
+  <desc id="desc">Heavy block with a negative-space arch cutout and keystone dot.</desc>
+  <rect width="100" height="100" fill="#ECE5D5"/>
+  <path d="M10 92 L9 18 L14 10 L88 9 L91 17 L92 92 Z" fill="#0F0C09"/>
+  <path d="M30 92 L30 56 A20 20 0 0 1 70 56 L70 92 Z" fill="#ECE5D5"/>
+  <circle cx="50" cy="48" r="4.2" fill="#C2381C"/>
+  <rect x="6" y="92" width="89" height="3" fill="#0F0C09"/>
+</svg>

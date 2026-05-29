@@ -1,0 +1,395 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Archolith Logo Showcase</title>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;700&family=Space+Grotesk:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #0f141c;
+  --bg-2: #161d28;
+  --ink: #d6dde8;
+  --ink-2: #98a4b6;
+  --ink-mute: #61708a;
+  --accent: #6c8fbe;
+  --rule: rgba(214,221,232,0.18);
+  --stone: #ECE5D5;
+}
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+body {
+  background: var(--bg);
+  color: var(--ink);
+  font-family: "Space Grotesk", system-ui, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  min-height: 100vh;
+}
+
+header {
+  padding: 48px 48px 32px;
+  border-bottom: 1px solid var(--rule);
+}
+header h1 {
+  font-size: 14px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  color: var(--ink-mute);
+}
+header h1 span { color: var(--ink); }
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  gap: 1px;
+  background: var(--rule);
+}
+
+.card {
+  background: var(--bg);
+  padding: 48px;
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+}
+
+.card__label {
+  display: flex;
+  align-items: baseline;
+  gap: 12px;
+}
+.card__code {
+  font-family: "IBM Plex Mono", monospace;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--accent);
+}
+.card__name {
+  font-size: 18px;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+}
+.card__desc {
+  font-family: "IBM Plex Mono", monospace;
+  font-size: 12px;
+  color: var(--ink-mute);
+  letter-spacing: 0.04em;
+  line-height: 1.5;
+}
+
+.card__sizes {
+  display: flex;
+  align-items: end;
+  gap: 28px;
+}
+
+.card__size {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+}
+
+.card__size-label {
+  font-family: "IBM Plex Mono", monospace;
+  font-size: 9px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--ink-mute);
+}
+
+.logo-frame {
+  background: var(--stone);
+  border: 1px solid rgba(214,221,232,0.15);
+  box-shadow: 4px 4px 0 rgba(0,0,0,0.25);
+  padding: 8px;
+  display: grid;
+  place-items: center;
+}
+.logo-frame img { width: 100%; height: 100%; display: block; }
+
+.logo-frame--xl { width: 160px; height: 160px; padding: 12px; }
+.logo-frame--lg { width: 96px; height: 96px; }
+.logo-frame--md { width: 48px; height: 48px; padding: 4px; }
+.logo-frame--sm { width: 24px; height: 24px; padding: 2px; }
+.logo-frame--xs { width: 16px; height: 16px; padding: 1px; }
+
+/* Nav mock strip */
+.nav-mock {
+  margin-top: auto;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 14px 20px;
+  background: rgba(15,20,28,0.92);
+  border: 1px solid var(--rule);
+  font-size: 13px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+.nav-mock__shard {
+  width: 24px; height: 24px; padding: 2px;
+  background: var(--stone);
+  border: 1px solid rgba(214,221,232,0.15);
+  box-shadow: 3px 3px 0 rgba(0,0,0,0.25);
+  display: grid; place-items: center;
+}
+.nav-mock__shard img { width: 100%; height: 100%; display: block; }
+.nav-mock__links {
+  margin-left: auto;
+  display: flex;
+  gap: 20px;
+  font-size: 11px;
+  color: var(--ink-mute);
+  letter-spacing: 0.1em;
+}
+
+/* Dark-on-light variant */
+.card__invert {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 20px 24px;
+  background: #f0ebe0;
+  border: 1px solid rgba(15,20,28,0.1);
+}
+.card__invert-logo {
+  width: 40px; height: 40px;
+}
+.card__invert-logo img { width: 100%; height: 100%; display: block; }
+.card__invert-text {
+  font-size: 16px;
+  font-weight: 700;
+  color: #0f0c09;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+.card__invert-text span {
+  display: block;
+  font-size: 10px;
+  font-weight: 400;
+  color: #61708a;
+  letter-spacing: 0.1em;
+  margin-top: 2px;
+}
+
+.winner { position: relative; }
+.winner::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border: 2px solid var(--accent);
+  pointer-events: none;
+}
+</style>
+</head>
+<body>
+
+<header>
+  <h1><span>Archolith</span> &mdash; Logo Variants &mdash; S5 Strata Column</h1>
+</header>
+
+<div class="grid">
+
+  <div class="card">
+    <div class="card__label">
+      <span class="card__code">S5</span>
+      <span class="card__name">Original</span>
+    </div>
+    <p class="card__desc">Current mark. Narrow column, subtle 8px shift on the extracted stratum.</p>
+    <div class="card__sizes">
+      <div class="card__size">
+        <div class="logo-frame logo-frame--xl"><img src="05-strata-column.svg" alt=""></div>
+        <span class="card__size-label">160px</span>
+      </div>
+      <div class="card__size">
+        <div class="logo-frame logo-frame--lg"><img src="05-strata-column.svg" alt=""></div>
+        <span class="card__size-label">96px</span>
+      </div>
+      <div class="card__size">
+        <div class="logo-frame logo-frame--md"><img src="05-strata-column.svg" alt=""></div>
+        <span class="card__size-label">48px</span>
+      </div>
+      <div class="card__size">
+        <div class="logo-frame logo-frame--sm"><img src="05-strata-column.svg" alt=""></div>
+        <span class="card__size-label">24px</span>
+      </div>
+      <div class="card__size">
+        <div class="logo-frame logo-frame--xs"><img src="05-strata-column.svg" alt=""></div>
+        <span class="card__size-label">16px</span>
+      </div>
+    </div>
+    <div class="nav-mock">
+      <span class="nav-mock__shard"><img src="05-strata-column.svg" alt=""></span>
+      ARCHOLITH
+      <div class="nav-mock__links"><span>Docs</span><span>GitHub</span></div>
+    </div>
+    <div class="card__invert">
+      <div class="card__invert-logo"><img src="05-strata-column.svg" alt=""></div>
+      <div class="card__invert-text">Archolith<span>Context compressed, not replayed</span></div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card__label">
+      <span class="card__code">S5-A</span>
+      <span class="card__name">Wider Shift</span>
+    </div>
+    <p class="card__desc">Same proportions, doubled shift distance. The extraction gesture is unmissable.</p>
+    <div class="card__sizes">
+      <div class="card__size">
+        <div class="logo-frame logo-frame--xl"><img src="05a-wider-shift.svg" alt=""></div>
+        <span class="card__size-label">160px</span>
+      </div>
+      <div class="card__size">
+        <div class="logo-frame logo-frame--lg"><img src="05a-wider-shift.svg" alt=""></div>
+        <span class="card__size-label">96px</span>
+      </div>
+      <div class="card__size">
+        <div class="logo-frame logo-frame--md"><img src="05a-wider-shift.svg" alt=""></div>
+        <span class="card__size-label">48px</span>
+      </div>
+      <div class="card__size">
+        <div class="logo-frame logo-frame--sm"><img src="05a-wider-shift.svg" alt=""></div>
+        <span class="card__size-label">24px</span>
+      </div>
+      <div class="card__size">
+        <div class="logo-frame logo-frame--xs"><img src="05a-wider-shift.svg" alt=""></div>
+        <span class="card__size-label">16px</span>
+      </div>
+    </div>
+    <div class="nav-mock">
+      <span class="nav-mock__shard"><img src="05a-wider-shift.svg" alt=""></span>
+      ARCHOLITH
+      <div class="nav-mock__links"><span>Docs</span><span>GitHub</span></div>
+    </div>
+    <div class="card__invert">
+      <div class="card__invert-logo"><img src="05a-wider-shift.svg" alt=""></div>
+      <div class="card__invert-text">Archolith<span>Context compressed, not replayed</span></div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card__label">
+      <span class="card__code">S5-B</span>
+      <span class="card__name">Shift + Registration Mark</span>
+    </div>
+    <p class="card__desc">Wider shift with a crosshair on the extracted block. Reads as precision/intentional.</p>
+    <div class="card__sizes">
+      <div class="card__size">
+        <div class="logo-frame logo-frame--xl"><img src="05b-wider-shift-mark.svg" alt=""></div>
+        <span class="card__size-label">160px</span>
+      </div>
+      <div class="card__size">
+        <div class="logo-frame logo-frame--lg"><img src="05b-wider-shift-mark.svg" alt=""></div>
+        <span class="card__size-label">96px</span>
+      </div>
+      <div class="card__size">
+        <div class="logo-frame logo-frame--md"><img src="05b-wider-shift-mark.svg" alt=""></div>
+        <span class="card__size-label">48px</span>
+      </div>
+      <div class="card__size">
+        <div class="logo-frame logo-frame--sm"><img src="05b-wider-shift-mark.svg" alt=""></div>
+        <span class="card__size-label">24px</span>
+      </div>
+      <div class="card__size">
+        <div class="logo-frame logo-frame--xs"><img src="05b-wider-shift-mark.svg" alt=""></div>
+        <span class="card__size-label">16px</span>
+      </div>
+    </div>
+    <div class="nav-mock">
+      <span class="nav-mock__shard"><img src="05b-wider-shift-mark.svg" alt=""></span>
+      ARCHOLITH
+      <div class="nav-mock__links"><span>Docs</span><span>GitHub</span></div>
+    </div>
+    <div class="card__invert">
+      <div class="card__invert-logo"><img src="05b-wider-shift-mark.svg" alt=""></div>
+      <div class="card__invert-text">Archolith<span>Context compressed, not replayed</span></div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card__label">
+      <span class="card__code">S5-C</span>
+      <span class="card__name">Squat + Wide</span>
+    </div>
+    <p class="card__desc">Heavier proportions, wider column. Maximum visual weight at small sizes.</p>
+    <div class="card__sizes">
+      <div class="card__size">
+        <div class="logo-frame logo-frame--xl"><img src="05c-squat-wide.svg" alt=""></div>
+        <span class="card__size-label">160px</span>
+      </div>
+      <div class="card__size">
+        <div class="logo-frame logo-frame--lg"><img src="05c-squat-wide.svg" alt=""></div>
+        <span class="card__size-label">96px</span>
+      </div>
+      <div class="card__size">
+        <div class="logo-frame logo-frame--md"><img src="05c-squat-wide.svg" alt=""></div>
+        <span class="card__size-label">48px</span>
+      </div>
+      <div class="card__size">
+        <div class="logo-frame logo-frame--sm"><img src="05c-squat-wide.svg" alt=""></div>
+        <span class="card__size-label">24px</span>
+      </div>
+      <div class="card__size">
+        <div class="logo-frame logo-frame--xs"><img src="05c-squat-wide.svg" alt=""></div>
+        <span class="card__size-label">16px</span>
+      </div>
+    </div>
+    <div class="nav-mock">
+      <span class="nav-mock__shard"><img src="05c-squat-wide.svg" alt=""></span>
+      ARCHOLITH
+      <div class="nav-mock__links"><span>Docs</span><span>GitHub</span></div>
+    </div>
+    <div class="card__invert">
+      <div class="card__invert-logo"><img src="05c-squat-wide.svg" alt=""></div>
+      <div class="card__invert-text">Archolith<span>Context compressed, not replayed</span></div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card__label">
+      <span class="card__code">S5-D</span>
+      <span class="card__name">Visible Gap</span>
+    </div>
+    <p class="card__desc">Shows exposed lighter stone where the block was extracted. Tells the story of removal.</p>
+    <div class="card__sizes">
+      <div class="card__size">
+        <div class="logo-frame logo-frame--xl"><img src="05d-gap-visible.svg" alt=""></div>
+        <span class="card__size-label">160px</span>
+      </div>
+      <div class="card__size">
+        <div class="logo-frame logo-frame--lg"><img src="05d-gap-visible.svg" alt=""></div>
+        <span class="card__size-label">96px</span>
+      </div>
+      <div class="card__size">
+        <div class="logo-frame logo-frame--md"><img src="05d-gap-visible.svg" alt=""></div>
+        <span class="card__size-label">48px</span>
+      </div>
+      <div class="card__size">
+        <div class="logo-frame logo-frame--sm"><img src="05d-gap-visible.svg" alt=""></div>
+        <span class="card__size-label">24px</span>
+      </div>
+      <div class="card__size">
+        <div class="logo-frame logo-frame--xs"><img src="05d-gap-visible.svg" alt=""></div>
+        <span class="card__size-label">16px</span>
+      </div>
+    </div>
+    <div class="nav-mock">
+      <span class="nav-mock__shard"><img src="05d-gap-visible.svg" alt=""></span>
+      ARCHOLITH
+      <div class="nav-mock__links"><span>Docs</span><span>GitHub</span></div>
+    </div>
+    <div class="card__invert">
+      <div class="card__invert-logo"><img src="05d-gap-visible.svg" alt=""></div>
+      <div class="card__invert-text">Archolith<span>Context compressed, not replayed</span></div>
+    </div>
+  </div>
+
+</div>
+
+</body>
+</html>
