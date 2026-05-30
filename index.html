@@ -1229,7 +1229,7 @@ ul { list-style: none; }
     <a href="#system">System</a>
     <a href="#demo">Demo</a>
     <a href="#quickstart">Run it</a>
-    <a href="https://github.com/archolith/archolith-proxy">GitHub</a>
+    <a href="https://github.com/Archolith/archolith-context">GitHub</a>
   </div>
 </nav>
 
@@ -1250,20 +1250,20 @@ ul { list-style: none; }
     </div>
     <div class="stats">
       <div class="stats__cell">
-        <div class="stats__num">~450K</div>
-        <div class="stats__label">cumulative &middot; linear replay</div>
+        <div class="stats__num">58.6%</div>
+        <div class="stats__label">proxy token savings</div>
       </div>
       <div class="stats__cell">
-        <div class="stats__num">60&ndash;90K</div>
-        <div class="stats__label">flat &middot; curated context</div>
+        <div class="stats__num">50%</div>
+        <div class="stats__label">filter compression</div>
       </div>
       <div class="stats__cell">
-        <div class="stats__num">10&ndash;50&times;</div>
-        <div class="stats__label">extraction ROI</div>
+        <div class="stats__num">71.5%</div>
+        <div class="stats__label">MCP waste reduction</div>
       </div>
       <div class="stats__cell">
-        <div class="stats__num">&lt; $0.02</div>
-        <div class="stats__label">curation cost / session</div>
+        <div class="stats__num">75%</div>
+        <div class="stats__label">best single-turn savings</div>
       </div>
     </div>
   </div>
@@ -1318,11 +1318,11 @@ ul { list-style: none; }
   <div class="stack">
     <div class="slab slab--primary">
       <div class="slab__id">
-        archolith-proxy
+        archolith-context
         <span class="slab__badge slab__badge--stable">stable</span>
-        <span class="slab__name">The boundary</span>
+        <span class="slab__name">The proxy</span>
       </div>
-      <div class="slab__body">OpenAI-compatible proxy. Point any harness at port 9800 with a base-URL swap &mdash; no code changes. Owns the request/response lifecycle, session fingerprinting, context assembly, and upstream forwarding.</div>
+      <div class="slab__body">OpenAI-compatible proxy. Point any harness at port 9800 with a base-URL swap &mdash; no code changes. Owns the request/response lifecycle, session fingerprinting, context assembly, graph extraction, and upstream forwarding.</div>
       <div class="slab__io">
         <div class="slab__io-label">Touches</div>
         <ul>
@@ -1335,34 +1335,35 @@ ul { list-style: none; }
     </div>
     <div class="slab">
       <div class="slab__id">
-        archolith-memory
+        archolith-rtk
         <span class="slab__badge slab__badge--stable">stable</span>
-        <span class="slab__name">The graph</span>
+        <span class="slab__name">The filter</span>
       </div>
-      <div class="slab__body">Temporal knowledge graph built on Neo4j. Facts extracted by gpt-4.1-mini off the critical path. Label-scoped sessions, validity windows, and a promotion gate that moves high-confidence knowledge to long-term storage.</div>
+      <div class="slab__body">Token Reduction Toolkit &mdash; deterministic output filtering for LLM agent contexts. Compresses git diffs, search results, file reads, test output, JSON, and logs. 50% average savings on real session data.</div>
       <div class="slab__io">
         <div class="slab__io-label">Owns</div>
         <ul>
-          <li>Session graph</li>
-          <li>Fact extraction</li>
-          <li>Promotion API</li>
-          <li>Memory adapters</li>
+          <li>Output classification</li>
+          <li>Category-specific filters</li>
+          <li>Token estimation</li>
+          <li>Risk-level presets</li>
         </ul>
       </div>
     </div>
-    <div class="slab slab--future">
+    <div class="slab">
       <div class="slab__id">
-        archolith-filter
-        <span class="slab__badge">roadmap</span>
-        <span class="slab__name">The compressor</span>
+        archolith-audit
+        <span class="slab__badge slab__badge--stable">stable</span>
+        <span class="slab__name">The diagnostics</span>
       </div>
-      <div class="slab__body">Selective compression applied post-assembly. Deduplicate, resolve superseded facts, enforce token budgets. Ships after proxy + memory are stable.</div>
+      <div class="slab__body">MCP token usage audit system. Measures per-server token cost, detects waste patterns, and produces report cards with concrete optimization suggestions. 71.5% waste reduction measured.</div>
       <div class="slab__io">
-        <div class="slab__io-label">Planned</div>
+        <div class="slab__io-label">Owns</div>
         <ul>
-          <li>Token budget enforcer</li>
-          <li>Supersession resolver</li>
-          <li>Quality regression gate</li>
+          <li>Server attribution</li>
+          <li>Waste detection (6 types)</li>
+          <li>Report cards</li>
+          <li>CI threshold gates</li>
         </ul>
       </div>
     </div>
@@ -1382,14 +1383,14 @@ ul { list-style: none; }
         <span class="demo-frame__dot"></span>
         <span class="demo-frame__dot"></span>
       </div>
-      <span>archolith &middot; benchmark rig &middot; turn 8 of 30</span>
+      <span>archolith &middot; benchmark rig &middot; turn 8 of 10</span>
       <span></span>
     </div>
     <div class="demo-grid">
       <div class="demo-pane">
         <h5 class="demo-pane__title">A &middot; Direct upstream <span class="demo-pane__badge">no proxy</span></h5>
-        <div class="demo-meter"><span>cumulative input</span><b>142,300 tok</b></div>
-        <div class="demo-meter"><span>cost &middot; 30 turns</span><b>$0.94</b></div>
+        <div class="demo-meter"><span>cumulative input</span><b>108,516 tok</b></div>
+        <div class="demo-meter"><span>cost &middot; 10 turns</span><b>$0.54</b></div>
         <div class="demo-meter"><span>compaction events</span><b>2 (lossy)</b></div>
         <div class="demo-bars">
           <span style="height:14%"></span><span style="height:22%"></span><span style="height:32%"></span><span style="height:42%"></span>
@@ -1399,8 +1400,8 @@ ul { list-style: none; }
       </div>
       <div class="demo-pane demo-pane--proxy">
         <h5 class="demo-pane__title">B &middot; Through archolith-proxy <span class="demo-pane__badge">curated</span></h5>
-        <div class="demo-meter demo-meter--good"><span>cumulative input</span><b>18,200 tok <span class="delta">&minus;87%</span></b></div>
-        <div class="demo-meter demo-meter--good"><span>cost &middot; 30 turns</span><b>$0.14 <span class="delta">&minus;85%</span></b></div>
+        <div class="demo-meter demo-meter--good"><span>cumulative input</span><b>44,890 tok <span class="delta">&minus;58.6%</span></b></div>
+        <div class="demo-meter demo-meter--good"><span>cost &middot; 10 turns</span><b>$0.22 <span class="delta">&minus;59%</span></b></div>
         <div class="demo-meter"><span>compaction events</span><b>0 <span class="delta">eliminated</span></b></div>
         <div class="demo-bars demo-bars--flat">
           <span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span>
@@ -1417,9 +1418,9 @@ ul { list-style: none; }
 <section class="sec" id="quickstart">
   <span class="sec__num">05 &middot; Run it</span>
   <h3 class="sec__title">Five lines to running.</h3>
-  <div class="quickstart"><span class="prompt">$</span> <span class="cmd">git clone https://github.com/archolith/archolith-proxy</span>
-<span class="prompt">$</span> <span class="cmd">cd archolith-proxy &amp;&amp; cp .env.example .env</span>
-<span class="prompt">$</span> <span class="cmd">docker compose up -d</span>                       <span class="comment"># neo4j + proxy on :9800</span>
+  <div class="quickstart"><span class="prompt">$</span> <span class="cmd">git clone https://github.com/Archolith/archolith-context</span>
+<span class="prompt">$</span> <span class="cmd">cd archolith-context &amp;&amp; cp .env.example .env</span>
+<span class="prompt">$</span> <span class="cmd">docker compose up -d</span>                       <span class="comment"># LadybugDB + proxy on :9800</span>
 <span class="prompt">$</span> <span class="cmd">export OPENAI_BASE_URL=http://localhost:9800</span>
 <span class="prompt">$</span> <span class="cmd">aider</span>                                       <span class="comment"># or claude, cursor, cline...</span></div>
 </section>
@@ -1435,9 +1436,10 @@ ul { list-style: none; }
   <div>
     <h5>Products</h5>
     <ul>
-      <li><a href="https://github.com/archolith/archolith-proxy">archolith-proxy</a></li>
-      <li>archolith-memory</li>
-      <li>archolith-filter</li>
+      <li><a href="https://github.com/Archolith/archolith-context">archolith-context</a></li>
+      <li><a href="https://github.com/Archolith/archolith-rtk">archolith-rtk</a></li>
+      <li><a href="https://github.com/Archolith/archolith-mcp-audit">archolith-audit</a></li>
+      <li><a href="https://github.com/ctharvey/archolith-bench">archolith-bench</a></li>
     </ul>
   </div>
   <div>
@@ -1452,10 +1454,10 @@ ul { list-style: none; }
   <div>
     <h5>Source</h5>
     <ul>
-      <li><a href="https://github.com/archolith/archolith-proxy">GitHub</a></li>
+      <li><a href="https://github.com/Archolith/archolith-context">GitHub</a></li>
       <li>Changelog</li>
       <li>Issues</li>
-      <li>Apache-2.0</li>
+      <li>PolyForm NC 1.0.0</li>
     </ul>
   </div>
 </footer>
