@@ -1302,9 +1302,9 @@ ul { list-style: none; }
     </div>
     <div class="seq__row">
       <span class="seq__step">05 &middot; extract</span>
-      <span class="seq__cell"><span class="seq__pip"></span>gpt-4.1-mini &middot; async</span>
+      <span class="seq__cell"><span class="seq__pip"></span>curator &middot; background pass</span>
       <span class="seq__cell">entities + edges + decisions</span>
-      <span class="seq__cell">store + invalidate stale</span>
+      <span class="seq__cell is-on">briefing for next turn</span>
     </div>
   </div>
 </section>
@@ -1314,7 +1314,7 @@ ul { list-style: none; }
      ============================================================ -->
 <section class="sec" id="system">
   <span class="sec__num">03 &middot; The system</span>
-  <h3 class="sec__title">Three packages, one seam.</h3>
+  <h3 class="sec__title">Four packages, one seam.</h3>
   <div class="stack">
     <div class="slab slab--primary">
       <div class="slab__id">
@@ -1322,13 +1322,13 @@ ul { list-style: none; }
         <span class="slab__badge slab__badge--stable">stable</span>
         <span class="slab__name">The proxy</span>
       </div>
-      <div class="slab__body">OpenAI-compatible proxy. Point any harness at port 9800 with a base-URL swap &mdash; no code changes. Owns the request/response lifecycle, session fingerprinting, context assembly, graph extraction, and upstream forwarding.</div>
+      <div class="slab__body">OpenAI-compatible proxy. Point any harness at port 9800 with a base-URL swap &mdash; no code changes. Owns the request/response lifecycle, session fingerprinting, two-pass curator assembly, graph extraction, and upstream forwarding. Circuit breaker and per-session token budget included.</div>
       <div class="slab__io">
         <div class="slab__io-label">Touches</div>
         <ul>
           <li>/v1/chat/completions</li>
           <li>SSE pass-through</li>
-          <li>Coherence tail</li>
+          <li>Circuit breaker + token budget</li>
           <li>Trace API + dashboard</li>
         </ul>
       </div>
@@ -1339,14 +1339,14 @@ ul { list-style: none; }
         <span class="slab__badge slab__badge--stable">stable</span>
         <span class="slab__name">The filter</span>
       </div>
-      <div class="slab__body">Token Reduction Toolkit &mdash; deterministic output filtering for LLM agent contexts. Compresses git diffs, search results, file reads, test output, JSON, and logs. 50% average savings on real session data.</div>
+      <div class="slab__body">Token Reduction Toolkit &mdash; deterministic output filtering for LLM agent contexts. Layer 0 pre-filter pipeline (secrets, thinking, paths, binary, oversized) plus nine format-switch strategies for diffs, search, file reads, JSON, logs, stack traces, and build output. 50% average savings on real session data.</div>
       <div class="slab__io">
         <div class="slab__io-label">Owns</div>
         <ul>
-          <li>Output classification</li>
-          <li>Category-specific filters</li>
-          <li>Token estimation</li>
-          <li>Risk-level presets</li>
+          <li>Layer 0 pre-filter pipeline</li>
+          <li>Nine format-switch strategies</li>
+          <li>Token estimation + risk presets</li>
+          <li>Cross-turn deduplication</li>
         </ul>
       </div>
     </div>
@@ -1364,6 +1364,23 @@ ul { list-style: none; }
           <li>Waste detection (6 types)</li>
           <li>Report cards</li>
           <li>CI threshold gates</li>
+        </ul>
+      </div>
+    </div>
+    <div class="slab slab--future">
+      <div class="slab__id">
+        archolith-bench
+        <span class="slab__badge">benchmark</span>
+        <span class="slab__name">The yardstick</span>
+      </div>
+      <div class="slab__body">Reproducible benchmark suite measuring proxy savings, filter compression, and MCP waste reduction across multi-turn coding scenarios. Headline numbers: 58.6% proxy, 50% filter, 71.5% audit.</div>
+      <div class="slab__io">
+        <div class="slab__io-label">Owns</div>
+        <ul>
+          <li>Proxy scenario runner</li>
+          <li>Filter corpus compression</li>
+          <li>Audit before/after</li>
+          <li>Stack comparison arms</li>
         </ul>
       </div>
     </div>
