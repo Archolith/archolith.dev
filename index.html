@@ -7,8 +7,8 @@
 <meta name="description" content="An OpenAI-compatible proxy that replaces linear replay with graph-assembled context. Compress context. Extract knowledge. Remember everything.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600;700&family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Serif:ital,wght@0,400;0,600;0,700;1,400&family=JetBrains+Mono:wght@400;500;700&family=Space+Grotesk:wght@400;500;600;700&display=swap">
-<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600;700&family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Serif:ital,wght@0,400;0,600;0,700;1,400&family=JetBrains+Mono:wght@400;500;700&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600;700&family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Serif:ital,wght@0,400;0,600;0,700;1,400&family=JetBrains+Mono:wght@400;500;700&family=Space+Grotesk:wght@400;500;600;700&display=swap" onload="this.onload=null;this.rel='stylesheet'">
+<noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600;700&family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Serif:ital,wght@0,400;0,600;0,700;1,400&family=JetBrains+Mono:wght@400;500;700&family=Space+Grotesk:wght@400;500;600;700&display=swap"></noscript>
 <link rel="preload" as="image" href="logos/01-k8-dropping-keystone.svg">
 <link rel="stylesheet" href="hero/archolith-hero.css">
 
@@ -1197,6 +1197,18 @@ ul { list-style: none; }
   .tweak-dock { right: 10px; bottom: 10px; }
   .type-switcher { font-size: 9px; }
   .logo-switcher { width: min(250px, calc(100vw - 20px)); }
+}
+
+/* ============================================================
+   HERO ROOT — reserve layout space before JS mounts
+   ============================================================ */
+#archolith-hero-root {
+  min-height: 430vh;
+}
+@media (max-width: 980px) {
+  #archolith-hero-root {
+    min-height: calc(100vh + 620px);
+  }
 }
 
 @media (max-width: 560px) {
