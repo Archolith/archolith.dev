@@ -6,10 +6,14 @@ Read everything in this directory before starting work.
 
 | File | Purpose |
 |------|---------|
-| `architecture.md` | System design, data flow, tech stack, config/env reference |
+| `architecture.md` | System design, data flow, tech stack, deployment, performance, config/env reference |
 | `data_models.md` | Entities, DTOs, enums, converters, repository reference |
 | `CHANGELOG.md` | Running log of changes, most recent first |
 | `workflows/code_conventions.md` | Language-specific style and formatting rules |
+
+## Deployment
+
+The site is deployed on the yawn VPS (`147.93.132.141`) via Caddy `file_server`. See `architecture.md` → Deployment section for full details including VPS paths, Caddy config, DNS/TLS setup, and deploy workflow.
 
 ## Maintenance Rules
 

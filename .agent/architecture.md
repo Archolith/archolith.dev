@@ -4,10 +4,11 @@
 
 archolith.dev is the marketing homepage for the Archolith suite — a set of self-hosted context compression tools for LLMs. The site is a single-page static HTML file with vanilla JavaScript components. No build system, no framework, no server-side rendering.
 
-The site presents three Archolith products:
-1. **archolith-proxy** (stable) — OpenAI-compatible proxy on port 9800 that curates context instead of replaying full history
-2. **archolith-memory** (stable) — Temporal knowledge graph on Neo4j with fact extraction via gpt-4.1-mini
-3. **archolith-filter** (roadmap) — Post-assembly compression, dedup, token budgets
+The site presents four Archolith products:
+1. **archolith-context** (stable) — Two-pass curator with circuit breaker and token budget; OpenAI-compatible proxy on port 9800
+2. **archolith-rtk** (stable) — Layer 0 recall with nine format-switch strategies for high-fidelity context reconstruction
+3. **archolith-bench** (stable) — Benchmark suite for measuring context quality vs. token cost
+4. **archolith-filter** (roadmap) — Post-assembly compression, dedup, token budgets
 
 The hero section features an interactive scroll-excavation animation built with vanilla JS that reveals geological strata layers as the user scrolls, each representing a product/suite layer.
 
@@ -19,26 +20,59 @@ The hero section features an interactive scroll-excavation animation built with 
 | Styling | Hand-written CSS (no preprocessor) |
 | Scripting | Vanilla JavaScript (no framework) |
 | Fonts | Google Fonts — Space Grotesk, IBM Plex Sans, IBM Plex Serif, IBM Plex Mono, JetBrains Mono |
-| Hosting | Static file serving (no server required) |
+| Hosting | Caddy `file_server` on VPS (147.93.132.141), Cloudflare proxy |
+| Analytics | Google Analytics (gtag.js, tag G-4MPBP8827S) |
 | Build | None — deploy `index.html` + assets as-is |
+| TLS | Let's Encrypt via Caddy auto-HTTPS (Cloudflare Full strict) |
 
 ## Data Flow
 
 ```
 User loads index.html
-       │
-       ├── CSS loaded: inline styles + hero/archolith-hero.css
-       ├── Google Fonts loaded via <link>
-       ├── Hero JS loaded:
-       │   ├── sliceDefinitions.js  → layer definitions (name, depth, measure)
-       │   ├── SliceAnnotations.js  → per-layer annotation data
-       │   ├── StrataSlice.js       → individual strata band component
-       │   ├── StrataField.js       → full strata field orchestration
-       │   └── ArcholithHero.js     → mounts hero into #archolith-hero-root
-       │
-       ├── Logo switcher (5 SVG variants, client-side toggle)
-       └── Type system switcher (3 presets: grotesk / sans / serif)
+│
+├── CSS loaded: inline styles + hero/archolith-hero.css
+├── Google Fonts CSS preloaded, then loaded via <link>
+├── Nav logo SVG preloaded via <link rel="preload">
+├── Hero JS deferred (preserves execution order):
+│   ├── sliceDefinitions.js → layer definitions (name, depth, measure)
+│   ├── SliceAnnotations.js → per-layer annotation data
+│   ├── StrataSlice.js → individual strata band component
+│   ├── StrataField.js → full strata field orchestration
+│   └── ArcholithHero.js → mounts hero into #archolith-hero-root
+│
+├── DOMContentLoaded fires:
+│   ├── Hero mount (ArcholithHero.mount)
+│   ├── Logo switcher (5 SVG variants, client-side toggle)
+│   └── Type system switcher (3 presets: grotesk / sans / serif)
+│
+└── Google Analytics (gtag.js, async)
 ```
+
+## Performance Optimizations
+
+| Technique | Detail |
+|-----------|--------|
+| Font CSS preload | `<link rel="preload" as="style">` for Google Fonts CSS to start fetch earlier |
+| Nav logo preload | `<link rel="preload" as="image">` for `logos/01-k8-dropping-keystone.svg` (LCP candidate) |
+| Deferred hero scripts | All 5 hero JS files use `defer` to preserve execution order without blocking HTML parse |
+| Consolidated inline JS | Three separate IIFEs merged into single `DOMContentLoaded` listener (ensures deferred scripts are available) |
+| Preconnect hints | `rel="preconnect"` for `fonts.googleapis.com` and `fonts.gstatic.com` |
+
+### PageSpeed Baseline (mobile, 2026-06-02)
+
+| Metric | Value | Rating |
+|--------|-------|--------|
+| FCP | 2.9s | Poor |
+| LCP | 4.2s | Poor |
+| TBT | 150ms | Okay |
+| CLS | 0 | Good |
+| SI | 4.8s | Poor |
+
+### Remaining Optimization Opportunities
+
+- **Self-host Google Fonts** — biggest potential win for FCP/LCP; eliminates cross-origin render-blocking dependency on Google CDN
+- **Inline critical CSS** — extract nav + hero first-paint CSS into `<style>` in `<head>`
+- **Cache-busting query strings** — add `?v=` to JS/CSS includes to avoid Cloudflare/browser cache staleness on updates
 
 ## Key Components
 
@@ -81,17 +115,49 @@ Three typography presets toggled via `data-type` attribute on `<body>`:
 1. **Hero** — Scroll-excavation strata animation
 2. **Problem** — "The broken model" — linear replay cost stats
 3. **Mechanism** — 5-step proxy pipeline (receive → query → assemble → forward → extract)
-4. **Architecture** — 3-slab product stack (proxy, memory, filter)
+4. **Architecture** — 4-slab product stack (context, rtk, bench, filter)
 5. **Demo** — Side-by-side benchmark comparison (direct vs. proxy)
-6. **Quickstart** — 5-line setup instructions
-7. **Footer** — Products, docs, source links
+6. **Quickstart** — Hidden via `display:none` (pre-launch)
+7. **Footer** — Links neutralized to `href="#"` (pre-launch)
 
-## Configuration / Environment Variables
+## Deployment
 
-None — this is a fully static site with no server-side configuration.
+### VPS Deployment
+
+The site is served from the yawn VPS via Caddy's built-in `file_server`, not a separate Docker container.
+
+| Item | Value |
+|------|-------|
+| VPS IP | `147.93.132.141` (user: `thron`) |
+| VPS files | `/var/www/html/archolith-dev/` (mounted into Caddy at `/srv/static/archolith-dev`) |
+| Caddy block | `archolith.dev` site block in `/srv/yawn/projects/yawn.deploy/Caddyfile` |
+| Caddy container | `yawndeploy-caddy-1` |
+| Compose dir | `/srv/yawn/projects/yawn.deploy/` |
+| DNS | Cloudflare proxied (orange cloud); A record → VPS IP |
+| TLS | Let's Encrypt auto-provisioned by Caddy; Cloudflare SSL mode: Full (strict) |
+| Cache | Caddy sets `Cache-Control: max-age=300` on `@assets` route; Cloudflare caches JS/CSS aggressively (`max-age=14400`) |
+| Volume mount | Uses existing `/var/www/html:/srv/static:ro` in docker-compose.yml — no separate volume needed |
+
+### Deploy Workflow
+
+1. Edit files locally in the git repo
+2. Commit and push to `https://github.com/Archolith/archolith.dev.git`
+3. Copy updated files to VPS: `scp index.html thron@147.93.132.141:/var/www/html/archolith-dev/`
+4. No container restart needed — Caddy serves files directly from disk
+
+### Cloudflare Cache Notes
+
+- Cloudflare caches JS/CSS aggressively. After deploying updated files, purge the CF cache or wait for revalidation.
+- Caddy ETag changes on file update, but CF may serve stale content until revalidation.
+
+### Pre-Launch State
+
+- All outbound links neutralized to `href="#"` (nav GitHub link, hero CTA buttons, footer links)
+- Quickstart section hidden via `display:none`
+- When repos go public: restore links, unhide quickstart, update `href="#"` to real URLs
 
 ## External Dependencies
 
 - **Google Fonts CDN** — loads 5 font families at runtime. If CDN is unreachable, falls back to system-ui/monospace.
-- **GitHub** — links to `https://github.com/archolith/archolith-proxy` in nav and footer.
+- **Google Analytics** — gtag.js (tag `G-4MPBP8827S`), loaded async.
 - No other external dependencies.
