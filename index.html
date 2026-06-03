@@ -7,7 +7,9 @@
 <meta name="description" content="An OpenAI-compatible proxy that replaces linear replay with graph-assembled context. Compress context. Extract knowledge. Remember everything.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600;700&family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Serif:ital,wght@0,400;0,600;0,700;1,400&family=JetBrains+Mono:wght@400;500;700&family=Space+Grotesk:wght@400;500;600;700&display=swap">
 <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600;700&family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Serif:ital,wght@0,400;0,600;0,700;1,400&family=JetBrains+Mono:wght@400;500;700&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="preload" as="image" href="logos/01-k8-dropping-keystone.svg">
 <link rel="stylesheet" href="hero/archolith-hero.css">
 
 <!-- Google tag (gtag.js) -->
@@ -1548,21 +1550,20 @@ ul { list-style: none; }
 <!-- ============================================================
      SCRIPTS
      ============================================================ -->
-<script src="hero/sliceDefinitions.js"></script>
-<script src="hero/SliceAnnotations.js"></script>
-<script src="hero/StrataSlice.js"></script>
-<script src="hero/StrataField.js"></script>
-<script src="hero/ArcholithHero.js"></script>
+<script defer src="hero/sliceDefinitions.js"></script>
+<script defer src="hero/SliceAnnotations.js"></script>
+<script defer src="hero/StrataSlice.js"></script>
+<script defer src="hero/StrataField.js"></script>
+<script defer src="hero/ArcholithHero.js"></script>
 <script>
-void function() {
+document.addEventListener("DOMContentLoaded", function() {
+  /* Hero */
   var heroRoot = document.getElementById("archolith-hero-root");
   if (heroRoot && window.ArcholithHero) {
     window.ArcholithHero.mount(heroRoot);
   }
-}();
 
-/* Logo switcher */
-void function() {
+  /* Logo switcher */
   var logos = {
     k8: {
       short: "K8",
@@ -1619,10 +1620,8 @@ void function() {
   });
 
   setLogo(document.body.getAttribute("data-logo") || "strata");
-}();
 
-/* Type switcher */
-void function() {
+  /* Type switcher */
   var btns = document.querySelectorAll(".type-switcher__btn");
   btns.forEach(function(btn) {
     btn.addEventListener("click", function() {
@@ -1631,7 +1630,7 @@ void function() {
       document.body.setAttribute("data-type", btn.getAttribute("data-type"));
     });
   });
-}();
+});
 </script>
 </body>
 </html>
