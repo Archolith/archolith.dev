@@ -183,7 +183,7 @@ window.addEventListener("scroll", onScroll, { passive: true });
 
     if (targetIndex >= count) {
       window.scrollTo({
-        top: sectionTop + scrollSection.offsetHeight - window.innerHeight + 1,
+        top: sectionTop + scrollSection.offsetHeight,
         behavior: "smooth"
       });
       return;
