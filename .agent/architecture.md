@@ -6,9 +6,9 @@ archolith.dev is the marketing homepage for the Archolith suite — a set of sel
 
 The site presents four Archolith products:
 1. **archolith-context** (stable) — Two-pass curator with circuit breaker and token budget; OpenAI-compatible proxy on port 9800
-2. **archolith-rtk** (stable) — Layer 0 recall with nine format-switch strategies for high-fidelity context reconstruction
-3. **archolith-bench** (stable) — Benchmark suite for measuring context quality vs. token cost
-4. **archolith-filter** (roadmap) — Post-assembly compression, dedup, token budgets
+2. **archolith-rtk** (stable) — Layer 0 pre-filter pipeline; nine format-switch strategies for token reduction
+3. **archolith-audit** (stable) — MCP token usage audit system; waste detection and report cards
+4. **archolith-bench** (benchmark) — Reproducible benchmark suite; generates the headline savings numbers
 
 The hero section features an interactive scroll-excavation animation built with vanilla JS that reveals geological strata layers as the user scrolls, each representing a product/suite layer.
 
@@ -41,7 +41,6 @@ User loads index.html
 │
 ├── DOMContentLoaded fires:
 │   ├── Hero mount (ArcholithHero.mount)
-│   ├── Logo switcher (5 SVG variants, client-side toggle)
 │   └── Type system switcher (3 presets: grotesk / sans / serif)
 │
 └── Google Analytics (gtag.js, async)
@@ -51,8 +50,8 @@ User loads index.html
 
 | Technique | Detail |
 |-----------|--------|
-| Font CSS preload | `<link rel="preload" as="style">` for Google Fonts CSS to start fetch earlier |
-| Nav logo preload | `<link rel="preload" as="image">` for `logos/01-k8-dropping-keystone.svg` (LCP candidate) |
+| Font CSS non-blocking | `<link rel="preload" as="style" onload>` for `fonts/fonts.css` — eliminates render-blocking |
+| Nav logo preload | `<link rel="preload" as="image">` for `logos/05-strata-column.svg` (S5, LCP candidate) |
 | Deferred hero scripts | All 5 hero JS files use `defer` to preserve execution order without blocking HTML parse |
 | Consolidated inline JS | Three separate IIFEs merged into single `DOMContentLoaded` listener (ensures deferred scripts are available) |
 | Self-hosted fonts | `fonts/fonts.css` + 38 WOFF2 files (latin + latin-ext only); no cross-origin font fetch |
@@ -167,6 +166,5 @@ The site is served from the yawn VPS via Caddy's built-in `file_server`, not a s
 
 ## External Dependencies
 
-- **Google Fonts CDN** — loads 5 font families at runtime. If CDN is unreachable, falls back to system-ui/monospace.
 - **Google Analytics** — gtag.js (tag `G-4MPBP8827S`), loaded async.
-- No other external dependencies.
+- No other external dependencies. Fonts are self-hosted (see Tech Stack).
