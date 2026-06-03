@@ -200,6 +200,16 @@ window.addEventListener("scroll", onScroll, { passive: true });
   }
 
   window.addEventListener("keydown", onKeydown);
+
+  /* Force a clean re-sync when any scroll animation (including smooth scrollTo
+     triggered by spacebar) fully settles. Without this, a spacebar+wheel combo
+     can leave the seam marker and active-layer color out of sync — scroll events
+     stop firing before the smooth scroll reaches its target, so the final resting
+     position never gets an update() call. */
+  window.addEventListener("scrollend", function onScrollEnd() {
+    lastIndex = -1;
+    update();
+  });
     }
 
     globalScope.ArcholithHero = {
