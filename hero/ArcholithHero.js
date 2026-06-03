@@ -152,7 +152,53 @@
             measure();
             update();
         });
-        window.addEventListener("scroll", onScroll, { passive: true });
+window.addEventListener("scroll", onScroll, { passive: true });
+
+  function onKeydown(e) {
+    if (e.code !== "Space" && e.keyCode !== 32) {
+      return;
+    }
+
+    var rect = scrollSection.getBoundingClientRect();
+
+    if (rect.bottom < 0 || rect.top > window.innerHeight) {
+      return;
+    }
+
+    e.preventDefault();
+
+    var scrollDistance = Math.max(1, scrollSection.offsetHeight - window.innerHeight);
+    var offset = Math.max(0, -rect.top);
+    var progress = Math.max(0, Math.min(1, offset / scrollDistance));
+    var currentIndex = Math.min(count - 1, Math.floor(progress * count));
+
+    var targetIndex;
+    if (e.shiftKey) {
+      targetIndex = Math.max(0, currentIndex - 1);
+    } else {
+      targetIndex = currentIndex + 1;
+    }
+
+    var sectionTop = rect.top + window.scrollY;
+
+    if (targetIndex >= count) {
+      window.scrollTo({
+        top: sectionTop + scrollSection.offsetHeight - window.innerHeight + 1,
+        behavior: "smooth"
+      });
+      return;
+    }
+
+    var targetProgress = (targetIndex + 0.5) / count;
+    var targetScrollY = sectionTop + targetProgress * scrollDistance;
+
+    window.scrollTo({
+      top: targetScrollY,
+      behavior: "smooth"
+    });
+  }
+
+  window.addEventListener("keydown", onKeydown);
     }
 
     globalScope.ArcholithHero = {
