@@ -19,7 +19,7 @@ The hero section features an interactive scroll-excavation animation built with 
 | Markup | Static HTML5 |
 | Styling | Hand-written CSS (no preprocessor) |
 | Scripting | Vanilla JavaScript (no framework) |
-| Fonts | Google Fonts — Space Grotesk, IBM Plex Sans, IBM Plex Serif, IBM Plex Mono, JetBrains Mono |
+| Fonts | Self-hosted WOFF2 — Space Grotesk, IBM Plex Sans, IBM Plex Serif, IBM Plex Mono, JetBrains Mono (latin + latin-ext subsets, `fonts/` dir, served with `Cache-Control: immutable`) |
 | Hosting | Caddy `file_server` on VPS (147.93.132.141), Cloudflare proxy |
 | Analytics | Google Analytics (gtag.js, tag G-4MPBP8827S) |
 | Build | None — deploy `index.html` + assets as-is |
@@ -30,8 +30,7 @@ The hero section features an interactive scroll-excavation animation built with 
 ```
 User loads index.html
 │
-├── CSS loaded: inline styles + hero/archolith-hero.css
-├── Google Fonts CSS preloaded, then loaded via <link>
+├── CSS loaded: inline styles + hero/archolith-hero.css + fonts/fonts.css (self-hosted)
 ├── Nav logo SVG preloaded via <link rel="preload">
 ├── Hero JS deferred (preserves execution order):
 │   ├── sliceDefinitions.js → layer definitions (name, depth, measure)
@@ -56,7 +55,8 @@ User loads index.html
 | Nav logo preload | `<link rel="preload" as="image">` for `logos/01-k8-dropping-keystone.svg` (LCP candidate) |
 | Deferred hero scripts | All 5 hero JS files use `defer` to preserve execution order without blocking HTML parse |
 | Consolidated inline JS | Three separate IIFEs merged into single `DOMContentLoaded` listener (ensures deferred scripts are available) |
-| Preconnect hints | `rel="preconnect"` for `fonts.googleapis.com` and `fonts.gstatic.com` |
+| Self-hosted fonts | `fonts/fonts.css` + 38 WOFF2 files (latin + latin-ext only); no cross-origin font fetch |
+| Hero space reservation | `#archolith-hero-root { min-height: 430vh }` prevents CLS from JS-mounted hero |
 
 ### PageSpeed Baseline (mobile, 2026-06-02)
 
@@ -68,10 +68,19 @@ User loads index.html
 | CLS | 0 | Good |
 | SI | 4.8s | Poor |
 
+### PageSpeed After Optimizations (mobile, 2026-06-03)
+
+| Metric | Before | After | Change |
+|--------|--------|-------|--------|
+| FCP | 2.7s | TBD | Self-hosted fonts + non-blocking load |
+| LCP | 2.7s | TBD | Same |
+| TBT | 50ms | TBD | |
+| CLS | 1.001 | ~0 | Hero min-height reserves space |
+| SI | 2.7s | TBD | |
+
 ### Remaining Optimization Opportunities
 
-- **Self-host Google Fonts** — biggest potential win for FCP/LCP; eliminates cross-origin render-blocking dependency on Google CDN
-- **Inline critical CSS** — extract nav + hero first-paint CSS into `<style>` in `<head>`
+- **Inline critical CSS** — extract nav + hero first-paint CSS into `<style>` in `<head>` (already partially done — inline `<style>` block exists)
 - **Cache-busting query strings** — add `?v=` to JS/CSS includes to avoid Cloudflare/browser cache staleness on updates
 
 ## Key Components

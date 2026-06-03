@@ -1,5 +1,13 @@
 # Changelog — archolith.dev
 
+## 2026-06-03 — Perf: self-host fonts, fix CLS, non-blocking font load
+
+- `fonts/` — added 38 WOFF2 files (5 families, latin + latin-ext subsets, 839 KB total)
+- `fonts/fonts.css` — self-hosted @font-face declarations replacing Google Fonts CDN
+- `index.html` — removed `preconnect` hints and Google Fonts `<link>` tags; replaced with `<link rel="stylesheet" href="fonts/fonts.css">`
+- `index.html` — added `#archolith-hero-root { min-height: 430vh }` (desktop) and `calc(100vh + 620px)` (mobile <980px) to eliminate CLS from JS-mounted hero
+- `yawn.deploy/Caddyfile` — set `Cache-Control: public, max-age=31536000, immutable` for `.woff2/.woff/.ttf` files on `archolith.dev`
+
 ## 2026-06-03 — Docs: update architecture.md and README with deployment and performance details
 
 - Updated `architecture.md` with VPS deployment section (paths, Caddy config, DNS/TLS, Cloudflare cache notes, deploy workflow, pre-launch state)
