@@ -5,9 +5,13 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Archolith &mdash; Self-hosted context compression for LLMs</title>
 <meta name="description" content="An OpenAI-compatible proxy that replaces linear replay with graph-assembled context. Compress context. Extract knowledge. Remember everything.">
-<link rel="stylesheet" href="fonts/fonts.css">
+<link rel="preload" as="style" href="fonts/fonts.css" onload="this.onload=null;this.rel='stylesheet'">
+<link rel="preload" as="style" href="hero/archolith-hero.css" onload="this.onload=null;this.rel='stylesheet'">
 <link rel="preload" as="image" href="logos/01-k8-dropping-keystone.svg">
-<link rel="stylesheet" href="hero/archolith-hero.css">
+<noscript>
+  <link rel="stylesheet" href="fonts/fonts.css">
+  <link rel="stylesheet" href="hero/archolith-hero.css">
+</noscript>
 
 <!-- Google tag (gtag.js) -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-4MPBP8827S"></script>
