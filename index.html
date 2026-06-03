@@ -6,7 +6,6 @@
 <title>Archolith &mdash; Self-hosted context compression for LLMs</title>
 <meta name="description" content="An OpenAI-compatible proxy that replaces linear replay with graph-assembled context. Compress context. Extract knowledge. Remember everything.">
 <link rel="icon" type="image/svg+xml" href="favicon.svg">
-<link rel="icon" type="image/png" href="favicon-32x32.png" sizes="32x32">
 <link rel="icon" href="favicon.ico" sizes="any">
 <link rel="preload" as="style" href="fonts/fonts.css" onload="this.onload=null;this.rel='stylesheet'">
 <link rel="preload" as="style" href="hero/archolith-hero.css" onload="this.onload=null;this.rel='stylesheet'">
@@ -1024,7 +1023,6 @@ ul { list-style: none; }
   gap: 10px;
   justify-items: end;
 }
-.logo-switcher,
 .type-switcher {
   position: static;
   display: flex;
@@ -1036,76 +1034,6 @@ ul { list-style: none; }
   font-size: 10px;
   letter-spacing: 0.1em;
   text-transform: uppercase;
-}
-.logo-switcher {
-  width: min(290px, calc(100vw - 40px));
-  display: block;
-}
-.logo-switcher__header {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 8px 12px;
-  border-bottom: 1px solid var(--rule-strong);
-  color: var(--ink-mute);
-}
-.logo-switcher__active {
-  color: var(--ink);
-}
-.logo-switcher__list {
-  display: grid;
-}
-.logo-switcher__btn {
-  display: grid;
-  grid-template-columns: 38px 1fr;
-  gap: 10px;
-  align-items: center;
-  padding: 8px 10px;
-  border-top: 1px solid var(--rule);
-  text-align: left;
-  transition: background 0.15s, color 0.15s;
-}
-.logo-switcher__btn:first-child {
-  border-top: 0;
-}
-.logo-switcher__btn:hover {
-  background: rgba(214,221,232,0.06);
-}
-.logo-switcher__btn.is-active {
-  background: var(--ink);
-  color: var(--bg);
-}
-.logo-switcher__thumb {
-  width: 38px;
-  height: 38px;
-  padding: 4px;
-  background: #ece5d5;
-  border: 1px solid rgba(15,20,28,0.18);
-  display: grid;
-  place-items: center;
-}
-.logo-switcher__thumb img {
-  width: 100%;
-  height: 100%;
-  display: block;
-}
-.logo-switcher__text {
-  display: grid;
-  gap: 2px;
-}
-.logo-switcher__code {
-  font-weight: 700;
-  letter-spacing: 0.12em;
-}
-.logo-switcher__name {
-  font-family: var(--f-body);
-  font-size: 12px;
-  letter-spacing: 0;
-  text-transform: none;
-  color: var(--ink-2);
-}
-.logo-switcher__btn.is-active .logo-switcher__name {
-  color: rgba(15,20,28,0.68);
 }
 .type-switcher__label {
   padding: 8px 12px;
@@ -1200,7 +1128,7 @@ ul { list-style: none; }
   .footer { grid-template-columns: 1fr 1fr; gap: 28px 20px; padding: 40px 20px; }
   .tweak-dock { right: 10px; bottom: 10px; }
   .type-switcher { font-size: 9px; }
-  .logo-switcher { width: min(250px, calc(100vw - 20px)); }
+
 }
 
 /* ============================================================
@@ -1240,7 +1168,7 @@ ul { list-style: none; }
 }
 </style>
 </head>
-<body data-type="grotesk" data-logo="strata">
+<body data-type="grotesk">
 
 <!-- ============================================================
      NAV
@@ -1248,7 +1176,7 @@ ul { list-style: none; }
 <nav class="nav">
   <div class="nav__brand">
     <span class="nav__shard">
-      <img id="nav-logo" src="logos/01-k8-dropping-keystone.svg" alt="" width="24" height="24">
+      <img id="nav-logo" src="logos/05-strata-column.svg" alt="Archolith" width="24" height="24">
     </span>
     ARCHOLITH
   </div>
@@ -1511,50 +1439,6 @@ ul { list-style: none; }
      TYPE SWITCHER
      ============================================================ -->
 <div class="tweak-dock">
-  <div class="logo-switcher">
-    <div class="logo-switcher__header">
-      <span>Logo</span>
-      <span class="logo-switcher__active" id="logo-switcher-active">K8</span>
-    </div>
-    <div class="logo-switcher__list">
-      <button class="logo-switcher__btn is-active" data-logo="k8">
-        <span class="logo-switcher__thumb"><img src="logos/01-k8-dropping-keystone.svg" alt="" width="38" height="38"></span>
-        <span class="logo-switcher__text">
-          <span class="logo-switcher__code">K8</span>
-          <span class="logo-switcher__name">Dropping keystone</span>
-        </span>
-      </button>
-      <button class="logo-switcher__btn" data-logo="k2">
-        <span class="logo-switcher__thumb"><img src="logos/02-k2-minimal-keystone.svg" alt="" width="38" height="38"></span>
-        <span class="logo-switcher__text">
-          <span class="logo-switcher__code">K2</span>
-          <span class="logo-switcher__name">Minimal keystone</span>
-        </span>
-      </button>
-      <button class="logo-switcher__btn" data-logo="k1">
-        <span class="logo-switcher__thumb"><img src="logos/03-k1-classic-keystone.svg" alt="" width="38" height="38"></span>
-        <span class="logo-switcher__text">
-          <span class="logo-switcher__code">K1</span>
-          <span class="logo-switcher__name">Classic keystone</span>
-        </span>
-      </button>
-      <button class="logo-switcher__btn" data-logo="doorway">
-        <span class="logo-switcher__thumb"><img src="logos/04-doorway.svg" alt="" width="38" height="38"></span>
-        <span class="logo-switcher__text">
-          <span class="logo-switcher__code">D4</span>
-          <span class="logo-switcher__name">Doorway</span>
-        </span>
-      </button>
-      <button class="logo-switcher__btn" data-logo="strata">
-        <span class="logo-switcher__thumb"><img src="logos/05-strata-column.svg" alt="" width="38" height="38"></span>
-        <span class="logo-switcher__text">
-          <span class="logo-switcher__code">S5</span>
-          <span class="logo-switcher__name">Strata column</span>
-        </span>
-      </button>
-    </div>
-  </div>
-
   <div class="type-switcher">
     <span class="type-switcher__label">Type</span>
     <button class="type-switcher__btn is-active" data-type="grotesk">Grotesk</button>
@@ -1578,64 +1462,6 @@ document.addEventListener("DOMContentLoaded", function() {
   if (heroRoot && window.ArcholithHero) {
     window.ArcholithHero.mount(heroRoot);
   }
-
-  /* Logo switcher */
-  var logos = {
-    k8: {
-      short: "K8",
-      label: "K8 · dropping keystone",
-      path: "logos/01-k8-dropping-keystone.svg"
-    },
-    k2: {
-      short: "K2",
-      label: "K2 · minimal keystone",
-      path: "logos/02-k2-minimal-keystone.svg"
-    },
-    k1: {
-      short: "K1",
-      label: "K1 · classic keystone",
-      path: "logos/03-k1-classic-keystone.svg"
-    },
-    doorway: {
-      short: "D4",
-      label: "D4 · doorway",
-      path: "logos/04-doorway.svg"
-    },
-    strata: {
-      short: "S5",
-      label: "S5 · strata column",
-      path: "logos/05-strata-column.svg"
-    }
-  };
-
-  var navLogo = document.getElementById("nav-logo");
-  var heroLogo = document.getElementById("hero-logo");
-  var heroLabel = document.getElementById("hero-logo-label");
-  var activeLabel = document.getElementById("logo-switcher-active");
-  var buttons = document.querySelectorAll(".logo-switcher__btn");
-
-  function setLogo(key) {
-    var logo = logos[key];
-    if (!logo) return;
-
-    if (navLogo) navLogo.src = logo.path;
-    if (heroLogo) heroLogo.src = logo.path;
-    if (heroLabel) heroLabel.textContent = logo.label;
-    if (activeLabel) activeLabel.textContent = logo.short;
-    document.body.setAttribute("data-logo", key);
-
-    buttons.forEach(function(btn) {
-      btn.classList.toggle("is-active", btn.getAttribute("data-logo") === key);
-    });
-  }
-
-  buttons.forEach(function(btn) {
-    btn.addEventListener("click", function() {
-      setLogo(btn.getAttribute("data-logo"));
-    });
-  });
-
-  setLogo(document.body.getAttribute("data-logo") || "strata");
 
   /* Type switcher */
   var btns = document.querySelectorAll(".type-switcher__btn");
