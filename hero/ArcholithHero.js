@@ -23,7 +23,7 @@
             "</div>",
             '<div class="archolith-hero__brandcopy">',
             '<span class="archolith-hero__brand-kicker">open source / self-hosted / infrastructural memory</span>',
-            '<span class="archolith-hero__brand-name" id="hero-logo-label">S5 · strata column</span>',
+            '<span class="archolith-hero__brand-name" id="hero-logo-label">Archolith</span>',
             "</div>",
             "</div>",
             '<span class="archolith-hero__crumb">Open source · Apache-2.0 · Self-hosted</span>',
