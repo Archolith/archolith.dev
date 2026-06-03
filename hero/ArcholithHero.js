@@ -33,6 +33,7 @@
             '<span class="archolith-hero__beat">Compress context</span>',
             '<span class="archolith-hero__beat">Extract knowledge</span>',
             '<span class="archolith-hero__beat">Remember everything</span>',
+            '<span class="archolith-hero__beat">Predict ahead</span>',
             "</div>",
             '<div class="archolith-hero__cta">',
             '<a class="cta" href="#" aria-label="Coming soon">Try the demo</a>',

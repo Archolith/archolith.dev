@@ -2,15 +2,15 @@
 (function defineArcholithSlices(globalScope) {
     var sliceDefinitions = [
         {
-            id: "surface",
+            id: "filter",
             layerId: "L0",
-            name: "Surface",
-            accent: "#8eaed5",
+            name: "Filter",
+            accent: "#c29b58",
             depth: "02m",
-            measure: "128k > survey brief",
-            summary: "Incoming signal mass compresses into order.",
-            detail: "Converging traces, scan bands, and collapsing density establish the first readable seam.",
-            note: "ingress / compression face"
+            measure: "50% avg compression",
+            summary: "Tool output stripped before it reaches the model.",
+            detail: "Layer 0 pre-filter pipeline removes secrets, binary, oversized blobs, and duplicate content. Nine format-switch strategies compress diffs, search results, JSON, logs, and stack traces.",
+            note: "archolith-filter / compression engine"
         },
         {
             id: "proxy",
@@ -18,21 +18,21 @@
             name: "Proxy",
             accent: "#56a8e8",
             depth: "08m",
-            measure: ":9800 routing seam",
-            summary: "Interception plate and reroute geometry.",
-            detail: "Channels, gate geometry, and seam crossings redirect traffic without changing the upstream contract.",
-            note: "routing / interception plate"
+            measure: "58.6% token savings",
+            summary: "Drop-in intercept. No code changes required.",
+            detail: "OpenAI-compatible proxy. Point any harness at port 9800 with a base-URL swap. Owns the request lifecycle, session fingerprinting, two-pass curator assembly, and upstream forwarding.",
+            note: "archolith-context / proxy layer"
         },
         {
-            id: "session",
+            id: "context",
             layerId: "L2",
-            name: "Session",
+            name: "Context",
             accent: "#62a98c",
             depth: "15m",
-            measure: "ttl 24h / active tail",
-            summary: "Temporary assembly layer.",
-            detail: "Linked fragments and working-state marks hold the current turn together before they decay or promote.",
-            note: "working state / transient joins"
+            measure: "~15K token budget",
+            summary: "Graph-assembled context replaces linear replay.",
+            detail: "Each turn queries the graph for active files, decisions, and relevant facts. Curated context is spliced in as synthetic messages — the model reads what matters, not the full history.",
+            note: "archolith-context / curator assembly"
         },
         {
             id: "memory",
@@ -41,31 +41,31 @@
             accent: "#82729e",
             depth: "23m",
             measure: "promote > 0.90",
-            summary: "Dense archival layer.",
-            detail: "Engraved relationships, compressed structures, and durable promotions form the long-term graph bed.",
-            note: "archive / promoted structure"
+            summary: "Knowledge extracted and kept across sessions.",
+            detail: "Entities, decisions, file structure, and code relationships are promoted to the long-term graph. Semantic retrieval surfaces the right context at the right turn without replay.",
+            note: "archolith-memory / knowledge graph"
         },
         {
-            id: "filter",
+            id: "audit",
             layerId: "L4",
-            name: "Filter",
-            accent: "#c29b58",
+            name: "Audit",
+            accent: "#8eaed5",
             depth: "31m",
-            measure: "threshold / subtraction",
-            summary: "Selective subtraction.",
-            detail: "Cut lines, masked removals, and threshold marks strip superseded matter before it crosses budget.",
-            note: "budget gate / subtraction plate"
+            measure: "per-server attribution",
+            summary: "Measure waste before you compress it.",
+            detail: "Per-server token cost, six waste pattern detectors, and report cards with concrete optimization suggestions. CI threshold gates catch regressions before they ship.",
+            note: "archolith-audit / MCP diagnostics"
         },
         {
-            id: "foundation",
+            id: "bench",
             layerId: "L5",
-            name: "Foundation",
+            name: "Bench",
             accent: "#a28670",
             depth: "39m",
-            measure: "load grid / schema base",
-            summary: "Load-bearing base grid.",
-            detail: "Bedrock lattice, survey rails, and schema understructure carry the entire stack without ornament.",
-            note: "bedrock / structural grid"
+            measure: "reproducible runs",
+            summary: "Every headline number has a source.",
+            detail: "Reproducible benchmark suite for proxy savings, filter compression, and audit waste reduction. Scenario runner, corpus compression, and stack comparison arms. 58.6% proxy, 50% filter.",
+            note: "archolith-bench / benchmark suite"
         }
     ];
 

@@ -4,12 +4,12 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Archolith &mdash; Self-hosted context compression for LLMs</title>
-<meta name="description" content="An OpenAI-compatible proxy that replaces linear replay with graph-assembled context. Compress context. Extract knowledge. Remember everything.">
+<meta name="description" content="An OpenAI-compatible proxy that replaces linear replay with graph-assembled context. Compress context. Extract knowledge. Remember everything. Predict ahead.">
 <link rel="icon" type="image/svg+xml" href="favicon.svg">
 <link rel="icon" href="favicon.ico" sizes="any">
 <link rel="preload" as="style" href="fonts/fonts.css" onload="this.onload=null;this.rel='stylesheet'">
 <link rel="preload" as="style" href="hero/archolith-hero.css" onload="this.onload=null;this.rel='stylesheet'">
-<link rel="preload" as="image" href="logos/01-k8-dropping-keystone.svg">
+<link rel="preload" as="image" href="logos/05-strata-column.svg">
 <noscript>
   <link rel="stylesheet" href="fonts/fonts.css">
   <link rel="stylesheet" href="hero/archolith-hero.css">
@@ -48,20 +48,6 @@
   --f-ui: "IBM Plex Mono", ui-monospace, monospace;
 
   --gap-section: 96px;
-}
-
-/* Type system B: all-sans (sharp) */
-body[data-type="sans"] {
-  --f-display: "IBM Plex Sans", system-ui, sans-serif;
-  --f-body: "IBM Plex Sans", system-ui, sans-serif;
-  --f-mono: "JetBrains Mono", ui-monospace, monospace;
-}
-
-/* Type system C: editorial serif + technical sans */
-body[data-type="serif"] {
-  --f-display: "IBM Plex Serif", Georgia, serif;
-  --f-body: "IBM Plex Sans", system-ui, sans-serif;
-  --f-mono: "JetBrains Mono", ui-monospace, monospace;
 }
 
 /* ============================================================
@@ -1013,50 +999,6 @@ ul { list-style: none; }
 .footer a:hover { color: var(--ink); }
 
 /* ============================================================
-   TWEAK DOCK
-   ============================================================ */
-.tweak-dock {
-  position: fixed;
-  right: 20px;
-  bottom: 20px;
-  z-index: 60;
-  display: grid;
-  gap: 10px;
-  justify-items: end;
-}
-.type-switcher {
-  position: static;
-  display: flex;
-  gap: 0;
-  border: 1px solid var(--rule-strong);
-  background: var(--bg);
-  box-shadow: 4px 4px 0 rgba(0,0,0,0.3);
-  font-family: var(--f-ui);
-  font-size: 10px;
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
-}
-.type-switcher__label {
-  padding: 8px 12px;
-  color: var(--ink-mute);
-  border-right: 1px solid var(--rule-strong);
-  display: flex;
-  align-items: center;
-}
-.type-switcher__btn {
-  padding: 8px 14px;
-  color: var(--ink-mute);
-  border-right: 1px solid var(--rule-strong);
-  transition: background 0.15s, color 0.15s;
-}
-.type-switcher__btn:last-child { border-right: 0; }
-.type-switcher__btn:hover { color: var(--ink); }
-.type-switcher__btn.is-active {
-  background: var(--ink);
-  color: var(--bg);
-}
-
-/* ============================================================
    RESPONSIVE
    ============================================================ */
 @media (max-width: 1300px) {
@@ -1127,8 +1069,6 @@ ul { list-style: none; }
   .demo-pane:last-child { border-bottom: 0; }
 
   .footer { grid-template-columns: 1fr 1fr; gap: 28px 20px; padding: 40px 20px; }
-  .tweak-dock { right: 10px; bottom: 10px; }
-  .type-switcher { font-size: 9px; }
 
 }
 
@@ -1152,20 +1092,6 @@ ul { list-style: none; }
   .stats__cell { border-right: 0; border-bottom: 1px solid var(--rule-strong); }
   .stats__cell:last-child { border-bottom: 0; }
   .footer { grid-template-columns: 1fr; }
-  .type-switcher {
-    width: min(250px, calc(100vw - 20px));
-    flex-wrap: wrap;
-  }
-  .type-switcher__label {
-    width: 100%;
-    justify-content: center;
-    border-right: 0;
-    border-bottom: 1px solid var(--rule-strong);
-  }
-  .type-switcher__btn {
-    flex: 1 1 0;
-    text-align: center;
-  }
 }
 </style>
 </head>
@@ -1215,7 +1141,7 @@ ul { list-style: none; }
         <div class="stats__label">filter compression</div>
       </div>
       <div class="stats__cell">
-        <div class="stats__num">71.5%</div>
+        <div class="stats__num">—</div>
         <div class="stats__label">MCP waste reduction</div>
       </div>
       <div class="stats__cell">
@@ -1271,15 +1197,15 @@ ul { list-style: none; }
      ============================================================ -->
 <section class="sec" id="system">
   <span class="sec__num">03 &middot; The system</span>
-  <h3 class="sec__title">Four packages, one seam.</h3>
+  <h3 class="sec__title">From raw tool output to long-term memory &mdash; every layer has a job.</h3>
   <div class="stack">
     <div class="slab slab--primary">
       <div class="slab__id">
         archolith-context
-        <span class="slab__badge slab__badge--stable">stable</span>
+        <span class="slab__badge slab__badge--stable">alpha</span>
         <span class="slab__name">The proxy</span>
       </div>
-      <div class="slab__body">OpenAI-compatible proxy. Point any harness at port 9800 with a base-URL swap &mdash; no code changes. Owns the request/response lifecycle, session fingerprinting, two-pass curator assembly, graph extraction, and upstream forwarding. Circuit breaker and per-session token budget included.</div>
+      <div class="slab__body">OpenAI-compatible proxy. Point any harness at port 9800 with a base-URL swap &mdash; no code changes. Owns the request/response lifecycle, session fingerprinting, two-pass curator assembly, graph extraction, and upstream forwarding. Circuit breaker and per-session token budget included. Speculative prefetch predicts likely tool calls and executes them in parallel while the model thinks &mdash; eliminating per-turn wait time at 50%+ prediction accuracy.</div>
       <div class="slab__io">
         <div class="slab__io-label">Touches</div>
         <ul>
@@ -1293,7 +1219,7 @@ ul { list-style: none; }
     <div class="slab">
       <div class="slab__id">
         archolith-rtk
-        <span class="slab__badge slab__badge--stable">stable</span>
+        <span class="slab__badge slab__badge--stable">alpha</span>
         <span class="slab__name">The filter</span>
       </div>
       <div class="slab__body">Token Reduction Toolkit &mdash; deterministic output filtering for LLM agent contexts. Layer 0 pre-filter pipeline (secrets, thinking, paths, binary, oversized) plus nine format-switch strategies for diffs, search, file reads, JSON, logs, stack traces, and build output. 50% average savings on real session data.</div>
@@ -1310,10 +1236,10 @@ ul { list-style: none; }
     <div class="slab">
       <div class="slab__id">
         archolith-audit
-        <span class="slab__badge slab__badge--stable">stable</span>
+        <span class="slab__badge slab__badge--stable">alpha</span>
         <span class="slab__name">The diagnostics</span>
       </div>
-      <div class="slab__body">MCP token usage audit system. Measures per-server token cost, detects waste patterns, and produces report cards with concrete optimization suggestions. 71.5% waste reduction measured.</div>
+      <div class="slab__body">MCP token usage audit system. Measures per-server token cost, detects waste patterns, and produces report cards with concrete optimization suggestions.</div>
       <div class="slab__io">
         <div class="slab__io-label">Owns</div>
         <ul>
@@ -1330,7 +1256,7 @@ ul { list-style: none; }
         <span class="slab__badge">benchmark</span>
         <span class="slab__name">The yardstick</span>
       </div>
-      <div class="slab__body">Reproducible benchmark suite measuring proxy savings, filter compression, and MCP waste reduction across multi-turn coding scenarios. Headline numbers: 58.6% proxy, 50% filter, 71.5% audit.</div>
+      <div class="slab__body">Reproducible benchmark suite measuring proxy savings, filter compression, and MCP waste reduction across multi-turn coding scenarios. Headline numbers: 58.6% proxy, 50% filter.</div>
       <div class="slab__io">
         <div class="slab__io-label">Owns</div>
         <ul>
@@ -1338,6 +1264,23 @@ ul { list-style: none; }
           <li>Filter corpus compression</li>
           <li>Audit before/after</li>
           <li>Stack comparison arms</li>
+        </ul>
+      </div>
+    </div>
+    <div class="slab slab--future">
+      <div class="slab__id">
+        archolith-memory
+        <span class="slab__badge">coming</span>
+        <span class="slab__name">The memory</span>
+      </div>
+      <div class="slab__body">Long-term knowledge graph across sessions and agents. Stores entities, decisions, file structure, and code relationships. Semantic retrieval surfaces the right context at the right turn &mdash; without replay. The thing that makes "remember everything" true.</div>
+      <div class="slab__io">
+        <div class="slab__io-label">Owns</div>
+        <ul>
+          <li>Cross-session entity graph</li>
+          <li>Semantic retrieval</li>
+          <li>Knowledge promotion</li>
+          <li>Session bootstrap</li>
         </ul>
       </div>
     </div>
@@ -1349,7 +1292,7 @@ ul { list-style: none; }
      ============================================================ -->
 <section class="sec demo-section" id="demo">
   <span class="sec__num">04 &middot; Side-by-side</span>
-  <h3 class="sec__title">Same prompts. Two paths.</h3>
+  <h3 class="sec__title">What 58.6% fewer tokens looks like across a real session.</h3>
   <div class="demo-frame">
     <div class="demo-frame__bar">
       <div class="demo-frame__dots">
@@ -1384,6 +1327,7 @@ ul { list-style: none; }
       </div>
     </div>
   </div>
+  <p style="margin-top:14px; font-family:var(--f-mono); font-size:10px; color:var(--ink-mute); letter-spacing:0.08em;">Cost calculated at $0.005&thinsp;/&thinsp;1K input tokens. Token counts from archolith-bench proxy suite, commit 5112334, 2026-05-30.</p>
 </section>
 
 <!-- ============================================================
@@ -1414,6 +1358,7 @@ ul { list-style: none; }
       <li><a href="#" aria-label="Coming soon">archolith-rtk</a></li>
       <li><a href="#" aria-label="Coming soon">archolith-audit</a></li>
       <li><a href="#" aria-label="Coming soon">archolith-bench</a></li>
+      <li><a href="#" aria-label="Coming soon">archolith-memory</a></li>
     </ul>
   </div>
   <div>
@@ -1437,18 +1382,6 @@ ul { list-style: none; }
 </footer>
 
 <!-- ============================================================
-     TYPE SWITCHER
-     ============================================================ -->
-<div class="tweak-dock">
-  <div class="type-switcher">
-    <span class="type-switcher__label">Type</span>
-    <button class="type-switcher__btn is-active" data-type="grotesk">Grotesk</button>
-    <button class="type-switcher__btn" data-type="sans">Sharp Sans</button>
-    <button class="type-switcher__btn" data-type="serif">Serif + Sans</button>
-  </div>
-</div>
-
-<!-- ============================================================
      SCRIPTS
      ============================================================ -->
 <script defer src="hero/sliceDefinitions.js"></script>
@@ -1464,15 +1397,6 @@ document.addEventListener("DOMContentLoaded", function() {
     window.ArcholithHero.mount(heroRoot);
   }
 
-  /* Type switcher */
-  var btns = document.querySelectorAll(".type-switcher__btn");
-  btns.forEach(function(btn) {
-    btn.addEventListener("click", function() {
-      btns.forEach(function(b) { b.classList.remove("is-active"); });
-      btn.classList.add("is-active");
-      document.body.setAttribute("data-type", btn.getAttribute("data-type"));
-    });
-  });
 });
 </script>
 </body>
