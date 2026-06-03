@@ -19,7 +19,7 @@
             '<div class="archolith-hero__copy">',
             '<div class="archolith-hero__brandplate">',
             '<div class="archolith-hero__logo-box">',
-            '<img id="hero-logo" src="logos/05-strata-column.svg" alt="Archolith logo">',
+            '<img id="hero-logo" src="logos/05-strata-column.svg" alt="Archolith logo" width="88" height="88">',
             "</div>",
             '<div class="archolith-hero__brandcopy">',
             '<span class="archolith-hero__brand-kicker">open source / self-hosted / infrastructural memory</span>',
