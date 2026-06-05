@@ -4,11 +4,12 @@
 
 archolith.dev is the marketing homepage for the Archolith suite — a set of self-hosted context compression tools for LLMs. The site is a single-page static HTML file with vanilla JavaScript components. No build system, no framework, no server-side rendering.
 
-The site presents four Archolith products:
-1. **archolith-context** (stable) — Two-pass curator with circuit breaker and token budget; OpenAI-compatible proxy on port 9800
-2. **archolith-rtk** (stable) — Layer 0 pre-filter pipeline; nine format-switch strategies for token reduction
-3. **archolith-audit** (stable) — MCP token usage audit system; waste detection and report cards
+The site currently presents five Archolith products:
+1. **archolith-context** (alpha) — Two-pass curator with circuit breaker and token budget; OpenAI-compatible proxy on port 9800
+2. **archolith-filter** (alpha) — Layer 0 pre-filter pipeline; nine format-switch strategies for token reduction
+3. **archolith-audit** (alpha) — MCP token usage audit system; waste detection and report cards
 4. **archolith-bench** (benchmark) — Reproducible benchmark suite; generates the headline savings numbers
+5. **archolith-memory** (coming) — Future long-term memory layer already represented on the homepage
 
 The hero section features an interactive scroll-excavation animation built with vanilla JS that reveals geological strata layers as the user scrolls, each representing a product/suite layer.
 
@@ -123,7 +124,7 @@ Three typography presets toggled via `data-type` attribute on `<body>`:
 1. **Hero** — Scroll-excavation strata animation
 2. **Problem** — "The broken model" — linear replay cost stats
 3. **Mechanism** — 5-step proxy pipeline (receive → query → assemble → forward → extract)
-4. **Architecture** — 4-slab product stack (context, rtk, bench, filter)
+4. **Architecture** — 5-slab product stack (context, rtk, audit, bench, memory)
 5. **Demo** — Side-by-side benchmark comparison (direct vs. proxy)
 6. **Quickstart** — Hidden via `display:none` (pre-launch)
 7. **Footer** — Links neutralized to `href="#"` (pre-launch)
