@@ -30,9 +30,9 @@
             accent: "#62a98c",
             depth: "15m",
             measure: "~15K token budget",
-            summary: "Graph-assembled context replaces linear replay.",
-            detail: "Each turn queries the graph for active files, decisions, and relevant facts. Curated context is spliced in as synthetic messages — the model reads what matters, not the full history.",
-            note: "archolith-context / curator assembly"
+            summary: "Experimental graph-assembled context reduces linear replay.",
+            detail: "Each turn can query the graph for active files, decisions, and relevant facts. Curated context is spliced in as synthetic messages when enabled; this layer is still experimental.",
+            note: "archolith-context / experimental curator assembly"
         },
         {
             id: "memory",
@@ -43,7 +43,7 @@
             measure: "promote > 0.90",
             summary: "Knowledge extracted and kept across sessions.",
             detail: "Entities, decisions, file structure, and code relationships are promoted to the long-term graph. Semantic retrieval surfaces the right context at the right turn without replay.",
-            note: "archolith-memory / knowledge graph"
+            note: "menhir / knowledge graph"
         },
         {
             id: "audit",

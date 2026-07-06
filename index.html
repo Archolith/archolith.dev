@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Archolith &mdash; Self-hosted context compression for LLMs</title>
-<meta name="description" content="An OpenAI-compatible proxy that replaces linear replay with graph-assembled context. Compress context. Extract knowledge. Remember everything. Predict ahead.">
+<meta name="description" content="Experimental context compression tools for LLM coding agents. Compress context. Extract knowledge. Remember what matters.">
 <link rel="icon" type="image/svg+xml" href="favicon.svg">
 <link rel="icon" href="favicon.ico" sizes="any">
 <link rel="preload" as="style" href="fonts/fonts.css" onload="this.onload=null;this.rel='stylesheet'">
@@ -1205,7 +1205,7 @@ ul { list-style: none; }
         <span class="slab__badge slab__badge--stable">alpha</span>
         <span class="slab__name">The proxy</span>
       </div>
-      <div class="slab__body">OpenAI-compatible proxy. Point any harness at port 9800 with a base-URL swap &mdash; no code changes. Owns the request/response lifecycle, session fingerprinting, two-pass curator assembly, graph extraction, and upstream forwarding. Circuit breaker and per-session token budget included. Speculative prefetch predicts likely tool calls and executes them in parallel while the model thinks &mdash; eliminating per-turn wait time at 50%+ prediction accuracy.</div>
+      <div class="slab__body">Experimental OpenAI-compatible proxy. Point any harness at port 9800 with a base-URL swap &mdash; no code changes. Owns the request/response lifecycle, session fingerprinting, two-pass curator assembly, graph extraction, and upstream forwarding. Circuit breaker and per-session token budget included.</div>
       <div class="slab__io">
         <div class="slab__io-label">Touches</div>
         <ul>
@@ -1269,11 +1269,11 @@ ul { list-style: none; }
     </div>
     <div class="slab slab--future">
       <div class="slab__id">
-        archolith-memory
+        menhir
         <span class="slab__badge">coming</span>
         <span class="slab__name">The memory</span>
       </div>
-      <div class="slab__body">Long-term knowledge graph across sessions and agents. Stores entities, decisions, file structure, and code relationships. Semantic retrieval surfaces the right context at the right turn &mdash; without replay. The thing that makes "remember everything" true.</div>
+      <div class="slab__body">Durable memory direction for knowledge across sessions and agents. Stores entities, decisions, file structure, and code relationships so future context retrieval can improve without replay. This layer is still being shaped.</div>
       <div class="slab__io">
         <div class="slab__io-label">Owns</div>
         <ul>
@@ -1349,7 +1349,7 @@ ul { list-style: none; }
 <footer class="footer">
   <div>
     <div class="footer__brand">ARCHOLITH</div>
-    <p class="footer__tagline">Self-hosted context compression for LLMs. Compress context. Extract knowledge. Remember everything.</p>
+    <p class="footer__tagline">Self-hosted context compression for LLMs. Compress context. Extract knowledge. Remember what matters.</p>
   </div>
   <div>
     <h5>Products</h5>
@@ -1358,7 +1358,7 @@ ul { list-style: none; }
       <li><a href="#" aria-label="Coming soon">archolith-filter</a></li>
       <li><a href="#" aria-label="Coming soon">archolith-audit</a></li>
       <li><a href="#" aria-label="Coming soon">archolith-bench</a></li>
-      <li><a href="#" aria-label="Coming soon">archolith-memory</a></li>
+      <li><a href="#" aria-label="Coming soon">menhir</a></li>
     </ul>
   </div>
   <div>
@@ -1367,7 +1367,7 @@ ul { list-style: none; }
       <li><a href="#" aria-label="Coming soon">Quickstart</a></li>
       <li><a href="#" aria-label="Coming soon">Architecture</a></li>
       <li><a href="#" aria-label="Coming soon">Trace API</a></li>
-      <li><a href="#" aria-label="Coming soon">Memory engines</a></li>
+      <li><a href="#" aria-label="Coming soon">Menhir memory</a></li>
     </ul>
   </div>
   <div>

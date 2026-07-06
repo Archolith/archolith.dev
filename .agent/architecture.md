@@ -5,11 +5,11 @@
 archolith.dev is the marketing homepage for the Archolith suite — a set of self-hosted context compression tools for LLMs. The site is a single-page static HTML file with vanilla JavaScript components. No build system, no framework, no server-side rendering.
 
 The site currently presents five Archolith products:
-1. **archolith-context** (alpha) — Two-pass curator with circuit breaker and token budget; OpenAI-compatible proxy on port 9800
+1. **archolith-context** (experimental alpha) — Two-pass curator with circuit breaker and token budget; OpenAI-compatible proxy on port 9800
 2. **archolith-filter** (alpha) — Layer 0 pre-filter pipeline; nine format-switch strategies for token reduction
 3. **archolith-audit** (alpha) — MCP token usage audit system; waste detection and report cards
 4. **archolith-bench** (benchmark) — Reproducible benchmark suite; generates the headline savings numbers
-5. **archolith-memory** (coming) — Future long-term memory layer already represented on the homepage
+5. **menhir** (memory direction) — Durable long-term memory layer represented on the homepage
 
 The hero section features an interactive scroll-excavation animation built with vanilla JS that reveals geological strata layers as the user scrolls, each representing a product/suite layer.
 

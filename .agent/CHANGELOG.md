@@ -1,5 +1,11 @@
 # Changelog — archolith.dev
 
+## 2026-07-05 — Correct experimental positioning and Menhir naming
+
+- Replaced `archolith-memory` references with `menhir` across the homepage, hero, logo matrix, and docs.
+- Removed unsupported predictive-prefetch claims and labeled graph-assembled context as experimental.
+- Updated contributor and repository documentation for the current static-site workflow and product surface.
+
 ## 2026-06-03 — Perf: self-host fonts, fix CLS, non-blocking font load
 
 - `fonts/` — added 38 WOFF2 files (5 families, latin + latin-ext subsets, 839 KB total)
