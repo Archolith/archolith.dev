@@ -1,5 +1,10 @@
 # Changelog — archolith.dev
 
+## 2026-07-08 — Align durable memory naming: `menhir` not `archolith-menhir`
+
+- `index.html` — replaced 3 `archolith-menhir` references with `menhir` (architecture slab, footer products list, footer docs list).
+- `hero/sliceDefinitions.js` — replaced `archolith-menhir` with `menhir` in memory layer note.
+
 ## 2026-07-08 — Public product rename to Archolith Skree
 
 - Verified site already uses `archolith-skree` in system section, install section, footer, and README.

@@ -1,4 +1,4 @@
-/* Keep in sync with sliceDefinitions.ts until archolith.dev adopts a build step. */
+/* Live hero slice definitions. This static site has no TypeScript build step. */
 (function defineArcholithSlices(globalScope) {
     var sliceDefinitions = [
         {
@@ -18,7 +18,7 @@
             name: "Proxy",
             accent: "#56a8e8",
             depth: "08m",
-            measure: "58.6% token savings",
+            measure: "launch evidence pending",
             summary: "Drop-in intercept. No code changes required.",
             detail: "OpenAI-compatible proxy. Point any harness at port 9800 with a base-URL swap. Owns the request lifecycle, session fingerprinting, two-pass curator assembly, and upstream forwarding.",
             note: "archolith-context / proxy layer"
@@ -54,7 +54,7 @@
             measure: "per-server attribution",
             summary: "Measure waste before you compress it.",
             detail: "Per-server token cost, six waste pattern detectors, and report cards with concrete optimization suggestions. CI threshold gates catch regressions before they ship.",
-            note: "archolith-audit / MCP diagnostics"
+            note: "archolith-skree / MCP diagnostics"
         },
         {
             id: "bench",
@@ -64,8 +64,8 @@
             depth: "39m",
             measure: "reproducible runs",
             summary: "Every headline number has a source.",
-            detail: "Reproducible benchmark suite for proxy savings, filter compression, and audit waste reduction. Scenario runner, corpus compression, and stack comparison arms. 58.6% proxy, 50% filter.",
-            note: "archolith-bench / benchmark suite"
+            detail: "Reproducible benchmark suite for proxy savings, filter compression, and audit waste reduction. Scenario runner, corpus compression, and stack comparison arms. Public claims stay tied to tracked evidence artifacts.",
+            note: "archolith-peira / benchmark suite"
         }
     ];
 
