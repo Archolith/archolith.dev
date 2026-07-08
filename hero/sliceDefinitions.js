@@ -37,13 +37,13 @@
         {
             id: "memory",
             layerId: "L3",
-            name: "Memory",
+            name: "Memory (coming)",
             accent: "#82729e",
             depth: "23m",
-            measure: "promote > 0.90",
-            summary: "Knowledge extracted and kept across sessions.",
-            detail: "Entities, decisions, file structure, and code relationships are promoted to the long-term graph. Semantic retrieval surfaces the right context at the right turn without replay.",
-            note: "menhir / knowledge graph"
+            measure: "future direction",
+            summary: "Future durable memory direction for cross-session knowledge.",
+            detail: "Entities, decisions, and code relationships would be promoted to a long-term graph so future context retrieval can improve without replay. This layer is still being shaped.",
+            note: "menhir / research direction"
         },
         {
             id: "audit",

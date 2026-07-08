@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Archolith Privacy Notice</title>
+<meta name="description" content="Privacy notice for archolith.dev.">
+<link rel="icon" type="image/svg+xml" href="favicon.svg">
+<link rel="icon" href="favicon.ico" sizes="any">
+<link rel="preload" as="style" href="fonts/fonts.css" onload="this.onload=null;this.rel='stylesheet'">
+<noscript>
+  <link rel="stylesheet" href="fonts/fonts.css">
+</noscript>
+<style>
+:root {
+  --bg: #0f141c;
+  --bg-2: #161d28;
+  --ink: #d6dde8;
+  --ink-2: #98a4b6;
+  --ink-mute: #61708a;
+  --accent: #6c8fbe;
+  --rule: rgba(214,221,232,0.18);
+  --rule-strong: rgba(214,221,232,0.35);
+  --f-display: "Space Grotesk", system-ui, sans-serif;
+  --f-body: "IBM Plex Sans", system-ui, sans-serif;
+  --f-mono: "JetBrains Mono", ui-monospace, monospace;
+}
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+body {
+  background:
+    repeating-linear-gradient(to right, transparent 0 108px, rgba(214,221,232,0.013) 108px 109px),
+    repeating-linear-gradient(to bottom, transparent 0 74px, rgba(214,221,232,0.011) 74px 75px),
+    var(--bg);
+  color: var(--ink);
+  font-family: var(--f-body);
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+}
+a { color: inherit; }
+.nav {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 18px 32px;
+  border-bottom: 1px solid var(--rule);
+  font-family: var(--f-display);
+  font-size: 14px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+.nav a { color: var(--ink-2); text-decoration: none; }
+.nav a:hover { color: var(--ink); }
+main {
+  width: min(840px, calc(100% - 40px));
+  margin: 0 auto;
+  padding: 72px 0 96px;
+}
+.eyebrow {
+  display: block;
+  margin-bottom: 18px;
+  font-family: var(--f-mono);
+  font-size: 11px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--ink-mute);
+}
+h1, h2 {
+  font-family: var(--f-display);
+  line-height: 1.1;
+  letter-spacing: -0.01em;
+}
+h1 {
+  max-width: 720px;
+  font-size: clamp(34px, 7vw, 64px);
+  margin-bottom: 18px;
+}
+h2 {
+  margin: 42px 0 12px;
+  font-size: 22px;
+}
+p, li { color: var(--ink-2); }
+p { margin: 0 0 16px; }
+ul {
+  margin: 0 0 18px 20px;
+}
+li + li { margin-top: 8px; }
+.notice {
+  margin: 34px 0;
+  padding: 18px 20px;
+  border: 1px solid var(--rule-strong);
+  border-left: 3px solid var(--accent);
+  background: var(--bg-2);
+  color: var(--ink-2);
+}
+.meta {
+  font-family: var(--f-mono);
+  font-size: 12px;
+  color: var(--ink-mute);
+}
+code {
+  font-family: var(--f-mono);
+  color: var(--ink);
+}
+</style>
+</head>
+<body>
+<nav class="nav">
+  <a href="index.html">Archolith</a>
+  <a href="https://github.com/Archolith">GitHub</a>
+</nav>
+<main>
+  <span class="eyebrow">Privacy notice</span>
+  <h1>Minimal analytics, disclosed plainly.</h1>
+  <p class="meta">Effective date: July 7, 2026</p>
+
+  <div class="notice">
+    archolith.dev does not load Google Analytics or advertising tags. The site is served through Cloudflare, which means Cloudflare may process request logs and privacy-preserving web analytics for security, reliability, abuse prevention, and aggregate performance measurement.
+  </div>
+
+  <h2>What this site collects</h2>
+  <p>archolith.dev is a static product site. It does not provide account creation, checkout, comments, newsletter signup, or contact forms.</p>
+  <p>When you visit the site, technical data may be processed by Cloudflare as part of delivery and analytics:</p>
+  <ul>
+    <li>Request data such as IP address, request path, timestamp, user agent, referrer, and approximate location derived from network data.</li>
+    <li>Security and reliability signals used to protect and operate the site.</li>
+    <li>Aggregate page performance metrics from Cloudflare Web Analytics when enabled, such as navigation timing and Core Web Vitals.</li>
+  </ul>
+
+  <h2>Cookies and local storage</h2>
+  <p>The site does not intentionally set first-party marketing, advertising, or cross-site tracking cookies. No Google Analytics tag is loaded.</p>
+  <p>Cloudflare may use strictly necessary technologies to provide network delivery, security, and reliability. If Archolith later adds non-essential browser analytics, personalization, or advertising tags, those features should not load for EU/UK visitors until consent is collected.</p>
+
+  <h2>How data is used</h2>
+  <ul>
+    <li>To deliver the website and related static assets.</li>
+    <li>To protect the site from abuse and diagnose reliability issues.</li>
+    <li>To understand aggregate performance and traffic patterns without building advertising profiles.</li>
+  </ul>
+
+  <h2>Sharing</h2>
+  <p>Cloudflare processes technical data as the hosting, security, and analytics provider for this site. Archolith does not sell personal information and does not share personal information for cross-context behavioral advertising.</p>
+
+  <h2>Your choices</h2>
+  <p>You can use browser controls to block or delete cookies and similar storage. Because this site does not sell or share personal information for targeted advertising, Global Privacy Control signals are treated as consistent with the current site posture: no sale, no sharing for cross-context behavioral advertising.</p>
+
+  <h2>Changes</h2>
+  <p>Material privacy changes should be reflected on this page with a new effective date before the corresponding tracking or collection change ships.</p>
+
+  <h2>Contact</h2>
+  <p>Privacy questions can be sent to <a href="mailto:contact@ctharvey.me">contact@ctharvey.me</a>.</p>
+</main>
+</body>
+</html>
