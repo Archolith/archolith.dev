@@ -8,22 +8,12 @@
 <link rel="icon" type="image/svg+xml" href="favicon.svg">
 <link rel="icon" href="favicon.ico" sizes="any">
 <link rel="preload" as="style" href="fonts/fonts.css" onload="this.onload=null;this.rel='stylesheet'">
-<link rel="preload" as="style" href="hero/archolith-hero.css" onload="this.onload=null;this.rel='stylesheet'">
+<link rel="preload" as="style" href="hero/archolith-hero.css?v=20260707a" onload="this.onload=null;this.rel='stylesheet'">
 <link rel="preload" as="image" href="logos/05-strata-column.svg">
 <noscript>
   <link rel="stylesheet" href="fonts/fonts.css">
-  <link rel="stylesheet" href="hero/archolith-hero.css">
+  <link rel="stylesheet" href="hero/archolith-hero.css?v=20260707a">
 </noscript>
-
-<!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-4MPBP8827S"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-
-  gtag('config', 'G-4MPBP8827S');
-</script>
 
 <style>
 /* ============================================================
@@ -69,6 +59,29 @@ body {
 a { color: inherit; }
 button { font: inherit; color: inherit; background: none; border: 0; cursor: pointer; }
 ul { list-style: none; }
+
+.skip-link {
+  position: fixed;
+  top: 12px;
+  left: 16px;
+  z-index: 100;
+  padding: 10px 14px;
+  background: var(--ink);
+  color: var(--bg);
+  font-family: var(--f-mono);
+  font-size: 11px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  text-decoration: none;
+  transform: translateY(-140%);
+  transition: transform 0.15s ease;
+}
+.skip-link:focus {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+  transform: translateY(0);
+}
+#main:focus { outline: none; }
 
 /* ============================================================
    NAV
@@ -958,6 +971,61 @@ ul { list-style: none; }
 .quickstart .comment { color: var(--ink-mute); }
 .quickstart .prompt { color: var(--accent); }
 
+.install-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 18px;
+}
+.install-tile {
+  border: 1px solid var(--rule-strong);
+  background: var(--bg-2);
+  padding: 20px;
+}
+.install-tile__head {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 12px;
+  margin-bottom: 14px;
+}
+.install-tile__name {
+  font-family: var(--f-display);
+  font-size: 18px;
+  font-weight: 700;
+  color: var(--ink);
+}
+.install-tile__state {
+  font-family: var(--f-mono);
+  font-size: 10px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--accent);
+}
+.install-tile__copy {
+  margin: 0 0 14px;
+  color: var(--ink-mute);
+  font-size: 13px;
+  line-height: 1.5;
+}
+.install-cmd {
+  border: 1px dashed var(--rule);
+  padding: 12px;
+  font-family: var(--f-mono);
+  font-size: 11px;
+  line-height: 1.6;
+  color: var(--ink-2);
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+  background: var(--bg);
+}
+.install-note {
+  margin-top: 18px;
+  font-family: var(--f-mono);
+  font-size: 11px;
+  line-height: 1.6;
+  color: var(--ink-mute);
+}
+
 /* ============================================================
    FOOTER
    ============================================================ */
@@ -1068,6 +1136,8 @@ ul { list-style: none; }
   .demo-pane { border-right: 0; border-bottom: 1px solid var(--rule-strong); }
   .demo-pane:last-child { border-bottom: 0; }
 
+  .install-grid { grid-template-columns: 1fr; }
+
   .footer { grid-template-columns: 1fr 1fr; gap: 28px 20px; padding: 40px 20px; }
 
 }
@@ -1096,6 +1166,7 @@ ul { list-style: none; }
 </style>
 </head>
 <body data-type="grotesk">
+<a class="skip-link" href="#main">Skip to main content</a>
 
 <!-- ============================================================
      NAV
@@ -1110,11 +1181,12 @@ ul { list-style: none; }
   <div class="nav__links">
     <a href="#mechanism">How it works</a>
     <a href="#system">System</a>
-    <a href="#demo">Demo</a>
-    <a href="#" aria-label="Coming soon">Run it</a>
-<a href="#" aria-label="Coming soon">GitHub</a>
+    <a href="#install">Install</a>
+    <a href="https://github.com/Archolith">GitHub</a>
   </div>
 </nav>
+
+<main id="main" tabindex="-1">
 
 <!-- ============================================================
      HERO &mdash; Scroll excavation
@@ -1133,8 +1205,8 @@ ul { list-style: none; }
     </div>
     <div class="stats">
       <div class="stats__cell">
-        <div class="stats__num">58.6%</div>
-        <div class="stats__label">proxy token savings</div>
+        <div class="stats__num">pending</div>
+        <div class="stats__label">proxy launch evidence</div>
       </div>
       <div class="stats__cell">
         <div class="stats__num">50%</div>
@@ -1235,7 +1307,7 @@ ul { list-style: none; }
     </div>
     <div class="slab">
       <div class="slab__id">
-        archolith-audit
+        archolith-skree
         <span class="slab__badge slab__badge--stable">alpha</span>
         <span class="slab__name">The diagnostics</span>
       </div>
@@ -1252,11 +1324,11 @@ ul { list-style: none; }
     </div>
     <div class="slab slab--future">
       <div class="slab__id">
-        archolith-bench
+        archolith-peira
         <span class="slab__badge">benchmark</span>
         <span class="slab__name">The yardstick</span>
       </div>
-      <div class="slab__body">Reproducible benchmark suite measuring proxy savings, filter compression, and MCP waste reduction across multi-turn coding scenarios. Headline numbers: 58.6% proxy, 50% filter.</div>
+      <div class="slab__body">Reproducible benchmark suite measuring proxy savings, filter compression, and MCP waste reduction across multi-turn coding scenarios. Public claims stay tied to tracked evidence artifacts.</div>
       <div class="slab__io">
         <div class="slab__io-label">Owns</div>
         <ul>
@@ -1269,7 +1341,7 @@ ul { list-style: none; }
     </div>
     <div class="slab slab--future">
       <div class="slab__id">
-        menhir
+        archolith-menhir
         <span class="slab__badge">coming</span>
         <span class="slab__name">The memory</span>
       </div>
@@ -1292,7 +1364,7 @@ ul { list-style: none; }
      ============================================================ -->
 <section class="sec demo-section" id="demo">
   <span class="sec__num">04 &middot; Side-by-side</span>
-  <h3 class="sec__title">What 58.6% fewer tokens looks like across a real session.</h3>
+  <h3 class="sec__title">How curated context changes a real session.</h3>
   <div class="demo-frame">
     <div class="demo-frame__bar">
       <div class="demo-frame__dots">
@@ -1317,8 +1389,8 @@ ul { list-style: none; }
       </div>
       <div class="demo-pane demo-pane--proxy">
         <h5 class="demo-pane__title">B &middot; Through archolith-proxy <span class="demo-pane__badge">curated</span></h5>
-        <div class="demo-meter demo-meter--good"><span>cumulative input</span><b>44,890 tok <span class="delta">&minus;58.6%</span></b></div>
-        <div class="demo-meter demo-meter--good"><span>cost &middot; 10 turns</span><b>$0.22 <span class="delta">&minus;59%</span></b></div>
+        <div class="demo-meter demo-meter--good"><span>cumulative input</span><b>tracked per run</b></div>
+        <div class="demo-meter demo-meter--good"><span>cost &middot; 10 turns</span><b>computed per run</b></div>
         <div class="demo-meter"><span>compaction events</span><b>0 <span class="delta">eliminated</span></b></div>
         <div class="demo-bars demo-bars--flat">
           <span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span>
@@ -1327,14 +1399,49 @@ ul { list-style: none; }
       </div>
     </div>
   </div>
-  <p style="margin-top:14px; font-family:var(--f-mono); font-size:10px; color:var(--ink-mute); letter-spacing:0.08em;">Cost calculated at $0.005&thinsp;/&thinsp;1K input tokens. Token counts from archolith-bench proxy suite, commit 5112334, 2026-05-30.</p>
+  <p style="margin-top:14px; font-family:var(--f-mono); font-size:10px; color:var(--ink-mute); letter-spacing:0.08em;">Proxy comparison figures are withheld until the next tracked archolith-peira evidence refresh.</p>
+</section>
+
+<!-- ============================================================
+     INSTALL
+     ============================================================ -->
+<section class="sec" id="install">
+  <span class="sec__num">05 &middot; Install</span>
+  <h3 class="sec__title">Start with archolith-skree: MCP audit tools for the agents people already use.</h3>
+  <div class="install-grid">
+    <div class="install-tile">
+      <div class="install-tile__head">
+        <div class="install-tile__name">Claude Code</div>
+        <div class="install-tile__state">beta</div>
+      </div>
+      <p class="install-tile__copy">Native Claude plugin install with managed Python runtime bootstrap.</p>
+      <div class="install-cmd">curl -fsSL https://raw.githubusercontent.com/Archolith/archolith-mcp-audit/main/scripts/install.sh | bash -s -- claude</div>
+    </div>
+    <div class="install-tile">
+      <div class="install-tile__head">
+        <div class="install-tile__name">Codex</div>
+        <div class="install-tile__state">beta</div>
+      </div>
+      <p class="install-tile__copy">Clones the public Codex plugin and registers the audit MCP server.</p>
+      <div class="install-cmd">curl -fsSL https://raw.githubusercontent.com/Archolith/archolith-mcp-audit/main/scripts/install.sh | bash -s -- codex</div>
+    </div>
+    <div class="install-tile">
+      <div class="install-tile__head">
+        <div class="install-tile__name">OpenCode</div>
+        <div class="install-tile__state">beta</div>
+      </div>
+      <p class="install-tile__copy">Clones the public OpenCode plugin and writes the local plugin + MCP config.</p>
+      <div class="install-cmd">curl -fsSL https://raw.githubusercontent.com/Archolith/archolith-mcp-audit/main/scripts/install.sh | bash -s -- opencode</div>
+    </div>
+  </div>
+  <p class="install-note">Each install keeps runtime dependencies in an isolated venv under ~/.archolith/venvs/. Gemini CLI is omitted because that CLI is deprecated.</p>
 </section>
 
 <!-- ============================================================
      QUICKSTART
      ============================================================ -->
 <section class="sec" id="quickstart" style="display:none">
-  <span class="sec__num">05 &middot; Run it</span>
+  <span class="sec__num">06 &middot; Run it</span>
   <h3 class="sec__title">Five lines to running.</h3>
   <div class="quickstart"><span class="prompt">$</span> <span class="cmd">git clone https://github.com/Archolith/archolith-context</span>
 <span class="prompt">$</span> <span class="cmd">cd archolith-context &amp;&amp; cp .env.example .env</span>
@@ -1342,6 +1449,8 @@ ul { list-style: none; }
 <span class="prompt">$</span> <span class="cmd">export OPENAI_BASE_URL=http://localhost:9800</span>
 <span class="prompt">$</span> <span class="cmd">aider</span>                                       <span class="comment"># or claude, cursor, cline...</span></div>
 </section>
+
+</main>
 
 <!-- ============================================================
      FOOTER
@@ -1354,29 +1463,30 @@ ul { list-style: none; }
   <div>
     <h5>Products</h5>
     <ul>
-      <li><a href="#" aria-label="Coming soon">archolith-context</a></li>
-      <li><a href="#" aria-label="Coming soon">archolith-filter</a></li>
-      <li><a href="#" aria-label="Coming soon">archolith-audit</a></li>
-      <li><a href="#" aria-label="Coming soon">archolith-bench</a></li>
-      <li><a href="#" aria-label="Coming soon">menhir</a></li>
+      <li><a href="https://github.com/Archolith/archolith-context">archolith-context</a></li>
+      <li><a href="https://github.com/Archolith/archolith-filter">archolith-filter</a></li>
+      <li><a href="https://github.com/Archolith/archolith-mcp-audit">archolith-skree</a></li>
+      <li><a href="https://github.com/Archolith">archolith-peira</a></li>
+      <li><a href="https://github.com/Archolith/menhir">archolith-menhir</a></li>
     </ul>
   </div>
   <div>
     <h5>Docs</h5>
     <ul>
-      <li><a href="#" aria-label="Coming soon">Quickstart</a></li>
-      <li><a href="#" aria-label="Coming soon">Architecture</a></li>
-      <li><a href="#" aria-label="Coming soon">Trace API</a></li>
-      <li><a href="#" aria-label="Coming soon">Menhir memory</a></li>
+      <li><a href="https://github.com/Archolith">Architecture</a></li>
+      <li><a href="#install">Install archolith-skree</a></li>
+      <li><a href="https://github.com/Archolith/archolith-context">Trace API</a></li>
+      <li><a href="https://github.com/Archolith/menhir">archolith-menhir memory</a></li>
     </ul>
   </div>
   <div>
     <h5>Source</h5>
     <ul>
-      <li><a href="#" aria-label="Coming soon">GitHub</a></li>
-      <li><a href="#" aria-label="Coming soon">Changelog</a></li>
-      <li><a href="#" aria-label="Coming soon">Issues</a></li>
-      <li><a href="#" aria-label="Coming soon">PolyForm NC 1.0.0</a></li>
+      <li><a href="https://github.com/Archolith">GitHub</a></li>
+      <li><a href="https://github.com/Archolith/menhir">Changelog</a></li>
+      <li><a href="https://github.com/Archolith/menhir/issues">Issues</a></li>
+      <li><a href="privacy.html">Privacy</a></li>
+      <li><a href="https://polyformproject.org/licenses/noncommercial/1.0.0/">PolyForm NC 1.0.0</a></li>
     </ul>
   </div>
 </footer>
@@ -1384,11 +1494,10 @@ ul { list-style: none; }
 <!-- ============================================================
      SCRIPTS
      ============================================================ -->
-<script defer src="hero/sliceDefinitions.js"></script>
-<script defer src="hero/SliceAnnotations.js"></script>
-<script defer src="hero/StrataSlice.js"></script>
-<script defer src="hero/StrataField.js"></script>
-<script defer src="hero/ArcholithHero.js"></script>
+<script defer src="hero/sliceDefinitions.js?v=20260707a"></script>
+<script defer src="hero/StrataSlice.js?v=20260707a"></script>
+<script defer src="hero/StrataField.js?v=20260707a"></script>
+<script defer src="hero/ArcholithHero.js?v=20260707a"></script>
 <script>
 document.addEventListener("DOMContentLoaded", function() {
   /* Hero */

@@ -7,7 +7,7 @@ archolith.dev is the marketing homepage for the Archolith suite — a set of sel
 The site currently presents five Archolith products:
 1. **archolith-context** (experimental alpha) — Two-pass curator with circuit breaker and token budget; OpenAI-compatible proxy on port 9800
 2. **archolith-filter** (alpha) — Layer 0 pre-filter pipeline; nine format-switch strategies for token reduction
-3. **archolith-audit** (alpha) — MCP token usage audit system; waste detection and report cards
+3. **archolith-skree** (beta install path) — MCP token usage audit system; waste detection and report cards
 4. **archolith-bench** (benchmark) — Reproducible benchmark suite; generates the headline savings numbers
 5. **menhir** (memory direction) — Durable long-term memory layer represented on the homepage
 
@@ -22,7 +22,7 @@ The hero section features an interactive scroll-excavation animation built with 
 | Scripting | Vanilla JavaScript (no framework) |
 | Fonts | Self-hosted WOFF2 — Space Grotesk, IBM Plex Sans, IBM Plex Serif, IBM Plex Mono, JetBrains Mono (latin + latin-ext subsets, `fonts/` dir, served with `Cache-Control: immutable`) |
 | Hosting | Caddy `file_server` on VPS (147.93.132.141), Cloudflare proxy |
-| Analytics | Google Analytics (gtag.js, tag G-4MPBP8827S) |
+| Analytics | Cloudflare dashboard/Web Analytics only; no on-page Google Analytics tag |
 | Build | None — deploy `index.html` + assets as-is |
 | TLS | Let's Encrypt via Caddy auto-HTTPS (Cloudflare Full strict) |
 
@@ -31,11 +31,10 @@ The hero section features an interactive scroll-excavation animation built with 
 ```
 User loads index.html
 │
-├── CSS loaded: inline styles + hero/archolith-hero.css + fonts/fonts.css (self-hosted)
+├── CSS loaded: inline styles + hero/archolith-hero.css?v=20260707a + fonts/fonts.css (self-hosted)
 ├── Nav logo SVG preloaded via <link rel="preload">
 ├── Hero JS deferred (preserves execution order):
 │   ├── sliceDefinitions.js → layer definitions (name, depth, measure)
-│   ├── SliceAnnotations.js → per-layer annotation data
 │   ├── StrataSlice.js → individual strata band component
 │   ├── StrataField.js → full strata field orchestration
 │   └── ArcholithHero.js → mounts hero into #archolith-hero-root
@@ -44,7 +43,7 @@ User loads index.html
 │   ├── Hero mount (ArcholithHero.mount)
 │   └── Type system switcher (3 presets: grotesk / sans / serif)
 │
-└── Google Analytics (gtag.js, async)
+└── Cloudflare remains in the request path for hosting, security, logs, and optional Web Analytics
 ```
 
 ## Performance Optimizations
@@ -56,7 +55,7 @@ User loads index.html
 | Deferred hero scripts | All 5 hero JS files use `defer` to preserve execution order without blocking HTML parse |
 | Consolidated inline JS | Three separate IIFEs merged into single `DOMContentLoaded` listener (ensures deferred scripts are available) |
 | Self-hosted fonts | `fonts/fonts.css` + 38 WOFF2 files (latin + latin-ext only); no cross-origin font fetch |
-| Hero space reservation | `#archolith-hero-root { min-height: 430vh }` prevents CLS from JS-mounted hero |
+| Hero space reservation | `#archolith-hero-root { min-height: 430vh }` prevents desktop CLS from JS-mounted hero; mobile Lighthouse CLS measured 0.072 |
 
 ### PageSpeed Baseline (mobile, 2026-06-02)
 
@@ -68,20 +67,37 @@ User loads index.html
 | CLS | 0 | Good |
 | SI | 4.8s | Poor |
 
-### PageSpeed After Optimizations (mobile, 2026-06-03)
+### Lighthouse After Optimizations (mobile, local lab, 2026-07-07)
+
+Measured with Lighthouse 13.4.0 against `http://127.0.0.1:8765/` using the default mobile profile in HeadlessChrome 149. This is a local lab measurement, not a production PageSpeed Insights / Cloudflare edge result.
 
 | Metric | Before | After | Change |
 |--------|--------|-------|--------|
-| FCP | 2.7s | TBD | Self-hosted fonts + non-blocking load |
-| LCP | 2.7s | TBD | Same |
-| TBT | 50ms | TBD | |
-| CLS | 1.001 | ~0 | Hero min-height reserves space |
-| SI | 2.7s | TBD | |
+| Performance score | n/a | 93 | Launch-acceptable mobile lab score |
+| FCP | 2.7s | 1.4s | Self-hosted fonts + non-blocking load |
+| LCP | 2.7s | 3.0s | Needs improvement; hero content is still the primary paint path |
+| TBT | 50ms | 0ms | No blocking task issue in local lab |
+| CLS | 1.001 | 0.072 | Good; remaining shift comes from JS-mounted mobile hero layout |
+| SI | 2.7s | 1.4s | Improved |
+
+### Lighthouse Desktop Sanity Check (local lab, 2026-07-07)
+
+| Metric | Value |
+|--------|-------|
+| Performance score | 100 |
+| FCP | 0.4s |
+| LCP | 0.6s |
+| TBT | 0ms |
+| CLS | 0.001 |
+| SI | 0.4s |
 
 ### Remaining Optimization Opportunities
 
 - **Inline critical CSS** — extract nav + hero first-paint CSS into `<style>` in `<head>` (already partially done — inline `<style>` block exists)
-- **Cache-busting query strings** — add `?v=` to JS/CSS includes to avoid Cloudflare/browser cache staleness on updates
+- **Cache-busting query strings** — hero JS/CSS uses `?v=20260707a` to avoid Cloudflare/browser cache staleness on launch updates; bump the value whenever launch-visible hero assets change
+- **Reduced motion** — `prefers-reduced-motion: reduce` disables scroll/key-driven hero motion and presents the strata as a static layout
+- **Production performance check** — rerun Lighthouse/PageSpeed against the deployed Cloudflare URL after the next deploy; current numbers are local-lab only
+- **Mobile CLS polish** — current CLS 0.072 is good, but the remaining shift is from the mobile JS-mounted hero replacing the reserved root
 
 ## Key Components
 
@@ -92,8 +108,9 @@ The signature visual element. A 420vh scrollable section where geological strata
 - `ArcholithHero.js` — Mounts the hero component, creates DOM structure
 - `StrataField.js` — Orchestrates all strata bands, handles scroll events
 - `StrataSlice.js` — Individual band component with CSS clip-paths and textures
-- `SliceAnnotations.js` — Per-layer annotation data (label, description, measure)
-- `sliceDefinitions.js` / `.ts` — Layer definitions (6 layers: 3 built products + 3 future)
+- `sliceDefinitions.js` — Live layer definitions; no TypeScript source or build step
+
+When `prefers-reduced-motion: reduce` is active, `ArcholithHero.js` skips scroll, spacebar, and smooth-scroll bindings. `archolith-hero.css` then renders the hero as a static non-sticky layout with all strata visible and decorative scan/seam animation disabled.
 
 ### Logo System (`logos/`)
 
@@ -104,9 +121,7 @@ The signature visual element. A 420vh scrollable section where geological strata
 4. **D4** — Doorway (non-keystone branch)
 5. **S5** — Strata column (supporting-system mark)
 
-Plus 3 variants (05a, 05b, 05c, 05d) and utility HTML files:
-- `showcase.html` — Visual comparison of all logos
-- `color-matrix.html` — Color variant testing
+Logo exploration variants and utility HTML files were archived outside the public `archolith.dev` repo on 2026-07-07.
 
 ### Logo Switcher
 
@@ -121,13 +136,16 @@ Three typography presets toggled via `data-type` attribute on `<body>`:
 
 ### Content Sections
 
+The public body content is wrapped in `<main id="main" tabindex="-1">`, with a keyboard-visible skip link before the fixed nav.
+
 1. **Hero** — Scroll-excavation strata animation
 2. **Problem** — "The broken model" — linear replay cost stats
 3. **Mechanism** — 5-step proxy pipeline (receive → query → assemble → forward → extract)
 4. **Architecture** — 5-slab product stack (context, rtk, audit, bench, memory)
 5. **Demo** — Side-by-side benchmark comparison (direct vs. proxy)
-6. **Quickstart** — Hidden via `display:none` (pre-launch)
-7. **Footer** — Links neutralized to `href="#"` (pre-launch)
+6. **Install** — Visible archolith-skree one-command installer copy for Claude, Codex, and OpenCode
+7. **Quickstart** — Hidden via `display:none` (pre-launch)
+8. **Footer** — Links point to current Archolith org/repo/license/privacy targets; `archolith-peira` remains provisional until an org-owned repo exists
 
 ## Deployment
 
@@ -151,21 +169,23 @@ The site is served from the yawn VPS via Caddy's built-in `file_server`, not a s
 
 1. Edit files locally in the git repo
 2. Commit and push to `https://github.com/Archolith/archolith.dev.git`
-3. Copy updated files to VPS: `scp index.html thron@147.93.132.141:/var/www/html/archolith-dev/`
-4. No container restart needed — Caddy serves files directly from disk
+3. Preview the static payload: `.\scripts\deploy.ps1 -PlanOnly`
+4. Copy the static payload to the VPS: `.\scripts\deploy.ps1`
+5. No container restart needed — Caddy serves files directly from disk
 
 ### Cloudflare Cache Notes
 
-- Cloudflare caches JS/CSS aggressively. After deploying updated files, purge the CF cache or wait for revalidation.
+- Hero JS/CSS references include `?v=20260707a`; bump this value when changing launch-visible hero assets.
+- Cloudflare caches JS/CSS aggressively. If a file changes without a query-string bump, purge the CF cache or wait for revalidation.
 - Caddy ETag changes on file update, but CF may serve stale content until revalidation.
 
 ### Pre-Launch State
 
-- All outbound links neutralized to `href="#"` (nav GitHub link, hero CTA buttons, footer links)
+- Public links point to Archolith org/repo/license/privacy targets where available
 - Quickstart section hidden via `display:none`
-- When repos go public: restore links, unhide quickstart, update `href="#"` to real URLs
+- First-run instructions are not ready; do not restore "Run it" / "Quickstart" prompts until they are launch-safe
 
 ## External Dependencies
 
-- **Google Analytics** — gtag.js (tag `G-4MPBP8827S`), loaded async.
-- No other external dependencies. Fonts are self-hosted (see Tech Stack).
+- **Cloudflare** — DNS/proxy, TLS edge, caching, request logs, and optional Web Analytics/performance metrics.
+- No on-page Google Analytics or advertising tags. Fonts are self-hosted (see Tech Stack).
