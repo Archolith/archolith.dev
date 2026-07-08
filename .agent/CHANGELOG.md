@@ -1,5 +1,30 @@
 # Changelog — archolith.dev
 
+## 2026-07-08 — Public product rename to Archolith Skree
+
+- Verified site already uses `archolith-skree` in system section, install section, footer, and README.
+- Remaining `archolith-mcp-audit` references are all GitHub repo URLs (allowed per compatibility contract).
+- Quickstart section remains hidden; Gemini CLI deprecation note preserved in install copy.
+
+## 2026-07-08 — archolith-skree installer copy
+
+- `index.html` — added a visible install section for the new archolith-skree one-command installer covering Claude Code, Codex, and OpenCode while leaving the broader context quickstart hidden.
+- `README.md` and `.agent/architecture.md` — documented the public audit installer copy and current content-section order.
+
+## 2026-07-07 — Launch readiness cleanup and git-first deploy
+
+- `index.html` — removed unsupported proxy headline numbers, replaced dead launch links, applied `archolith-<name>` public labels, removed public first-run prompts, removed Google Analytics, linked privacy notice, added hero asset cache-busting, and added a main landmark with a skip-to-content link.
+- `hero/ArcholithHero.js` and `hero/archolith-hero.css` — added reduced-motion behavior that disables scroll/key-driven hero motion and renders the strata as a static layout.
+- `.agent/architecture.md` and `README.md` — replaced stale PageSpeed TBD entries with a 2026-07-07 local Lighthouse baseline.
+- `screenshots/` — kept four current public visual references and moved 40 design-iteration PNGs to the umbrella archive.
+- `logos/` — kept the five named logo candidates plus `README.md` and moved 4 exploration variants plus 2 logo utility HTML files to the umbrella archive.
+- `privacy.html` — added privacy notice disclosing Cloudflare analytics/logging and no-sale/no-sharing posture.
+- `hero/ArcholithHero.js` and `hero/sliceDefinitions.js` — updated CTA targets, evidence-pending copy, and public family labels.
+- `hero/sliceDefinitions.ts` — deleted dead diverged TypeScript design artifact; `sliceDefinitions.js` is the live source of truth.
+- `hero/SliceAnnotations.js` — deleted dead annotation script and removed unused annotation CSS/docs references.
+- `scripts/deploy.ps1` — added git-first static deploy script with payload preview and clean-tree guard.
+- `README.md`, `.agent/architecture.md`, `.agent/data_models.md`, and `.agent/workflows/code_conventions.md` — documented the deploy script, current analytics posture, launch-state constraints, hero asset cache-busting rule, reduced-motion behavior, Lighthouse baseline, screenshot/logo curation rules, and live JS-only hero data source.
+
 ## 2026-07-05 — Correct experimental positioning and Menhir naming
 
 - Replaced `archolith-memory` references with `menhir` across the homepage, hero, logo matrix, and docs.
