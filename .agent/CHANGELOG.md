@@ -1,5 +1,10 @@
 # Changelog — archolith.dev
 
+## 2026-07-08 — Fix visible paths for launch readiness
+
+- `index.html` — Fixed 3 install script URLs from `main`→`master` (default branch); changed 4 broken `github.com/Archolith/menhir` footer links to plain text (repo not public); fixed polyform license URL (removed trailing slash, was 404); fixed archolith-peira link to `ctharvey/archolith-bench`.
+- `README.md` — Fixed umbrella link from `ctharvey/archolith` (404) to `Archolith/archolith-context`; fixed 3 install script URLs from `main`→`master`.
+
 ## 2026-07-08 — Align durable memory naming: `menhir` not `archolith-menhir`
 
 - `index.html` — replaced 3 `archolith-menhir` references with `menhir` (architecture slab, footer products list, footer docs list).

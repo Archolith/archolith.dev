@@ -1,6 +1,6 @@
 # archolith.dev
 
-Marketing homepage for the [archolith&trade;](https://github.com/ctharvey/archolith) suite — self-hosted context compression tools for LLMs. A single-page static HTML site with a signature scroll-excavation hero animation.
+Marketing homepage for the [archolith&trade;](https://github.com/Archolith/archolith-context) suite — self-hosted context compression tools for LLMs. A single-page static HTML site with a signature scroll-excavation hero animation.
 
 ## Quick Start
 
@@ -30,9 +30,9 @@ No build step. No framework. No dependencies.
 The public site links to the one-command audit plugin installer:
 
 ```bash
-curl -fsSL https://raw.githubusercontent.com/Archolith/archolith-mcp-audit/main/scripts/install.sh | bash -s -- claude
-curl -fsSL https://raw.githubusercontent.com/Archolith/archolith-mcp-audit/main/scripts/install.sh | bash -s -- codex
-curl -fsSL https://raw.githubusercontent.com/Archolith/archolith-mcp-audit/main/scripts/install.sh | bash -s -- opencode
+curl -fsSL https://raw.githubusercontent.com/Archolith/archolith-mcp-audit/master/scripts/install.sh | bash -s -- claude
+curl -fsSL https://raw.githubusercontent.com/Archolith/archolith-mcp-audit/master/scripts/install.sh | bash -s -- codex
+curl -fsSL https://raw.githubusercontent.com/Archolith/archolith-mcp-audit/master/scripts/install.sh | bash -s -- opencode
 ```
 
 The installer keeps runtime dependencies in managed venvs under `~/.archolith/venvs/` and does not support Gemini CLI.
