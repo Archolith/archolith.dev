@@ -178,28 +178,36 @@ The site is served from the yawn VPS via Caddy's built-in `file_server`, not a s
 4. Copy the static payload to the VPS: `.\scripts\deploy.ps1`
 5. No container restart needed — Caddy serves files directly from disk
 
-### Deploy Gotchas (observed 2026-07-20, first successful scripted deploy)
+### Deploy Behaviour and Gotchas
 
-- **scp resets directory modes to 700.** Every run leaves `archolith-dev/`, `fonts/`,
-  `hero/`, `logos/` as `drwx------`. The site keeps working only because the Caddy
-  container reads as root. Re-apply after each deploy:
-  `chmod 755 . fonts hero logos && find . -maxdepth 2 -type f -exec chmod 644 {} +`
-- **Root-owned files block the copy.** The three favicons were `root:root` from an early
-  manual deploy, so scp failed with `dest open ... Permission denied` and aborted the whole
-  transfer. Fixed by removing them and re-uploading as `thron`. If a deploy fails this way,
-  check ownership before anything else.
-- **The deploy is additive — it never prunes.** Files deleted from the repo stay on the
-  origin and keep serving. `hero/SliceAnnotations.js`, the `05a`-`05d` logo variants, and
-  `logos/{showcase,color-matrix,README}.md/html` were all still public after being removed
-  from git. Delete removed paths on the VPS manually.
-- **`scp -r` can nest.** Copying the staged `archolith-dev/` into `/var/www/html/` while
-  that directory already exists risks `/var/www/html/archolith-dev/archolith-dev/`. Verify
-  the remote tree after each deploy. A stray full repo copy (including `.git`, `CLAUDE.md`,
-  `AGENTS.md`) was found in the webroot this way and moved to
-  `/home/thron/quarantine/`.
+The script now mirrors the repo: it prunes and repairs permissions automatically. The
+first three items below were manual chores before 2026-07-20 and are handled for you.
+
+- **Permissions are normalised automatically.** scp resets directories to `0700` on every
+  run; the post-upload pass restores `755`/`644`. The site kept working through this only
+  because the Caddy container reads as root.
+- **Deletions are mirrored automatically.** The payload ships a `deploy-files.txt`
+  manifest; anything on the origin not in it is pruned, then emptied directories are
+  removed and the manifest is deleted so it is never publicly served. Use `-SkipPrune`
+  to fall back to purely additive copying. Before this existed,
+  `hero/SliceAnnotations.js`, `hero/index.html`, the `05a`-`05d` logo variants, and
+  `logos/{showcase,color-matrix,README}` were all still public long after being deleted
+  from git.
+- **Nesting is detected.** `scp -r` into an existing directory can produce
+  `archolith-dev/archolith-dev/`; the post-upload pass warns if that appears. A stray full
+  repo copy — `.git`, `CLAUDE.md`, `AGENTS.md`, publicly readable — reached the webroot
+  this way and was removed on 2026-07-20.
+- **Root-owned files still block the copy.** One `root:root` file aborts the *entire* scp
+  transfer with `dest open ... Permission denied`. This is not auto-repaired because
+  fixing it needs `sudo` or a delete. If a deploy fails, check ownership first:
+  everything under the webroot should be `thron:thron`.
 - **A cache-buster bump removes the need to purge Cloudflare.** New `?v=` values are new
   cache keys, so they return `MISS` and pull from origin. Purge only if assets change
   *without* a version bump.
+
+Prune safety: the remote pass aborts if `index.html` is missing after upload or if the
+manifest is missing/empty, and the manifest is written with LF endings — CRLF would
+mismatch every line in `comm` and delete the whole site.
 
 ### Cloudflare Cache Notes
 

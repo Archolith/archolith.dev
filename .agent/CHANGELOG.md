@@ -21,7 +21,19 @@ three July commits were never pushed live, and `deploy.ps1` had never successful
 - No Cloudflare purge needed — the `?v=20260720a` bump made every hero asset a new cache
   key returning `MISS`.
 
-Deploy gotchas recorded in `architecture.md` → Deploy Gotchas.
+Deploy behaviour and remaining gotchas recorded in `architecture.md`.
+
+### Follow-up, same day — deploy script hardened, quarantine cleared
+
+- `scripts/deploy.ps1` now mirrors deletions and repairs permissions itself, so the two
+  manual chores above no longer recur. Verified end-to-end against a planted canary: a
+  stale file, a stale nested directory, and a `hero/` reset to `0700` were all corrected
+  in one run. The pass also caught a genuinely orphaned `hero/index.html` that had been
+  serving publicly and is not in the repo.
+- Deleted the quarantined webroot copy after verifying it was fully redundant: its HEAD
+  (`cb08dc3`) is an ancestor of `main` and 13 commits behind, `git diff --ignore-all-space`
+  reported zero real changes across all 34 "modified" files (pure CRLF/LF artifact from
+  the Windows-to-Linux copy), and it held no `.env`, key, or secret. 14 MB reclaimed.
 
 ## 2026-07-20 — Reposition launch around `menhir`, demote `archolith-context`
 
