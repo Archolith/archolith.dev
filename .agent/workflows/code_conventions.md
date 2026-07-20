@@ -19,6 +19,7 @@
   - `.nav__brand`, `.nav__links`, `.hero-copy__tagline`, `.stats__cell`, `.slab--primary`, `.slab--future`
 - **State classes**: `.is-active`, `.is-passed`, `.is-future` — no `active` or `selected` standalone
 - **Responsive**: Mobile-first breakpoints at 560px and 900px
+- **Reduced motion**: Keep scroll-driven hero changes paired with `prefers-reduced-motion: reduce` behavior and skip smooth-scroll bindings when the preference is active
 - **No preprocessors**: Pure CSS, no Sass/Less/PostCSS
 
 ### JavaScript
@@ -39,7 +40,7 @@
 | JS variables | camelCase | `heroRoot`, `navLogo`, `activeLabel` |
 | Data attributes | kebab-case | `data-layer="0"`, `data-logo="strata"`, `data-type="grotesk"` |
 | SVG files | Numbered kebab-case | `01-k8-dropping-keystone.svg` |
-| Screenshots | kebab-case with version prefix | `v05-bold-L0.png`, `v03-split-scroll1.png` |
+| Screenshots | kebab-case, current public references only | `current-state-top.png`, `logo-comparison.png` |
 
 ## File Organization
 
@@ -51,24 +52,16 @@ archolith.dev/
 │   ├── ArcholithHero.js    # Hero mount point and initialization
 │   ├── StrataField.js      # Full strata field orchestration (scroll events)
 │   ├── StrataSlice.js      # Individual strata band component
-│   ├── SliceAnnotations.js # Per-layer annotation data
-│   ├── sliceDefinitions.js # Layer definitions (JS)
-│   └── sliceDefinitions.ts # Layer definitions (TypeScript source, not used at runtime)
+│   └── sliceDefinitions.js # Live layer definitions; no TypeScript build step
 ├── logos/
 │   ├── 01-k8-dropping-keystone.svg    # Primary logo
 │   ├── 02-k2-minimal-keystone.svg     # Favicon-scale
 │   ├── 03-k1-classic-keystone.svg     # Classic mark
 │   ├── 04-doorway.svg                 # Doorway variant
 │   ├── 05-strata-column.svg           # Strata variant
-│   ├── 05a-wider-shift.svg           # Exploration variants
-│   ├── 05b-wider-shift-mark.svg
-│   ├── 05c-squat-wide.svg
-│   ├── 05d-gap-visible.svg
-│   ├── README.md                      # Logo ranking and notes
-│   ├── showcase.html                  # Visual comparison page
-│   └── color-matrix.html             # Color variant tester
+│   └── README.md                      # Logo ranking and notes
 └── screenshots/
-    └── *.png                         # Design iteration screenshots
+    └── *.png                         # Current public visual references only
 ```
 
 ## Testing
@@ -76,7 +69,7 @@ archolith.dev/
 No automated test suite — this is a visual/interactive site. Validation approach:
 
 - **Manual browser testing**: Chrome, Firefox, Safari at 3 breakpoints (560px, 900px, 1300px+)
-- **Screenshot comparisons**: Keep screenshots in `screenshots/` for visual regression reference
+- **Screenshot comparisons**: Keep only current public visual references in `screenshots/`; archive iteration captures outside `archolith.dev`
 - **HTML validation**: Use W3C validator or browser dev tools
 - **Accessibility**: Verify keyboard navigation, color contrast, and screen reader behavior
 - **Performance**: Lighthouse audit for LCP, CLS, and FID
