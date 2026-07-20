@@ -16,17 +16,23 @@ var logos = {
 
 ## Slice Definitions (`hero/sliceDefinitions.js`)
 
-Defines the geological strata layers used in the scroll-excavation hero. Each slice has:
-- `id` — unique identifier
+Defines the geological strata layers used in the scroll-excavation hero. **One slice per product**, ordered shallow → deep. Slices map to products, never to sub-components of a single product. Each slice has:
+- `id` — unique identifier; emitted as `data-slice-key` by `StrataSlice.js`
+- `layerId` — display label (`L0`–`L5`) shown in ticks, readout, and layer card
 - `name` — display name
-- `description` — short description revealed on active state
-- `measure` — depth/unit annotation
-- `layer` — numeric index (0–5) controlling CSS `data-layer` color/texture
-- `state` — `"active"` | `"passed"` | `"future"` (set dynamically by scroll)
+- `accent` — hex accent driving `--slice-accent` and the active seam/dot color
+- `depth` — depth annotation (cosmetic)
+- `measure` — right-aligned metric annotation
+- `summary` — one-line hook shown on the active layer card
+- `detail` — longer description shown on the active layer card
+- `note` — product attribution line (e.g. `menhir / graph memory`)
 
-## Slice Annotations (`hero/SliceAnnotations.js`)
-
-Per-layer annotation data paired with slice definitions. Provides expanded descriptions and metadata for the hero copy panel that updates as the user scrolls.
+**Coupling to watch:** `archolith-hero.css` defines per-slice plate textures via
+`.strata-slice[data-slice-key="<id>"] .strata-slice__plate`. Renaming a slice `id`
+silently drops its texture unless the matching CSS selector is renamed too. The
+textures are authored per accent color, so keep `id` ↔ `accent` ↔ selector aligned.
+Current ids: `menhir`, `filter`, `audit`, `bench`, `proxy` — five slices, five selectors,
+no orphans on either side.
 
 ## CSS Custom Properties
 
@@ -56,6 +62,7 @@ No formal enums. State is managed via CSS classes:
 - `.is-active` — expanded band in hero
 - `.is-passed` — compressed/receded band
 - `.is-future` — dimmed band with "(coming)" label
+- `.is-reduced-motion` — hero scroll section mounted without scroll/key motion bindings when `prefers-reduced-motion: reduce` is active
 
 ## Repository Reference
 

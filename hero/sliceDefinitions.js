@@ -1,56 +1,36 @@
 /* Live hero slice definitions. This static site has no TypeScript build step. */
+/* One slice per product. Slice `id` must match the plate-texture selector in
+   archolith-hero.css: .strata-slice[data-slice-key="<id>"] .strata-slice__plate */
 (function defineArcholithSlices(globalScope) {
     var sliceDefinitions = [
         {
-            id: "filter",
+            id: "menhir",
             layerId: "L0",
-            name: "Filter",
-            accent: "#c29b58",
+            name: "menhir",
+            accent: "#82729e",
             depth: "02m",
+            measure: "launch",
+            summary: "Graph memory agents can actually recall from.",
+            detail: "Long-term memory on Neo4j and Graphiti, served over MCP. Recall re-ranks on graph adjacency, recency, and prominence, not similarity alone. Indexes your code graph for blast radius and structure-aware retrieval, and compresses, decays, and flags contradictions on its own.",
+            note: "menhir / graph memory"
+        },
+        {
+            id: "filter",
+            layerId: "L1",
+            name: "archolith-filter",
+            accent: "#c29b58",
+            depth: "09m",
             measure: "50% avg compression",
             summary: "Tool output stripped before it reaches the model.",
             detail: "Layer 0 pre-filter pipeline removes secrets, binary, oversized blobs, and duplicate content. Nine format-switch strategies compress diffs, search results, JSON, logs, and stack traces.",
             note: "archolith-filter / compression engine"
         },
         {
-            id: "proxy",
-            layerId: "L1",
-            name: "Proxy",
-            accent: "#56a8e8",
-            depth: "08m",
-            measure: "launch evidence pending",
-            summary: "Drop-in intercept. No code changes required.",
-            detail: "OpenAI-compatible proxy. Point any harness at port 9800 with a base-URL swap. Owns the request lifecycle, session fingerprinting, two-pass curator assembly, and upstream forwarding.",
-            note: "archolith-context / proxy layer"
-        },
-        {
-            id: "context",
-            layerId: "L2",
-            name: "Context",
-            accent: "#62a98c",
-            depth: "15m",
-            measure: "~15K token budget",
-            summary: "Experimental graph-assembled context reduces linear replay.",
-            detail: "Each turn can query the graph for active files, decisions, and relevant facts. Curated context is spliced in as synthetic messages when enabled; this layer is still experimental.",
-            note: "archolith-context / experimental curator assembly"
-        },
-        {
-            id: "memory",
-            layerId: "L3",
-            name: "Memory (coming)",
-            accent: "#82729e",
-            depth: "23m",
-            measure: "future direction",
-            summary: "Future durable memory direction for cross-session knowledge.",
-            detail: "Entities, decisions, and code relationships would be promoted to a long-term graph so future context retrieval can improve without replay. This layer is still being shaped.",
-            note: "menhir / research direction"
-        },
-        {
             id: "audit",
-            layerId: "L4",
-            name: "Audit",
+            layerId: "L2",
+            name: "archolith-skree",
             accent: "#8eaed5",
-            depth: "31m",
+            depth: "17m",
             measure: "per-server attribution",
             summary: "Measure waste before you compress it.",
             detail: "Per-server token cost, six waste pattern detectors, and report cards with concrete optimization suggestions. CI threshold gates catch regressions before they ship.",
@@ -58,14 +38,25 @@
         },
         {
             id: "bench",
-            layerId: "L5",
-            name: "Bench",
+            layerId: "L3",
+            name: "archolith-peira",
             accent: "#a28670",
-            depth: "39m",
+            depth: "25m",
             measure: "reproducible runs",
             summary: "Every headline number has a source.",
-            detail: "Reproducible benchmark suite for proxy savings, filter compression, and audit waste reduction. Scenario runner, corpus compression, and stack comparison arms. Public claims stay tied to tracked evidence artifacts.",
+            detail: "Reproducible benchmark suite for recall quality, filter compression, and audit waste reduction. Scenario runner, corpus compression, and stack comparison arms. Public claims stay tied to tracked evidence artifacts.",
             note: "archolith-peira / benchmark suite"
+        },
+        {
+            id: "proxy",
+            layerId: "L4",
+            name: "archolith-context (coming)",
+            accent: "#56a8e8",
+            depth: "33m",
+            measure: "research direction",
+            summary: "Curated context assembly at the request boundary.",
+            detail: "An OpenAI-compatible proxy that would query the memory graph each turn and splice curated context in place of linear replay. Still experimental and not part of the launch.",
+            note: "archolith-context / research direction"
         }
     ];
 

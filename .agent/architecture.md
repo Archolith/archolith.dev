@@ -2,14 +2,19 @@
 
 ## Overview
 
-archolith.dev is the marketing homepage for the Archolith suite — a set of self-hosted context compression tools for LLMs. The site is a single-page static HTML file with vanilla JavaScript components. No build system, no framework, no server-side rendering.
+archolith.dev is the marketing homepage for the Archolith suite — self-hosted graph memory and context tooling for AI agents. The site is a single-page static HTML file with vanilla JavaScript components. No build system, no framework, no server-side rendering.
+
+Launch positioning leads with **menhir**. `archolith-context` is presented as a future research direction, not the flagship.
+
+The hero and the architecture stack both run **one layer per product**, in the same order.
+Layers map to products, never to sub-components of a single product.
 
 The site currently presents five Archolith products:
-1. **archolith-context** (experimental alpha) — Two-pass curator with circuit breaker and token budget; OpenAI-compatible proxy on port 9800
+1. **menhir** (launch) — Graph-based long-term memory on Neo4j + Graphiti, served over MCP; includes the code graph and retention lifecycle
 2. **archolith-filter** (alpha) — Layer 0 pre-filter pipeline; nine format-switch strategies for token reduction
 3. **archolith-skree** (beta install path) — MCP token usage audit system; waste detection and report cards
-4. **archolith-bench** (benchmark) — Reproducible benchmark suite; generates the headline savings numbers
-5. **menhir** (memory direction) — Durable long-term memory layer represented on the homepage
+4. **archolith-bench** (benchmark) — Reproducible benchmark suite; keeps public claims tied to tracked evidence
+5. **archolith-context** (coming) — Curated-context proxy at the request boundary; experimental, not part of launch
 
 The hero section features an interactive scroll-excavation animation built with vanilla JS that reveals geological strata layers as the user scrolls, each representing a product/suite layer.
 
@@ -139,10 +144,10 @@ Three typography presets toggled via `data-type` attribute on `<body>`:
 The public body content is wrapped in `<main id="main" tabindex="-1">`, with a keyboard-visible skip link before the fixed nav.
 
 1. **Hero** — Scroll-excavation strata animation
-2. **Problem** — "The broken model" — linear replay cost stats
-3. **Mechanism** — 5-step proxy pipeline (receive → query → assemble → forward → extract)
-4. **Architecture** — 5-slab product stack (context, rtk, audit, bench, memory)
-5. **Demo** — Side-by-side benchmark comparison (direct vs. proxy)
+2. **Problem** — "The broken model" — cold-start memory loss stats
+3. **Mechanism** — 5-step memory pipeline (ingest → extract → anchor → recall → lifecycle)
+4. **Architecture** — 5-slab product stack (menhir, filter, skree, peira, context) mirroring the hero order
+5. **Demo** — Side-by-side recall comparison (cold start vs. menhir); illustrative, not benchmarked
 6. **Install** — Visible archolith-skree one-command installer copy for Claude, Codex, and OpenCode
 7. **Quickstart** — Hidden via `display:none` (pre-launch)
 8. **Footer** — Links point to current Archolith org/repo/license/privacy targets; `archolith-peira` remains provisional until an org-owned repo exists

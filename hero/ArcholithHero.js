@@ -22,22 +22,22 @@
             '<img id="hero-logo" src="logos/05-strata-column.svg" alt="Archolith logo" width="88" height="88">',
             "</div>",
             '<div class="archolith-hero__brandcopy">',
-            '<span class="archolith-hero__brand-kicker">source-available / self-hosted / infrastructural memory</span>',
+            '<span class="archolith-hero__brand-kicker">source-available / self-hosted / graph memory for agents</span>',
             '<span class="archolith-hero__brand-name" id="hero-logo-label">Archolith</span>',
             "</div>",
             "</div>",
             '<span class="archolith-hero__crumb">Source-available · PolyForm NC · Self-hosted</span>',
-            '<h1>Context <span class="accent">compressed</span>,<br>not replayed.</h1>',
-            '<p class="archolith-hero__tagline">Self-hosted context compression for LLMs</p>',
+            '<h1>Agents that<br><span class="accent">remember</span><br>their work.</h1>',
+            '<p class="archolith-hero__tagline">menhir — self-hosted graph memory for AI agents</p>',
             '<div class="archolith-hero__three-beat">',
-            '<span class="archolith-hero__beat">Compress context</span>',
-            '<span class="archolith-hero__beat">Extract knowledge</span>',
-            '<span class="archolith-hero__beat">Remember what matters</span>',
-            '<span class="archolith-hero__beat">Measure the waste</span>',
+            '<span class="archolith-hero__beat">Recall across sessions</span>',
+            '<span class="archolith-hero__beat">Know the code graph</span>',
+            '<span class="archolith-hero__beat">Decay what goes stale</span>',
+            '<span class="archolith-hero__beat">Flag contradictions</span>',
             "</div>",
             '<div class="archolith-hero__cta">',
-            '<a class="cta" href="#" aria-label="Coming soon">Try the demo</a>',
-            '<a class="cta cta--ghost" href="#" aria-label="Coming soon">View source</a>',
+            '<a class="cta" href="#system">How menhir works</a>',
+            '<a class="cta cta--ghost" href="https://github.com/Archolith">View source</a>',
             "</div>",
             '<div class="archolith-hero__layer-card" id="archolith-layer-card">',
             '<div class="archolith-hero__layer-head">',
@@ -62,6 +62,11 @@
         ].join("");
     }
 
+    function shouldReduceMotion() {
+        return globalScope.matchMedia &&
+            globalScope.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    }
+
     function bindScroll(root, definitions) {
         var scrollSection = root.querySelector("#archolith-hero-scroll");
         var stickySection = root.querySelector("#archolith-hero-sticky");
@@ -82,6 +87,7 @@
         var lastIndex = -1;
         var ticking = false;
         var markerRange = 0;
+        var reducedMotion = shouldReduceMotion();
 
         function measure() {
             markerRange = Math.max(0, strataWall.offsetHeight - 10);
@@ -148,6 +154,11 @@
 
         measure();
         updateVisualState(0);
+        if (reducedMotion) {
+            scrollSection.classList.add("is-reduced-motion");
+            return;
+        }
+
         update();
         window.addEventListener("resize", function handleResize() {
             measure();

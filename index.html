@@ -3,16 +3,16 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Archolith &mdash; Self-hosted context compression for LLMs</title>
-<meta name="description" content="Experimental context compression tools for LLM coding agents. Compress context. Extract knowledge. Remember what matters.">
+<title>Archolith &mdash; Self-hosted graph memory for AI agents</title>
+<meta name="description" content="menhir is a self-hosted graph memory system for AI agents. Recall across sessions, structure-aware retrieval, automatic decay and conflict detection. Served over MCP.">
 <link rel="icon" type="image/svg+xml" href="favicon.svg">
 <link rel="icon" href="favicon.ico" sizes="any">
 <link rel="preload" as="style" href="fonts/fonts.css" onload="this.onload=null;this.rel='stylesheet'">
-<link rel="preload" as="style" href="hero/archolith-hero.css?v=20260707a" onload="this.onload=null;this.rel='stylesheet'">
+<link rel="preload" as="style" href="hero/archolith-hero.css?v=20260720a" onload="this.onload=null;this.rel='stylesheet'">
 <link rel="preload" as="image" href="logos/05-strata-column.svg">
 <noscript>
   <link rel="stylesheet" href="fonts/fonts.css">
-  <link rel="stylesheet" href="hero/archolith-hero.css?v=20260707a">
+  <link rel="stylesheet" href="hero/archolith-hero.css?v=20260720a">
 </noscript>
 
 <style>
@@ -1200,25 +1200,25 @@ ul { list-style: none; }
   <span class="sec__num">01 &middot; The broken model</span>
   <div class="problem-grid">
     <div>
-      <h2 class="problem__heading">Every turn re-sends the same stale history. A 30-turn session pays for <em>~450K input tokens</em> the model no longer attends to.</h2>
-      <p class="problem__body">Reactive compaction triggers too late and loses information. Naive RAG can't see structural relevance in code. Tool-spec pruning saves 2&ndash;5K tokens &mdash; a rounding error. The conversation itself is the dominant cost, and nobody is curating it.</p>
+      <h2 class="problem__heading">Every session starts cold. Decisions, preferences, and hard-won project knowledge <em>vanish when the window closes</em>.</h2>
+      <p class="problem__body">Stuffing the context window doesn't scale &mdash; it fills up. Flat markdown files go stale and nobody prunes them. Vector databases find text that looks similar but have no concept of how memories relate to each other, so an isolated note outranks the decision it contradicts. Agents need a graph, not a bigger bucket.</p>
     </div>
     <div class="stats">
       <div class="stats__cell">
-        <div class="stats__num">pending</div>
-        <div class="stats__label">proxy launch evidence</div>
+        <div class="stats__num">43</div>
+        <div class="stats__label">MCP tools shipped</div>
       </div>
       <div class="stats__cell">
-        <div class="stats__num">50%</div>
-        <div class="stats__label">filter compression</div>
+        <div class="stats__num">4</div>
+        <div class="stats__label">recall signals beyond similarity</div>
       </div>
       <div class="stats__cell">
-        <div class="stats__num">—</div>
-        <div class="stats__label">MCP waste reduction</div>
+        <div class="stats__num">900+</div>
+        <div class="stats__label">tests in suite</div>
       </div>
       <div class="stats__cell">
         <div class="stats__num">0</div>
-        <div class="stats__label">forced compactions</div>
+        <div class="stats__label">manual graph upkeep</div>
       </div>
     </div>
   </div>
@@ -1228,38 +1228,38 @@ ul { list-style: none; }
      MECHANISM
      ============================================================ -->
 <section class="sec" id="mechanism">
-  <span class="sec__num">02 &middot; How a turn moves</span>
-  <h3 class="sec__title">A proxy that curates instead of replays.</h3>
+  <span class="sec__num">02 &middot; How a memory moves</span>
+  <h3 class="sec__title">A graph that ranks by relationship, not just resemblance.</h3>
   <div class="seq">
     <div class="seq__row">
-      <span class="seq__step">01 &middot; receive</span>
-      <span class="seq__cell"><span class="seq__pip"></span>parse incoming messages</span>
-      <span class="seq__cell">identify system prompt + last N</span>
-      <span class="seq__cell is-on">pin coherence tail</span>
+      <span class="seq__step">01 &middot; ingest</span>
+      <span class="seq__cell"><span class="seq__pip"></span>add_memory &middot; non-blocking</span>
+      <span class="seq__cell">queued for background work</span>
+      <span class="seq__cell is-on">agent keeps going</span>
     </div>
     <div class="seq__row">
-      <span class="seq__step">02 &middot; query</span>
-      <span class="seq__cell"><span class="seq__pip"></span>graph: active files</span>
-      <span class="seq__cell">graph: decisions / goal</span>
-      <span class="seq__cell">graph: relevant facts</span>
+      <span class="seq__step">02 &middot; extract</span>
+      <span class="seq__cell"><span class="seq__pip"></span>LLM pulls entities + edges</span>
+      <span class="seq__cell">merge into Neo4j</span>
+      <span class="seq__cell">stamp scope &middot; session &middot; source</span>
     </div>
     <div class="seq__row">
-      <span class="seq__step">03 &middot; assemble</span>
-      <span class="seq__cell"><span class="seq__pip"></span>budget to ~15K tokens</span>
-      <span class="seq__cell">format as synthetic messages</span>
-      <span class="seq__cell">splice into the middle</span>
+      <span class="seq__step">03 &middot; anchor</span>
+      <span class="seq__cell"><span class="seq__pip"></span>detect file paths in text</span>
+      <span class="seq__cell">link to the code graph</span>
+      <span class="seq__cell is-on">ANCHORED_TO edge</span>
     </div>
     <div class="seq__row">
-      <span class="seq__step">04 &middot; forward</span>
-      <span class="seq__cell"><span class="seq__pip"></span>upstream POST + SSE</span>
-      <span class="seq__cell">retry &middot; backoff &middot; 429/5xx</span>
-      <span class="seq__cell is-on">stream back unchanged</span>
+      <span class="seq__step">04 &middot; recall</span>
+      <span class="seq__cell"><span class="seq__pip"></span>hybrid BM25 + cosine</span>
+      <span class="seq__cell">re-rank on graph signals</span>
+      <span class="seq__cell is-on">file_context widens the pool</span>
     </div>
     <div class="seq__row">
-      <span class="seq__step">05 &middot; extract</span>
-      <span class="seq__cell"><span class="seq__pip"></span>curator &middot; background pass</span>
-      <span class="seq__cell">entities + edges + decisions</span>
-      <span class="seq__cell is-on">briefing for next turn</span>
+      <span class="seq__step">05 &middot; lifecycle</span>
+      <span class="seq__cell"><span class="seq__pip"></span>promote &middot; compress &middot; expire</span>
+      <span class="seq__cell">bridge neighbors before delete</span>
+      <span class="seq__cell is-on">contradictions flagged</span>
     </div>
   </div>
 </section>
@@ -1269,22 +1269,22 @@ ul { list-style: none; }
      ============================================================ -->
 <section class="sec" id="system">
   <span class="sec__num">03 &middot; The system</span>
-  <h3 class="sec__title">From raw tool output to long-term memory &mdash; every layer has a job.</h3>
+  <h3 class="sec__title">From long-term memory out to the tooling around it &mdash; every layer has a job.</h3>
   <div class="stack">
     <div class="slab slab--primary">
       <div class="slab__id">
-        archolith-context
-        <span class="slab__badge slab__badge--stable">alpha</span>
-        <span class="slab__name">The proxy</span>
+        menhir
+        <span class="slab__badge slab__badge--stable">launch</span>
+        <span class="slab__name">The memory</span>
       </div>
-      <div class="slab__body">Experimental OpenAI-compatible proxy. Point any harness at port 9800 with a base-URL swap &mdash; no code changes. Owns the request/response lifecycle, session fingerprinting, two-pass curator assembly, graph extraction, and upstream forwarding. Circuit breaker and per-session token budget included.</div>
+      <div class="slab__body">Graph-based long-term memory for AI agents, built on Neo4j and Graphiti and exposed as an MCP server. Memories are entities with relationships, and those relationships count during retrieval &mdash; a well-connected memory outranks an isolated note with the same keywords. It also indexes your project structure into the same database, so recall is code-aware and any file change comes with a blast radius.</div>
       <div class="slab__io">
-        <div class="slab__io-label">Touches</div>
+        <div class="slab__io-label">Owns</div>
         <ul>
-          <li>/v1/chat/completions</li>
-          <li>SSE pass-through</li>
-          <li>Circuit breaker + token budget</li>
-          <li>Trace API + dashboard</li>
+          <li>Cross-session entity graph</li>
+          <li>Four-signal recall scoring</li>
+          <li>Code graph + blast radius</li>
+          <li>Decay, compression, conflicts</li>
         </ul>
       </div>
     </div>
@@ -1328,11 +1328,11 @@ ul { list-style: none; }
         <span class="slab__badge">benchmark</span>
         <span class="slab__name">The yardstick</span>
       </div>
-      <div class="slab__body">Reproducible benchmark suite measuring proxy savings, filter compression, and MCP waste reduction across multi-turn coding scenarios. Public claims stay tied to tracked evidence artifacts.</div>
+      <div class="slab__body">Reproducible benchmark suite measuring recall quality, filter compression, and MCP waste reduction across multi-turn coding scenarios. Public claims stay tied to tracked evidence artifacts.</div>
       <div class="slab__io">
         <div class="slab__io-label">Owns</div>
         <ul>
-          <li>Proxy scenario runner</li>
+          <li>Recall scenario runner</li>
           <li>Filter corpus compression</li>
           <li>Audit before/after</li>
           <li>Stack comparison arms</li>
@@ -1341,18 +1341,18 @@ ul { list-style: none; }
     </div>
     <div class="slab slab--future">
       <div class="slab__id">
-        menhir
+        archolith-context
         <span class="slab__badge">coming</span>
-        <span class="slab__name">The memory</span>
+        <span class="slab__name">The proxy</span>
       </div>
-      <div class="slab__body">Durable memory direction for knowledge across sessions and agents. Stores entities, decisions, file structure, and code relationships so future context retrieval can improve without replay. This layer is still being shaped.</div>
+      <div class="slab__body">Research direction for curated context assembly at the request boundary. An OpenAI-compatible proxy would query the memory graph each turn and splice curated context in place of linear replay, with no harness code changes. Still experimental and not part of the launch.</div>
       <div class="slab__io">
-        <div class="slab__io-label">Owns</div>
+        <div class="slab__io-label">Would own</div>
         <ul>
-          <li>Cross-session entity graph</li>
-          <li>Semantic retrieval</li>
-          <li>Knowledge promotion</li>
-          <li>Session bootstrap</li>
+          <li>/v1/chat/completions</li>
+          <li>SSE pass-through</li>
+          <li>Curator assembly</li>
+          <li>Trace API + dashboard</li>
         </ul>
       </div>
     </div>
@@ -1364,7 +1364,7 @@ ul { list-style: none; }
      ============================================================ -->
 <section class="sec demo-section" id="demo">
   <span class="sec__num">04 &middot; Side-by-side</span>
-  <h3 class="sec__title">How curated context changes a real session.</h3>
+  <h3 class="sec__title">The same question, asked on session six.</h3>
   <div class="demo-frame">
     <div class="demo-frame__bar">
       <div class="demo-frame__dots">
@@ -1372,34 +1372,34 @@ ul { list-style: none; }
         <span class="demo-frame__dot"></span>
         <span class="demo-frame__dot"></span>
       </div>
-      <span>archolith &middot; benchmark rig &middot; turn 8 of 10</span>
+      <span>&ldquo;why did we drop the retry wrapper in SessionCache?&rdquo;</span>
       <span></span>
     </div>
     <div class="demo-grid">
       <div class="demo-pane">
-        <h5 class="demo-pane__title">A &middot; Direct upstream <span class="demo-pane__badge">no proxy</span></h5>
-        <div class="demo-meter"><span>cumulative input</span><b>108,516 tok</b></div>
-        <div class="demo-meter"><span>cost &middot; 10 turns</span><b>$0.54</b></div>
-        <div class="demo-meter"><span>compaction events</span><b>2 (lossy)</b></div>
+        <h5 class="demo-pane__title">A &middot; Cold start <span class="demo-pane__badge">no memory</span></h5>
+        <div class="demo-meter"><span>prior sessions visible</span><b>0</b></div>
+        <div class="demo-meter"><span>recall signals</span><b>none</b></div>
+        <div class="demo-meter"><span>code graph</span><b>unavailable</b></div>
         <div class="demo-bars">
-          <span style="height:14%"></span><span style="height:22%"></span><span style="height:32%"></span><span style="height:42%"></span>
-          <span style="height:54%"></span><span style="height:64%"></span><span style="height:74%"></span><span style="height:86%"></span>
+          <span style="height:8%"></span><span style="height:8%"></span><span style="height:8%"></span><span style="height:8%"></span>
+          <span style="height:8%"></span><span style="height:8%"></span><span style="height:8%"></span><span style="height:8%"></span>
         </div>
-        <div class="demo-output">// assistant &rarr; added flush() guard and retry backoff. Updated SessionCache, SessionCacheTest (3 new cases). Full replay of prior 7 turns re-sent upstream.</div>
+        <div class="demo-output">// assistant &rarr; I don't have context on that decision. Can you point me at the file and explain what the retry wrapper did? &mdash; user re-explains prior work by hand.</div>
       </div>
       <div class="demo-pane demo-pane--proxy">
-        <h5 class="demo-pane__title">B &middot; Through archolith-proxy <span class="demo-pane__badge">curated</span></h5>
-        <div class="demo-meter demo-meter--good"><span>cumulative input</span><b>tracked per run</b></div>
-        <div class="demo-meter demo-meter--good"><span>cost &middot; 10 turns</span><b>computed per run</b></div>
-        <div class="demo-meter"><span>compaction events</span><b>0 <span class="delta">eliminated</span></b></div>
+        <h5 class="demo-pane__title">B &middot; With menhir <span class="demo-pane__badge">graph recall</span></h5>
+        <div class="demo-meter demo-meter--good"><span>prior sessions visible</span><b>all persistent</b></div>
+        <div class="demo-meter demo-meter--good"><span>recall signals</span><b>4 <span class="delta">beyond similarity</span></b></div>
+        <div class="demo-meter demo-meter--good"><span>code graph</span><b>anchored</b></div>
         <div class="demo-bars demo-bars--flat">
           <span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span>
         </div>
-        <div class="demo-output">// assistant &rarr; added flush() guard and retry backoff. Updated SessionCache, SessionCacheTest (3 new cases). &mdash; curated context: 892 tok injected vs. 24,847 tok raw replay. Parity confirmed.</div>
+        <div class="demo-output">// assistant &rarr; It was dropped in favor of upstream backoff &mdash; that decision is anchored to SessionCache.java and connects to two later memories about 429 handling. Related tests: SessionCacheTest.</div>
       </div>
     </div>
   </div>
-  <p style="margin-top:14px; font-family:var(--f-mono); font-size:10px; color:var(--ink-mute); letter-spacing:0.08em;">Proxy comparison figures are withheld until the next tracked archolith-peira evidence refresh.</p>
+  <p style="margin-top:14px; font-family:var(--f-mono); font-size:10px; color:var(--ink-mute); letter-spacing:0.08em;">Illustrative of the recall path. Benchmarked figures stay tied to tracked archolith-peira evidence artifacts.</p>
 </section>
 
 <!-- ============================================================
@@ -1407,7 +1407,8 @@ ul { list-style: none; }
      ============================================================ -->
 <section class="sec" id="install">
   <span class="sec__num">05 &middot; Install</span>
-  <h3 class="sec__title">Start with archolith-skree: MCP audit tools for the agents people already use.</h3>
+  <h3 class="sec__title">menhir is self-hosted &mdash; Neo4j, an LLM backend, and your MCP client. Public install lands with the release.</h3>
+  <p class="install-tile__copy" style="max-width:640px; margin:-24px 0 28px;">In the meantime, archolith-skree installs today and measures where your MCP context is going.</p>
   <div class="install-grid">
     <div class="install-tile">
       <div class="install-tile__head">
@@ -1443,11 +1444,11 @@ ul { list-style: none; }
 <section class="sec" id="quickstart" style="display:none">
   <span class="sec__num">06 &middot; Run it</span>
   <h3 class="sec__title">Five lines to running.</h3>
-  <div class="quickstart"><span class="prompt">$</span> <span class="cmd">git clone https://github.com/Archolith/archolith-context</span>
-<span class="prompt">$</span> <span class="cmd">cd archolith-context &amp;&amp; cp .env.example .env</span>
-<span class="prompt">$</span> <span class="cmd">docker compose up -d</span>                       <span class="comment"># LadybugDB + proxy on :9800</span>
-<span class="prompt">$</span> <span class="cmd">export OPENAI_BASE_URL=http://localhost:9800</span>
-<span class="prompt">$</span> <span class="cmd">aider</span>                                       <span class="comment"># or claude, cursor, cline...</span></div>
+  <div class="quickstart"><span class="prompt">$</span> <span class="cmd">docker run -d -p 7687:7687 -e NEO4J_AUTH=neo4j/password neo4j:5</span>
+<span class="prompt">$</span> <span class="cmd">pip install -e ".[dev]"</span>
+<span class="prompt">$</span> <span class="cmd">cp .env.example .env</span>                         <span class="comment"># Neo4j + LLM backend settings</span>
+<span class="prompt">$</span> <span class="cmd">python -m menhir</span>                             <span class="comment"># MCP server over stdio</span>
+<span class="prompt">$</span> <span class="cmd">menhir serve</span>                                 <span class="comment"># graph explorer on :8090</span></div>
 </section>
 
 </main>
@@ -1458,25 +1459,25 @@ ul { list-style: none; }
 <footer class="footer">
   <div>
     <div class="footer__brand">ARCHOLITH</div>
-    <p class="footer__tagline">Self-hosted context compression for LLMs. Compress context. Extract knowledge. Remember what matters.</p>
+    <p class="footer__tagline">Self-hosted graph memory for AI agents. Recall across sessions. Know the code graph. Forget what stopped mattering.</p>
   </div>
   <div>
     <h5>Products</h5>
     <ul>
-      <li><a href="https://github.com/Archolith/archolith-context">archolith-context</a></li>
+      <li>menhir <span style="color:var(--ink-mute)">&middot; launch</span></li>
       <li><a href="https://github.com/Archolith/archolith-filter">archolith-filter</a></li>
       <li><a href="https://github.com/Archolith/archolith-mcp-audit">archolith-skree</a></li>
       <li><a href="https://github.com/ctharvey/archolith-bench">archolith-peira</a></li>
-      <li>menhir</li>
+      <li>archolith-context <span style="color:var(--ink-mute)">&middot; coming</span></li>
     </ul>
   </div>
   <div>
     <h5>Docs</h5>
     <ul>
-      <li><a href="https://github.com/Archolith/archolith-context">Architecture</a></li>
+      <li><a href="#system">Architecture</a></li>
+      <li><a href="#mechanism">How recall works</a></li>
       <li><a href="#install">Install archolith-skree</a></li>
-      <li><a href="https://github.com/Archolith/archolith-context">Trace API</a></li>
-      <li>menhir</li>
+      <li>menhir setup <span style="color:var(--ink-mute)">&middot; soon</span></li>
     </ul>
   </div>
   <div>
@@ -1494,10 +1495,10 @@ ul { list-style: none; }
 <!-- ============================================================
      SCRIPTS
      ============================================================ -->
-<script defer src="hero/sliceDefinitions.js?v=20260707a"></script>
-<script defer src="hero/StrataSlice.js?v=20260707a"></script>
-<script defer src="hero/StrataField.js?v=20260707a"></script>
-<script defer src="hero/ArcholithHero.js?v=20260707a"></script>
+<script defer src="hero/sliceDefinitions.js?v=20260720a"></script>
+<script defer src="hero/StrataSlice.js?v=20260720a"></script>
+<script defer src="hero/StrataField.js?v=20260720a"></script>
+<script defer src="hero/ArcholithHero.js?v=20260720a"></script>
 <script>
 document.addEventListener("DOMContentLoaded", function() {
   /* Hero */

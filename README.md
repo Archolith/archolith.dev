@@ -1,6 +1,6 @@
 # archolith.dev
 
-Marketing homepage for the [archolith&trade;](https://github.com/Archolith/archolith-context) suite — self-hosted context compression tools for LLMs. A single-page static HTML site with a signature scroll-excavation hero animation.
+Marketing homepage for the [archolith&trade;](https://github.com/Archolith) suite — self-hosted graph memory and context tooling for AI agents. Launch copy leads with **menhir**, the graph memory system. A single-page static HTML site with a signature scroll-excavation hero animation.
 
 ## Quick Start
 
@@ -17,13 +17,15 @@ No build step. No framework. No dependencies.
 
 ## Products Featured
 
+One hero layer per product, same order in the architecture stack.
+
 | Product | Layer | Status |
 |---------|-------|--------|
-| archolith-context | L4 — Proxy | Experimental alpha |
-| archolith-filter | L0–L2 — RTK | Alpha |
-| archolith-skree | L3 — Audit | Beta install path |
-| archolith-bench | Bench | Active |
-| menhir | L5 — Memory | Current memory direction |
+| menhir | L0 — Memory | **Launch** |
+| archolith-filter | L1 — Filter | Alpha |
+| archolith-skree | L2 — Audit | Beta install path |
+| archolith-peira | L3 — Bench | Active |
+| archolith-context | L4 — Proxy | Coming / research direction |
 
 ## Install archolith-skree
 

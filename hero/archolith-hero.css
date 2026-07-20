@@ -595,60 +595,6 @@
     transition: color 300ms ease;
 }
 
-.slice-annotations {
-    position: absolute;
-    inset: 0;
-    z-index: 5;
-    width: 100%;
-    height: 100%;
-    color: var(--slice-accent);
-    opacity: 0.34;
-    transition: opacity 260ms ease, transform 260ms ease;
-    transform: translateX(10px);
-}
-
-.slice-annotations__grid,
-.slice-annotations__minor,
-.slice-annotations__major {
-    fill: none;
-    stroke-linecap: square;
-}
-
-.slice-annotations__grid {
-    stroke: rgba(214, 221, 232, 0.08);
-    stroke-width: 1;
-    stroke-dasharray: 3 7;
-}
-
-.slice-annotations__minor {
-    stroke: rgba(214, 221, 232, 0.2);
-    stroke-width: 1.2;
-    stroke-dasharray: 4 7;
-}
-
-.slice-annotations__major {
-    stroke: currentColor;
-    stroke-width: 1.8;
-}
-
-.slice-annotations__labels,
-.slice-annotations__caption {
-    fill: rgba(214, 221, 232, 0.7);
-    font-family: var(--f-mono);
-    font-size: 11px;
-    letter-spacing: 0.12em;
-    text-transform: uppercase;
-}
-
-.slice-annotations__caption {
-    fill: rgba(214, 221, 232, 0.34);
-    font-size: 10px;
-}
-
-.slice-annotations__caption--right {
-    text-anchor: end;
-}
-
 /* Active slice: expanded, accent edge, brighter labels */
 .strata-slice.is-active {
     flex: 1.8 1 0%;
@@ -703,7 +649,7 @@
     opacity: 0;
 }
 
-.strata-slice[data-slice-key="surface"] .strata-slice__plate {
+.strata-slice[data-slice-key="audit"] .strata-slice__plate {
     background:
         repeating-linear-gradient(174deg, transparent 0 18px, rgba(142, 174, 213, 0.08) 18px 19px),
         repeating-linear-gradient(180deg, transparent 0 38px, rgba(142, 174, 213, 0.05) 38px 39px),
@@ -722,15 +668,7 @@
 }
 
 
-.strata-slice[data-slice-key="session"] .strata-slice__plate {
-    background:
-        repeating-linear-gradient(55deg, transparent 0 18px, rgba(98, 169, 140, 0.09) 18px 19px),
-        repeating-linear-gradient(-55deg, transparent 0 18px, rgba(98, 169, 140, 0.07) 18px 19px),
-        linear-gradient(180deg, rgba(98, 169, 140, 0.06), rgba(15, 20, 28, 0.02));
-}
-
-
-.strata-slice[data-slice-key="memory"] .strata-slice__plate {
+.strata-slice[data-slice-key="menhir"] .strata-slice__plate {
     background:
         repeating-linear-gradient(60deg, transparent 0 18px, rgba(130, 114, 158, 0.08) 18px 19px),
         repeating-linear-gradient(-60deg, transparent 0 18px, rgba(130, 114, 158, 0.06) 18px 19px),
@@ -751,7 +689,7 @@
 }
 
 
-.strata-slice[data-slice-key="foundation"] .strata-slice__plate {
+.strata-slice[data-slice-key="bench"] .strata-slice__plate {
     background:
         linear-gradient(90deg, rgba(162, 134, 112, 0.09) 0 1px, transparent 1px 54px),
         linear-gradient(180deg, rgba(162, 134, 112, 0.09) 0 1px, transparent 1px 32px),
@@ -787,17 +725,53 @@
 }
 
 @media (prefers-reduced-motion: reduce) {
+    .archolith-hero-scroll {
+        height: auto;
+    }
+
+    .archolith-hero-sticky {
+        position: relative;
+        top: 0;
+        height: auto;
+        min-height: calc(100vh - 50px);
+    }
+
+    .archolith-hero__visual {
+        min-height: 620px;
+    }
+
     .strata-slice,
     .strata-slice__cutaway,
     .strata-slice__core,
-    .slice-annotations,
-    .strata-field__tick {
+    .strata-field__tick,
+    .archolith-hero__layer-card {
         transition: none;
     }
 
     .strata-slice__scan,
     .strata-field__marker-line {
         animation: none;
+    }
+
+    .strata-field__marker {
+        display: none;
+    }
+
+    .strata-slice,
+    .strata-slice.is-active,
+    .strata-slice.is-passed {
+        flex: 1 1 0%;
+        opacity: 1;
+        filter: none;
+    }
+
+    .strata-slice.is-passed .strata-slice__measure {
+        opacity: 1;
+    }
+
+    .strata-slice__scan,
+    .strata-slice.is-active .strata-slice__scan {
+        opacity: 0;
     }
 }
 
@@ -915,10 +889,6 @@
         right: 18px;
     }
 
-    .slice-annotations__labels,
-    .slice-annotations__caption {
-        font-size: 9px;
-    }
 }
 
 .tweak-dock {

@@ -1,5 +1,19 @@
 # Changelog — archolith.dev
 
+## 2026-07-20 — Reposition launch around `menhir`, demote `archolith-context`
+
+Site previously led with `archolith-context` (the proxy) as the flagship and showed
+`menhir` as a dimmed "coming" slab. Launch is menhir, so the narrative was inverted.
+
+- `hero/sliceDefinitions.js` — rewrote all slices as **one layer per product**: L0 `menhir` (launch), L1 `archolith-filter`, L2 `archolith-skree`, L3 `archolith-peira`, L4 `archolith-context` (coming). Five slices, down from six. Layers name products; menhir's internals (code graph, lifecycle) are described inside its own slice rather than split across layers.
+- `hero/ArcholithHero.js` — new headline ("Agents that / remember / their work."), tagline, brand kicker, and four beats; primary CTA now points at `#system` instead of the demo. Headline is hard-broken to three lines: the copy column renders ~348px at 64px bold, so any line longer than roughly "what they" wraps — keep replacement lines at or under that width or the headline silently grows a fourth line.
+- `hero/archolith-hero.css` — realigned plate-texture selectors to the product slice ids (`surface`→`audit`, `memory`→`menhir`, `foundation`→`bench`, `proxy` reassigned to the blue plate). Removed the orphaned green `session`/`lifecycle` block. Textures are authored per accent color; accents were assigned to preserve each pairing. Note the pre-existing state was already mismatched — 3 of 6 slices had no texture at all — so all five now resolve.
+- `index.html` — new `<title>` + meta description; problem section reframed from replay cost to cold-start memory loss (4 new stat cells); mechanism sequence retargeted from the 5-step proxy pipeline to the 5-step memory pipeline; architecture stack is one slab per product mirroring the hero order, leading with `menhir` badged `launch` and ending with `archolith-context` badged `coming`; demo reframed from token-cost comparison to cold-start-vs-recall; install heading now leads with menhir self-host requirements; hidden quickstart rewritten for menhir; footer tagline, product order, and docs links updated. Bumped hero cache-buster to `?v=20260720a`.
+- `README.md`, `.agent/architecture.md` — product table and section descriptions updated to the new ordering.
+- `.agent/data_models.md` — corrected the slice field list (it documented `description`/`layer`/`state`, none of which exist) and documented the `id` ↔ `data-slice-key` ↔ CSS-texture coupling.
+
+**Not done:** no public install path for menhir — its README still says "Private — not currently open source", so the install section keeps the working archolith-skree commands and states that menhir's public install lands with the release. Demo figures are labelled illustrative rather than benchmarked.
+
 ## 2026-07-08 — Fix visible paths for launch readiness
 
 - `index.html` — Fixed 3 install script URLs from `main`→`master` (default branch); changed 4 broken `github.com/Archolith/menhir` footer links to plain text (repo not public); fixed polyform license URL (removed trailing slash, was 404); fixed archolith-peira link to `ctharvey/archolith-bench`.
