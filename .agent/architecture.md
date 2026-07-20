@@ -167,7 +167,7 @@ The site is served from the yawn VPS via Caddy's built-in `file_server`, not a s
 | Compose dir | `/srv/yawn/projects/yawn.deploy/` |
 | DNS | Cloudflare proxied (orange cloud); A record → VPS IP |
 | TLS | Let's Encrypt auto-provisioned by Caddy; Cloudflare SSL mode: Full (strict) |
-| Cache | Caddy sets `Cache-Control: max-age=300` on `@assets` route; Cloudflare caches JS/CSS aggressively (`max-age=14400`) |
+| Cache | Caddy sets `Cache-Control: max-age=604800` on `@assets` (`*.js *.css *.svg *.png *.jpg *.ico`) and `max-age=31536000, immutable` on fonts; `.html` is not in `@assets` and serves `cf-cache-status: DYNAMIC` |
 | Volume mount | Uses existing `/var/www/html:/srv/static:ro` in docker-compose.yml — no separate volume needed |
 
 ### Deploy Workflow
@@ -177,6 +177,29 @@ The site is served from the yawn VPS via Caddy's built-in `file_server`, not a s
 3. Preview the static payload: `.\scripts\deploy.ps1 -PlanOnly`
 4. Copy the static payload to the VPS: `.\scripts\deploy.ps1`
 5. No container restart needed — Caddy serves files directly from disk
+
+### Deploy Gotchas (observed 2026-07-20, first successful scripted deploy)
+
+- **scp resets directory modes to 700.** Every run leaves `archolith-dev/`, `fonts/`,
+  `hero/`, `logos/` as `drwx------`. The site keeps working only because the Caddy
+  container reads as root. Re-apply after each deploy:
+  `chmod 755 . fonts hero logos && find . -maxdepth 2 -type f -exec chmod 644 {} +`
+- **Root-owned files block the copy.** The three favicons were `root:root` from an early
+  manual deploy, so scp failed with `dest open ... Permission denied` and aborted the whole
+  transfer. Fixed by removing them and re-uploading as `thron`. If a deploy fails this way,
+  check ownership before anything else.
+- **The deploy is additive — it never prunes.** Files deleted from the repo stay on the
+  origin and keep serving. `hero/SliceAnnotations.js`, the `05a`-`05d` logo variants, and
+  `logos/{showcase,color-matrix,README}.md/html` were all still public after being removed
+  from git. Delete removed paths on the VPS manually.
+- **`scp -r` can nest.** Copying the staged `archolith-dev/` into `/var/www/html/` while
+  that directory already exists risks `/var/www/html/archolith-dev/archolith-dev/`. Verify
+  the remote tree after each deploy. A stray full repo copy (including `.git`, `CLAUDE.md`,
+  `AGENTS.md`) was found in the webroot this way and moved to
+  `/home/thron/quarantine/`.
+- **A cache-buster bump removes the need to purge Cloudflare.** New `?v=` values are new
+  cache keys, so they return `MISS` and pull from origin. Purge only if assets change
+  *without* a version bump.
 
 ### Cloudflare Cache Notes
 

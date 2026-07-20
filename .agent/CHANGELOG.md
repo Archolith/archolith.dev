@@ -1,5 +1,28 @@
 # Changelog — archolith.dev
 
+## 2026-07-20 — First scripted deploy; webroot cleanup
+
+Deployed commit `4b07a19` to the VPS. Origin had been serving a **June 3** build — the
+three July commits were never pushed live, and `deploy.ps1` had never successfully run
+(no `deploy-manifest.json` existed on the server).
+
+- First run failed: the three favicons were `root:root`, so scp aborted the transfer.
+  Removed and re-uploaded them as `thron`; second run completed clean.
+- Removed orphaned files still being served after their removal from git:
+  `hero/SliceAnnotations.js`, `logos/05a`-`05d`, `logos/showcase.html`,
+  `logos/color-matrix.html`, `logos/README.md`. The deploy is additive and never prunes.
+- **Closed a webroot exposure.** `/var/www/html/archolith-dev/archolith.dev/` held a full
+  14 MB repo copy, publicly reachable — `.git/config`, `.git/HEAD`, `packed-refs`,
+  `CLAUDE.md`, and `AGENTS.md` all returned 200, making the history clonable. Moved to
+  `/home/thron/quarantine/archolith.dev-webroot-copy-20260720` (mode 700) rather than
+  deleted, pending a decision on destroying it. No credentials were in the exposed config.
+- Restored directory modes to 755/644 after scp reset them to 700.
+- `privacy.html` now serves (was 404 in production despite being linked from the footer).
+- No Cloudflare purge needed — the `?v=20260720a` bump made every hero asset a new cache
+  key returning `MISS`.
+
+Deploy gotchas recorded in `architecture.md` → Deploy Gotchas.
+
 ## 2026-07-20 — Reposition launch around `menhir`, demote `archolith-context`
 
 Site previously led with `archolith-context` (the proxy) as the flagship and showed
