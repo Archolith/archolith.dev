@@ -8,11 +8,11 @@
 <link rel="icon" type="image/svg+xml" href="favicon.svg">
 <link rel="icon" href="favicon.ico" sizes="any">
 <link rel="preload" as="style" href="fonts/fonts.css" onload="this.onload=null;this.rel='stylesheet'">
-<link rel="preload" as="style" href="hero/archolith-hero.css?v=20260720a" onload="this.onload=null;this.rel='stylesheet'">
+<link rel="preload" as="style" href="hero/archolith-hero.css?v=20260810a" onload="this.onload=null;this.rel='stylesheet'">
 <link rel="preload" as="image" href="logos/05-strata-column.svg">
 <noscript>
   <link rel="stylesheet" href="fonts/fonts.css">
-  <link rel="stylesheet" href="hero/archolith-hero.css?v=20260720a">
+  <link rel="stylesheet" href="hero/archolith-hero.css?v=20260810a">
 </noscript>
 
 <style>
@@ -971,6 +971,23 @@ ul { list-style: none; }
 .quickstart .comment { color: var(--ink-mute); }
 .quickstart .prompt { color: var(--accent); }
 
+.install-split {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 18px;
+  align-items: start;
+}
+.install-split__col { min-width: 0; }
+.install-split__label {
+  display: block;
+  margin-bottom: 10px;
+  font-family: var(--f-mono);
+  font-size: 10px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--ink-mute);
+}
+
 .install-grid {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
@@ -1025,6 +1042,155 @@ ul { list-style: none; }
   line-height: 1.6;
   color: var(--ink-mute);
 }
+
+/* ============================================================
+   LIFECYCLE
+   ============================================================ */
+.life {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  border: 1px solid var(--rule-strong);
+  background: var(--bg-2);
+}
+.life__cell {
+  padding: 24px 20px;
+  border-right: 1px solid var(--rule);
+}
+.life__cell:last-child { border-right: 0; }
+.life__state {
+  display: block;
+  font-family: var(--f-mono);
+  font-size: 10px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin-bottom: 12px;
+}
+.life__cell--end .life__state { color: var(--ink-mute); }
+.life__body { font-size: 13px; line-height: 1.6; color: var(--ink-2); }
+.life__arrow {
+  display: block;
+  margin-top: 16px;
+  font-family: var(--f-mono);
+  font-size: 10px;
+  letter-spacing: 0.12em;
+  color: var(--ink-mute);
+}
+.life__note {
+  margin-top: 18px;
+  font-family: var(--f-mono);
+  font-size: 11px;
+  line-height: 1.6;
+  color: var(--ink-mute);
+}
+
+/* ============================================================
+   RANKING
+   ============================================================ */
+.formula {
+  background: var(--bg-2);
+  border: 1px solid var(--rule-strong);
+  padding: 22px 24px;
+  margin-bottom: 28px;
+  font-family: var(--f-mono);
+  font-size: 13px;
+  color: var(--ink-2);
+  white-space: nowrap;
+  overflow-x: auto;
+}
+.formula b { color: var(--accent); font-weight: 500; }
+.table-wrap { overflow-x: auto; }
+.gtable {
+  width: 100%;
+  min-width: 520px;
+  border-collapse: collapse;
+  border: 1px solid var(--rule-strong);
+  background: var(--bg-2);
+}
+.gtable th {
+  text-align: left;
+  padding: 14px 18px;
+  font-family: var(--f-mono);
+  font-size: 10px;
+  font-weight: 400;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--ink-mute);
+  border-bottom: 1px solid var(--rule-strong);
+}
+.gtable td {
+  padding: 14px 18px;
+  font-size: 13px;
+  line-height: 1.55;
+  color: var(--ink-2);
+  border-bottom: 1px solid var(--rule);
+  vertical-align: top;
+}
+.gtable tr:last-child td { border-bottom: 0; }
+.gtable td.key {
+  font-family: var(--f-mono);
+  font-size: 12px;
+  color: var(--ink);
+  white-space: nowrap;
+}
+.subhead {
+  font-family: var(--f-display);
+  font-size: 18px;
+  font-weight: 700;
+  letter-spacing: -0.01em;
+  margin: 44px 0 16px;
+}
+.subhead:first-of-type { margin-top: 0; }
+
+/* ============================================================
+   TOOL SURFACE
+   ============================================================ */
+.tools {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 18px;
+}
+.tools__group {
+  border: 1px solid var(--rule-strong);
+  background: var(--bg-2);
+  padding: 20px;
+}
+.tools__label {
+  display: block;
+  margin-bottom: 12px;
+  font-family: var(--f-mono);
+  font-size: 10px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--accent);
+}
+.tools__list {
+  font-family: var(--f-mono);
+  font-size: 11px;
+  line-height: 2;
+  color: var(--ink-2);
+}
+.tools__list li::before { content: "\2192\00a0"; color: var(--ink-mute); }
+.tools__list em { color: var(--ink-mute); font-style: normal; }
+
+/* ============================================================
+   CALLOUT
+   ============================================================ */
+.callout {
+  border-left: 2px solid var(--accent);
+  background: var(--bg-2);
+  padding: 18px 22px;
+  margin-top: 24px;
+  font-size: 13px;
+  line-height: 1.6;
+  color: var(--ink-2);
+}
+.callout code {
+  font-family: var(--f-mono);
+  font-size: 12px;
+  color: var(--ink);
+}
+.callout--warn { border-left-color: var(--ink-mute); }
 
 /* ============================================================
    FOOTER
@@ -1137,6 +1303,14 @@ ul { list-style: none; }
   .demo-pane:last-child { border-bottom: 0; }
 
   .install-grid { grid-template-columns: 1fr; }
+  .install-split { grid-template-columns: 1fr; }
+
+  .life { grid-template-columns: 1fr 1fr; }
+  .life__cell { border-bottom: 1px solid var(--rule); }
+  .life__cell:nth-child(2n) { border-right: 0; }
+  .life__cell:nth-last-child(-n+2) { border-bottom: 0; }
+
+  .tools { grid-template-columns: 1fr 1fr; }
 
   .footer { grid-template-columns: 1fr 1fr; gap: 28px 20px; padding: 40px 20px; }
 
@@ -1161,6 +1335,10 @@ ul { list-style: none; }
   .stats { grid-template-columns: 1fr; }
   .stats__cell { border-right: 0; border-bottom: 1px solid var(--rule-strong); }
   .stats__cell:last-child { border-bottom: 0; }
+  .life { grid-template-columns: 1fr; }
+  .life__cell { border-right: 0; }
+  .tools { grid-template-columns: 1fr; }
+  .formula { white-space: normal; font-size: 12px; }
   .footer { grid-template-columns: 1fr; }
 }
 </style>
@@ -1180,9 +1358,10 @@ ul { list-style: none; }
   </div>
   <div class="nav__links">
     <a href="#mechanism">How it works</a>
+    <a href="#ranking">Ranking</a>
     <a href="#system">System</a>
     <a href="#install">Install</a>
-    <a href="https://github.com/Archolith">GitHub</a>
+    <a href="https://github.com/Archolith/menhir">GitHub</a>
   </div>
 </nav>
 
@@ -1205,7 +1384,7 @@ ul { list-style: none; }
     </div>
     <div class="stats">
       <div class="stats__cell">
-        <div class="stats__num">43</div>
+        <div class="stats__num">52</div>
         <div class="stats__label">MCP tools shipped</div>
       </div>
       <div class="stats__cell">
@@ -1213,8 +1392,8 @@ ul { list-style: none; }
         <div class="stats__label">recall signals beyond similarity</div>
       </div>
       <div class="stats__cell">
-        <div class="stats__num">900+</div>
-        <div class="stats__label">tests in suite</div>
+        <div class="stats__num">5,900+</div>
+        <div class="stats__label">tests in the suite</div>
       </div>
       <div class="stats__cell">
         <div class="stats__num">0</div>
@@ -1265,10 +1444,79 @@ ul { list-style: none; }
 </section>
 
 <!-- ============================================================
+     LIFECYCLE
+     ============================================================ -->
+<section class="sec" id="lifecycle">
+  <span class="sec__num">03 &middot; Lifecycle</span>
+  <h3 class="sec__title">Memories are supposed to fade. Most systems never let them.</h3>
+  <div class="life">
+    <div class="life__cell">
+      <span class="life__state">Session</span>
+      <div class="life__body">Scoped to one conversation. It gets promoted to persistent only if it builds enough connections to memories that already stuck around.</div>
+      <span class="life__arrow">promote &rarr;</span>
+    </div>
+    <div class="life__cell">
+      <span class="life__state">Active</span>
+      <div class="life__body">The working set. Full content, regularly recalled, full weight in scoring.</div>
+      <span class="life__arrow">inactivity &rarr;</span>
+    </div>
+    <div class="life__cell">
+      <span class="life__state">Compressed</span>
+      <div class="life__body">Content swapped for an LLM summary once it stops being accessed. Rehydrates on its own the next time something recalls it.</div>
+      <span class="life__arrow">expiry &rarr;</span>
+    </div>
+    <div class="life__cell life__cell--end">
+      <span class="life__state">Gone</span>
+      <div class="life__body">Queued for deletion. Neighbors get bridged first, so removing a node doesn't cut the graph in half.</div>
+      <span class="life__arrow">deleted</span>
+    </div>
+  </div>
+  <p class="life__note">Contradictions get flagged instead of quietly coexisting. Nothing in this loop needs a human: recall keeps a memory sharp, and everything else thins out.</p>
+</section>
+
+<!-- ============================================================
+     RANKING
+     ============================================================ -->
+<section class="sec" id="ranking">
+  <span class="sec__num">04 &middot; Ranking</span>
+  <h3 class="sec__title">Similarity finds the candidates. The graph decides the order.</h3>
+  <div class="formula">relevance = similarity + <b>&alpha;</b>&times;adjacency + <b>&beta;</b>&times;recency + <b>&gamma;</b>&times;prominence + <b>&delta;</b>&times;conflict</div>
+  <div class="table-wrap">
+    <table class="gtable">
+      <thead>
+        <tr><th>Signal</th><th>What it reads</th></tr>
+      </thead>
+      <tbody>
+        <tr><td class="key">adjacency</td><td>How many other strong candidates this memory connects to. A cluster of related memories pulls its own members up.</td></tr>
+        <tr><td class="key">recency</td><td>Last access. Work you touched this week outranks work you touched in March.</td></tr>
+        <tr><td class="key">prominence</td><td>Total edge count. A hub memory is treated as more central than a leaf with the same wording.</td></tr>
+        <tr><td class="key">conflict</td><td>Whether the memory sits inside an unresolved contradiction that's worth showing you.</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <h4 class="subhead">Five presets shift the weights</h4>
+  <div class="table-wrap">
+    <table class="gtable">
+      <thead>
+        <tr><th>Preset</th><th>Reach for it when</th><th>Weighting</th></tr>
+      </thead>
+      <tbody>
+        <tr><td class="key">knowledge</td><td>General recall and Q&amp;A. The default.</td><td>adjacency 0.2, recency 0.1</td></tr>
+        <tr><td class="key">recent</td><td>&ldquo;What was I just working on?&rdquo;</td><td>recency 0.5</td></tr>
+        <tr><td class="key">connected</td><td>Walking outward from something you already found.</td><td>adjacency 0.4</td></tr>
+        <tr><td class="key">emotional</td><td>Sentiment-laden recall.</td><td>recency 0.2, adjacency 0.1</td></tr>
+        <tr><td class="key">conflict</td><td>Auditing what the graph disagrees with itself about.</td><td>conflict 0.4</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p class="life__note">Pass <code>file_context</code> to any recall and memories anchored to that file &mdash; and to its import neighborhood &mdash; join the candidate pool, whether or not the query text has anything to do with the code.</p>
+</section>
+
+<!-- ============================================================
      ARCHITECTURE
      ============================================================ -->
 <section class="sec" id="system">
-  <span class="sec__num">03 &middot; The system</span>
+  <span class="sec__num">05 &middot; The system</span>
   <h3 class="sec__title">From long-term memory out to the tooling around it &mdash; every layer has a job.</h3>
   <div class="stack">
     <div class="slab slab--primary">
@@ -1277,7 +1525,7 @@ ul { list-style: none; }
         <span class="slab__badge slab__badge--stable">launch</span>
         <span class="slab__name">The memory</span>
       </div>
-      <div class="slab__body">Graph-based long-term memory for AI agents, built on Neo4j and Graphiti and exposed as an MCP server. Memories are entities with relationships, and those relationships count during retrieval &mdash; a well-connected memory outranks an isolated note with the same keywords. It also indexes your project structure into the same database, so recall is code-aware and any file change comes with a blast radius.</div>
+      <div class="slab__body">Graph-based long-term memory for AI agents, built on Neo4j and Graphiti and served over MCP. Memories are entities with relationships, and those relationships count during retrieval &mdash; a well-connected memory outranks an isolated note with the same keywords. Project structure lands in the same database, so recall is code-aware and any file change comes with a blast radius. Apache-2.0, self-hosted, 52 tools and 9 resources.</div>
       <div class="slab__io">
         <div class="slab__io-label">Owns</div>
         <ul>
@@ -1363,7 +1611,7 @@ ul { list-style: none; }
      DEMO
      ============================================================ -->
 <section class="sec demo-section" id="demo">
-  <span class="sec__num">04 &middot; Side-by-side</span>
+  <span class="sec__num">06 &middot; Side-by-side</span>
   <h3 class="sec__title">The same question, asked on session six.</h3>
   <div class="demo-frame">
     <div class="demo-frame__bar">
@@ -1403,12 +1651,117 @@ ul { list-style: none; }
 </section>
 
 <!-- ============================================================
+     TOOL SURFACE
+     ============================================================ -->
+<section class="sec" id="tools">
+  <span class="sec__num">07 &middot; Surface</span>
+  <h3 class="sec__title">52 tools and 9 resources, all over MCP.</h3>
+  <div class="tools">
+    <div class="tools__group">
+      <span class="tools__label">Ingestion</span>
+      <ul class="tools__list">
+        <li>add_memory <em>&middot; non-blocking</em></li>
+        <li>add_memory_and_track</li>
+        <li>ingest_project</li>
+        <li>ingest_document</li>
+      </ul>
+    </div>
+    <div class="tools__group">
+      <span class="tools__label">Recall</span>
+      <ul class="tools__list">
+        <li>recall_memories</li>
+        <li>recall_context_memories</li>
+        <li>read_flagged_memories</li>
+        <li>build_context <em>&middot; token-budgeted</em></li>
+      </ul>
+    </div>
+    <div class="tools__group">
+      <span class="tools__label">Code graph</span>
+      <ul class="tools__list">
+        <li>query_structure</li>
+        <li>&nbsp;&nbsp;blast_radius</li>
+        <li>&nbsp;&nbsp;affected_tests</li>
+        <li>&nbsp;&nbsp;imports &middot; endpoints &middot; symbols</li>
+      </ul>
+    </div>
+    <div class="tools__group">
+      <span class="tools__label">Conflicts</span>
+      <ul class="tools__list">
+        <li>list_conflicts</li>
+        <li>resolve_conflict</li>
+        <li>scan_for_conflicts</li>
+        <li>run_llm_conflict_review</li>
+      </ul>
+    </div>
+    <div class="tools__group">
+      <span class="tools__label">Operations</span>
+      <ul class="tools__list">
+        <li>get_enrichment_status</li>
+        <li>list_enrichment_queue</li>
+        <li>watch_enrichment</li>
+        <li>get_episode_trace</li>
+        <li>repair_stale_enrichment</li>
+        <li>get_memory_stats</li>
+      </ul>
+    </div>
+    <div class="tools__group">
+      <span class="tools__label">Retention</span>
+      <ul class="tools__list">
+        <li>flag_memory</li>
+        <li>promote_memory</li>
+        <li>close_memory</li>
+        <li>delete_memory</li>
+        <li>delete_namespace</li>
+      </ul>
+    </div>
+  </div>
+  <p class="life__note">Every enrichment pass, scoring decision, and lifecycle transition writes to a SQLite sidecar, so when recall returns something strange there is a trace to read.</p>
+</section>
+
+<!-- ============================================================
      INSTALL
      ============================================================ -->
 <section class="sec" id="install">
-  <span class="sec__num">05 &middot; Install</span>
-  <h3 class="sec__title">menhir is self-hosted &mdash; Neo4j, an LLM backend, and your MCP client. Public install lands with the release.</h3>
-  <p class="install-tile__copy" style="max-width:640px; margin:-24px 0 28px;">In the meantime, archolith-skree installs today and measures where your MCP context is going.</p>
+  <span class="sec__num">08 &middot; Install</span>
+  <h3 class="sec__title">Self-hosted. Neo4j, an LLM backend, and your MCP client.</h3>
+  <div class="install-split">
+    <div class="install-split__col">
+      <span class="install-split__label">Clone and run</span>
+      <div class="quickstart"><span class="prompt">$</span> <span class="cmd">git clone https://github.com/Archolith/menhir.git</span>
+<span class="prompt">$</span> <span class="cmd">cd menhir &amp;&amp; pip install -e .</span>
+<span class="prompt">$</span> <span class="cmd">cp .env.example .env</span>      <span class="comment"># Neo4j + LLM settings</span>
+<span class="prompt">$</span> <span class="cmd">docker compose up -d</span>      <span class="comment"># local Neo4j with APOC</span>
+<span class="prompt">$</span> <span class="cmd">menhir serve</span>              <span class="comment"># :8100 + /explorer</span></div>
+    </div>
+    <div class="install-split__col">
+      <span class="install-split__label">Register with your MCP client</span>
+      <div class="quickstart">{
+  <span class="cmd">"mcpServers"</span>: {
+    <span class="cmd">"memory"</span>: {
+      <span class="cmd">"type"</span>: "http",
+      <span class="cmd">"url"</span>: "http://127.0.0.1:8100/mcp-http",
+      <span class="cmd">"headers"</span>: {
+        <span class="cmd">"Authorization"</span>: "Bearer &lt;key&gt;"
+      }
+    }
+  }
+}</div>
+    </div>
+  </div>
+  <p class="install-note">menhir is a long-lived server. It holds the Neo4j pool, the background enrichment queue, and the maintenance scheduler, so you start it once instead of spawning one per client session. <code>menhir check</code> and <code>menhir diagnostics</code> cover preflight, <code>menhir console</code> is the interactive shell. Installing pulls two first-party dependencies from GitHub, so <code>git</code> has to be on your PATH.</p>
+
+  <div class="callout">
+    <strong>Open auth is loopback-only.</strong> With no bearer key configured, the server refuses to bind to <code>0.0.0.0</code>, <code>::</code>, or any LAN address. Four key tiers &mdash; readonly, agent, operator, and the general API key &mdash; decide which tools a client can reach. The remote no-auth override exists, and it is meant for isolated lab networks and nothing else.
+  </div>
+
+  <h4 class="subhead">Or run the whole thing in Docker</h4>
+  <div class="quickstart"><span class="prompt">$</span> <span class="cmd">cp deploy/.env.deploy.example deploy/.env.deploy</span>
+<span class="prompt">$</span> <span class="cmd">docker compose -f deploy/docker-compose.full.yml up -d --build</span>
+<span class="prompt">$</span> <span class="cmd">curl -fsS http://127.0.0.1:8099/api/health</span></div>
+  <p class="install-note">Two things to know before picking this over a local install. The code graph records absolute paths as it scans, so a containerized server indexes container paths while your client reports host paths &mdash; <code>file_context</code> and <code>blast_radius</code> only line up if you mount your code at an identical path. And a local LLM on the host is not at <code>127.0.0.1</code> from inside the container, so point <code>LOCAL_LLM_BASE_URL</code> at <code>host.docker.internal</code>.</p>
+
+  <h4 class="subhead">archolith-skree installs today too</h4>
+  <p class="install-tile__copy" style="max-width:640px;">The MCP audit plugin is a one-command install and measures where your context budget is actually going.</p>
   <div class="install-grid">
     <div class="install-tile">
       <div class="install-tile__head">
@@ -1439,16 +1792,30 @@ ul { list-style: none; }
 </section>
 
 <!-- ============================================================
-     QUICKSTART
+     STACK
      ============================================================ -->
-<section class="sec" id="quickstart" style="display:none">
-  <span class="sec__num">06 &middot; Run it</span>
-  <h3 class="sec__title">Five lines to running.</h3>
-  <div class="quickstart"><span class="prompt">$</span> <span class="cmd">docker run -d -p 7687:7687 -e NEO4J_AUTH=neo4j/password neo4j:5</span>
-<span class="prompt">$</span> <span class="cmd">pip install -e ".[dev]"</span>
-<span class="prompt">$</span> <span class="cmd">cp .env.example .env</span>                         <span class="comment"># Neo4j + LLM backend settings</span>
-<span class="prompt">$</span> <span class="cmd">python -m menhir</span>                             <span class="comment"># MCP server over stdio</span>
-<span class="prompt">$</span> <span class="cmd">menhir serve</span>                                 <span class="comment"># graph explorer on :8090</span></div>
+<section class="sec" id="stack">
+  <span class="sec__num">09 &middot; Stack</span>
+  <h3 class="sec__title">What it runs on.</h3>
+  <div class="table-wrap">
+    <table class="gtable">
+      <thead>
+        <tr><th>Component</th><th>Technology</th></tr>
+      </thead>
+      <tbody>
+        <tr><td class="key">Language</td><td>Python 3.12+</td></tr>
+        <tr><td class="key">Graph database</td><td>Neo4j 5</td></tr>
+        <tr><td class="key">Graph memory framework</td><td>graphiti-core 0.29+</td></tr>
+        <tr><td class="key">LLM backends</td><td>Local llama.cpp (OpenAI-compatible), OpenAI, Gemini</td></tr>
+        <tr><td class="key">Embeddings</td><td>Local or OpenAI, configurable</td></tr>
+        <tr><td class="key">Protocol</td><td>Model Context Protocol over HTTP at /mcp-http</td></tr>
+        <tr><td class="key">Observability</td><td>SQLite sidecar, optional Langfuse tracing</td></tr>
+        <tr><td class="key">Visualization</td><td>FastAPI explorer with Cytoscape.js, mounted at /explorer</td></tr>
+        <tr><td class="key">License</td><td>Apache-2.0</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p class="life__note">The offline suite runs with <code>pytest</code>. Live tests need Neo4j and an LLM, run unscoped destructive queries, and point at a throwaway instance on purpose.</p>
 </section>
 
 </main>
@@ -1459,12 +1826,12 @@ ul { list-style: none; }
 <footer class="footer">
   <div>
     <div class="footer__brand">ARCHOLITH</div>
-    <p class="footer__tagline">Self-hosted graph memory for AI agents. Recall across sessions. Know the code graph. Forget what stopped mattering.</p>
+    <p class="footer__tagline">Self-hosted graph memory for AI agents. Recall carries across sessions, the code graph comes along with it, and what stopped mattering gets forgotten.</p>
   </div>
   <div>
     <h5>Products</h5>
     <ul>
-      <li>menhir <span style="color:var(--ink-mute)">&middot; launch</span></li>
+      <li><a href="https://github.com/Archolith/menhir">menhir</a> <span style="color:var(--ink-mute)">&middot; launch</span></li>
       <li><a href="https://github.com/Archolith/archolith-filter">archolith-filter</a></li>
       <li><a href="https://github.com/Archolith/archolith-mcp-audit">archolith-skree</a></li>
       <li><a href="https://github.com/ctharvey/archolith-bench">archolith-peira</a></li>
@@ -1474,20 +1841,21 @@ ul { list-style: none; }
   <div>
     <h5>Docs</h5>
     <ul>
-      <li><a href="#system">Architecture</a></li>
-      <li><a href="#mechanism">How recall works</a></li>
-      <li><a href="#install">Install archolith-skree</a></li>
-      <li>menhir setup <span style="color:var(--ink-mute)">&middot; soon</span></li>
+      <li><a href="#mechanism">How a memory moves</a></li>
+      <li><a href="#ranking">Ranking and presets</a></li>
+      <li><a href="#tools">MCP tool surface</a></li>
+      <li><a href="#install">Install menhir</a></li>
+      <li><a href="#stack">Stack</a></li>
     </ul>
   </div>
   <div>
     <h5>Source</h5>
     <ul>
       <li><a href="https://github.com/Archolith">GitHub</a></li>
-      <li>Changelog</li>
-      <li>Issues</li>
+      <li><a href="https://github.com/Archolith/menhir/issues">Issues</a></li>
       <li><a href="privacy.html">Privacy</a></li>
-      <li><a href="https://polyformproject.org/licenses/noncommercial/1.0.0">PolyForm NC 1.0.0</a></li>
+      <li>menhir &middot; <a href="https://www.apache.org/licenses/LICENSE-2.0">Apache-2.0</a></li>
+      <li>this site &middot; <a href="https://polyformproject.org/licenses/noncommercial/1.0.0">PolyForm NC</a></li>
     </ul>
   </div>
 </footer>
@@ -1495,10 +1863,10 @@ ul { list-style: none; }
 <!-- ============================================================
      SCRIPTS
      ============================================================ -->
-<script defer src="hero/sliceDefinitions.js?v=20260720a"></script>
-<script defer src="hero/StrataSlice.js?v=20260720a"></script>
-<script defer src="hero/StrataField.js?v=20260720a"></script>
-<script defer src="hero/ArcholithHero.js?v=20260720a"></script>
+<script defer src="hero/sliceDefinitions.js?v=20260810a"></script>
+<script defer src="hero/StrataSlice.js?v=20260810a"></script>
+<script defer src="hero/StrataField.js?v=20260810a"></script>
+<script defer src="hero/ArcholithHero.js?v=20260810a"></script>
 <script>
 document.addEventListener("DOMContentLoaded", function() {
   /* Hero */

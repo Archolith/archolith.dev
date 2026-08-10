@@ -27,6 +27,27 @@ One hero layer per product, same order in the architecture stack.
 | archolith-peira | L3 — Bench | Active |
 | archolith-context | L4 — Proxy | Coming / research direction |
 
+## Content Sync
+
+Body copy for sections 01-09 mirrors [`menhir/README.md`](https://github.com/Archolith/menhir#readme).
+When that README changes materially, update the site in the same pass so the two stay
+aligned. Figures on the page are verified against the menhir repo rather than copied from
+prose: tool count from `menhir.mcp.tools.ALL_TOOLS`, resources from
+`menhir.mcp.resources.RESOURCE_TYPES`, preset weights from `domain/recall.py`, and the test
+figure from `pytest --collect-only`.
+
+## Install menhir
+
+menhir is public and self-hosted. The site shows the working path:
+
+```bash
+git clone https://github.com/Archolith/menhir.git
+cd menhir && pip install -e .
+cp .env.example .env
+docker compose up -d
+menhir serve
+```
+
 ## Install archolith-skree
 
 The public site links to the one-command audit plugin installer:
@@ -69,6 +90,8 @@ Current local Lighthouse baseline is documented in [.agent/architecture.md](.age
 
 ## License
 
-Source-available under the PolyForm Noncommercial License 1.0.0.
+This site is source-available under the PolyForm Noncommercial License 1.0.0. Product
+licenses differ: menhir and archolith-skree are Apache-2.0; archolith-filter,
+archolith-peira, and archolith-context are PolyForm Noncommercial 1.0.0.
 
 archolith&trade; is a trademark of Charles Harvey.

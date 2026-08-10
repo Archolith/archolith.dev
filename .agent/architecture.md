@@ -144,13 +144,24 @@ Three typography presets toggled via `data-type` attribute on `<body>`:
 The public body content is wrapped in `<main id="main" tabindex="-1">`, with a keyboard-visible skip link before the fixed nav.
 
 1. **Hero** — Scroll-excavation strata animation
-2. **Problem** — "The broken model" — cold-start memory loss stats
-3. **Mechanism** — 5-step memory pipeline (ingest → extract → anchor → recall → lifecycle)
-4. **Architecture** — 5-slab product stack (menhir, filter, skree, peira, context) mirroring the hero order
-5. **Demo** — Side-by-side recall comparison (cold start vs. menhir); illustrative, not benchmarked
-6. **Install** — Visible archolith-skree one-command installer copy for Claude, Codex, and OpenCode
-7. **Quickstart** — Hidden via `display:none` (pre-launch)
-8. **Footer** — Links point to current Archolith org/repo/license/privacy targets; `archolith-peira` remains provisional until an org-owned repo exists
+2. **01 Problem** — "The broken model" — cold-start memory loss stats
+3. **02 Mechanism** — 5-step memory pipeline (ingest → extract → anchor → recall → lifecycle)
+4. **03 Lifecycle** — Session / Active / Compressed / Gone state cells, mirroring the README lifecycle diagram
+5. **04 Ranking** — Scoring formula, the four signals beyond similarity, and the five preset weightings
+6. **05 Architecture** — 5-slab product stack (menhir, filter, skree, peira, context) mirroring the hero order
+7. **06 Demo** — Side-by-side recall comparison (cold start vs. menhir); illustrative, not benchmarked
+8. **07 Surface** — Six-group MCP tool catalog (ingestion, recall, code graph, conflicts, operations, retention)
+9. **08 Install** — menhir clone/run + MCP client registration, Docker path with its two caveats, loopback-auth callout, then the archolith-skree one-command installers
+10. **09 Stack** — Component/technology table mirroring the README stack table
+11. **Footer** — Links point to current Archolith org/repo/license/privacy targets
+
+Content in sections 01–09 is kept in sync with `menhir/README.md`. When that README
+changes materially, mirror it here rather than letting the two drift.
+
+Numbers on the site are verified against the menhir repo, not copied from prose:
+tool count from `menhir.mcp.tools.ALL_TOOLS`, resource count from
+`menhir.mcp.resources.RESOURCE_TYPES`, preset weights from `domain/recall.py`
+`PRESET_WEIGHTS`, and the test figure from `pytest --collect-only`.
 
 ## Deployment
 

@@ -1,5 +1,40 @@
 # Changelog — archolith.dev
 
+## 2026-08-10 — Mirror the menhir README onto the site
+
+menhir went public (Apache-2.0, `github.com/Archolith/menhir`), and its README was rewritten
+to cover lifecycle, scoring, the tool surface, install, and the stack. The site was still
+carrying pre-launch copy that said the install path did not exist yet, plus two stale
+figures. Brought the page in line with the README.
+
+- `index.html` — Added three sections: **03 Lifecycle** (Session/Active/Compressed/Gone),
+  **04 Ranking** (scoring formula, the four signals, the five preset weightings), and
+  **09 Stack** (component/technology table). Added **07 Surface**, a six-group MCP tool
+  catalog. Rewrote **08 Install** around the real menhir clone/run path, MCP client
+  registration, the Docker option with its two path/LLM caveats, and a loopback-auth
+  callout; the archolith-skree installers moved under a subhead there. Removed the hidden
+  pre-launch quickstart section, whose commands (`python -m menhir`, `:8090`) no longer
+  match the CLI. Renumbered every section and updated nav and footer to match.
+- `index.html` — Corrected two stats: MCP tools 43 → 52, tests 900+ → 5,900+. Both were
+  verified against the repo (`ALL_TOOLS`, `pytest --collect-only` reports 5964), not
+  estimated. Footer now distinguishes the menhir Apache-2.0 license from the site's
+  PolyForm NC.
+- `hero/ArcholithHero.js` — Crumb changed from "Source-available · PolyForm NC ·
+  Self-hosted" to "Apache-2.0 · Self-hosted · Neo4j + MCP", since the lead product is
+  Apache-2.0 and the old crumb misdescribed it. Source and CTA links now point at the
+  menhir repo rather than the org root.
+- `hero/sliceDefinitions.js` — menhir detail copy refreshed to match the README, including
+  the fourth recall signal (conflict).
+- Hero asset `?v=` bumped to `20260810a`.
+- `.agent/architecture.md` — Content-section list rewritten for the new structure, with a
+  note that sections 01-09 track the menhir README and where each figure is verified.
+- Upstream: fixed `menhir/README.md`, which had 43 tools in its architecture block against
+  a runtime registry of 52.
+
+Not verified: mobile rendering. Desktop at 1366px has no horizontal overflow and the tag
+tree is balanced, but the 900px and 560px breakpoints for `.life`, `.tools`, `.gtable`, and
+`.install-split` were written to match existing patterns and not opened in a browser.
+
 ## 2026-07-20 — First scripted deploy; webroot cleanup
 
 Deployed commit `4b07a19` to the VPS. Origin had been serving a **June 3** build — the

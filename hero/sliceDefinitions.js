@@ -11,7 +11,7 @@
             depth: "02m",
             measure: "launch",
             summary: "Graph memory agents can actually recall from.",
-            detail: "Long-term memory on Neo4j and Graphiti, served over MCP. Recall re-ranks on graph adjacency, recency, and prominence, not similarity alone. Indexes your code graph for blast radius and structure-aware retrieval, and compresses, decays, and flags contradictions on its own.",
+            detail: "Long-term memory on Neo4j and Graphiti, served over MCP. Recall re-ranks candidates on graph adjacency, recency, prominence, and unresolved conflict, not similarity alone. It indexes your code graph for blast radius and structure-aware retrieval, then compresses, decays, and flags contradictions without being asked. 52 tools, 9 resources, Apache-2.0.",
             note: "menhir / graph memory"
         },
         {
