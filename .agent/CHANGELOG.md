@@ -31,6 +31,10 @@ figures. Brought the page in line with the README.
 - Upstream: fixed `menhir/README.md`, which had 43 tools in its architecture block against
   a runtime registry of 52.
 
+Deployed `d67c73d` to the VPS. Prune removed 0 stale files, permissions normalised,
+and the live page serves all four new section ids, the bumped `?v=20260810a` hero assets,
+and the corrected figures. Cloudflare served the new assets without a manual purge.
+
 Not verified: mobile rendering. Desktop at 1366px has no horizontal overflow and the tag
 tree is balanced, but the 900px and 560px breakpoints for `.life`, `.tools`, `.gtable`, and
 `.install-split` were written to match existing patterns and not opened in a browser.
