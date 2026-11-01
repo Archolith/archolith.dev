@@ -1,5 +1,13 @@
 # Changelog — archolith.dev
 
+## 2026-11-01 — Fit the hero card above the fold
+
+- `hero/` — The layer card now ends above the fold at 1440x900, so the typed state caveat is
+  visible. Merged the crumb into the kicker, moved the measure into the card header, and cut
+  each layer description to about two lines. The full text stays in the system section. Hero
+  cache key bumped to `20261101b`.
+- `AGENTS.md`, `logos/README.md`, `.agent/` — Record S5 as the mark in use, matching the site.
+
 ## 2026-11-01 — Correct menhir copy for 0.3.0
 
 Accuracy pass against menhir 0.3.0. Deploy only after 0.3.0 is on PyPI, because the page now

@@ -38,7 +38,7 @@ No build step, no framework, no dependencies. Just HTML, CSS, and vanilla JavaSc
 - This is a **static marketing site** — single `index.html` with hand-written CSS and vanilla JS.
 - Deployment target: Caddy `file_server` on the VPS, behind Cloudflare proxy. Do not commit the origin IP; `scripts/deploy.ps1` reads it from `ARCHOLITH_VPS_HOST`.
 - The hero animation (`hero/`) is the signature visual — scroll-excavation strata bands.
-- Logo candidates are ranked in `logos/README.md`. Primary mark is K8 (dropping keystone).
+- Logo candidates are ranked in `logos/README.md`. The site's mark is S5 (`05-strata-column.svg`), shown in the nav and hero.
 - The site covers `menhir` only. Other Archolith projects stay off it until they are ready.
 - Cloudflare caches JS/CSS aggressively. Purge CF cache or wait for revalidation after deploys.
 - No server-side state. No database. No API. Everything is client-side DOM and CSS toggles.

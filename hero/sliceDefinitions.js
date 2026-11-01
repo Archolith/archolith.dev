@@ -11,8 +11,7 @@
             depth: "02m",
             measure: "menhir v0.3.0",
             summary: "Long-term memory that keeps its sources.",
-            detail: "Built on Neo4j and Graphiti, served over MCP. add_memory queues an episode and returns, then a background worker extracts entities and relationships and records scope and provenance. 62 tools, 9 resources, Apache-2.0.",
-            note: "menhir / memory"
+            detail: "Built on Neo4j and Graphiti, served over MCP. A background worker extracts entities, relationships and provenance."
         },
         {
             id: "state",
@@ -22,8 +21,7 @@
             depth: "09m",
             measure: "current + history",
             summary: "Current values, rebuilt from what was said.",
-            detail: "Statements become typed assertions with a source span. A deterministic fold rebuilds the current value through later changes and corrections. Some kinds are not checked against the source yet, so a value can be misread.",
-            note: "menhir / typed state"
+            detail: "A deterministic fold tracks changes and corrections. Some kinds are not checked against the source yet, so a value can be misread."
         },
         {
             id: "recall",
@@ -33,8 +31,7 @@
             depth: "17m",
             measure: "up to 4 graph signals",
             summary: "Similarity finds the candidates. The graph decides the order.",
-            detail: "Hybrid BM25 and vector search supplies candidates. menhir reranks them on graph adjacency, recency, prominence and, when asked, unresolved conflict. Five presets shift the weights.",
-            note: "menhir / recall"
+            detail: "Hybrid BM25 and vector search supplies candidates. menhir reranks on signals like graph adjacency and recency."
         },
         {
             id: "codegraph",
@@ -44,8 +41,7 @@
             depth: "25m",
             measure: "blast radius",
             summary: "Recall that knows your code.",
-            detail: "Index a project with ingest_project, then ask what a change touches. Pass file_context to a recall and memories anchored to that file join the candidates, even when the query wording misses them.",
-            note: "menhir / code graph"
+            detail: "Index a project, then ask what a change touches. Pass file_context and memories anchored to that file join the candidates."
         },
         {
             id: "provenance",
@@ -55,8 +51,7 @@
             depth: "33m",
             measure: "get_provenance",
             summary: "Check where a fact came from.",
-            detail: "get_provenance expands a memory or derived value into its source episodes, any attached evidence and its code anchors. Candidates wait for human approval, and superseded memories drop out of current recall by default.",
-            note: "menhir / provenance"
+            detail: "get_provenance expands a memory or derived value into its source episodes, evidence and code anchors."
         }
     ];
 
