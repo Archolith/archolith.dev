@@ -7,6 +7,8 @@
   each layer description to about two lines. The full text stays in the system section. Hero
   cache key bumped to `20261101b`.
 - `AGENTS.md`, `logos/README.md`, `.agent/` — Record S5 as the mark in use, matching the site.
+- `index.html` — Removed `.subhead:first-of-type`, which left the Ranking subheading flush against
+  the table above it, and the inline margin that worked around it on Known limitations.
 
 ## 2026-11-01 — Correct menhir copy for 0.3.0
 
