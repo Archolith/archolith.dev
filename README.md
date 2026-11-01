@@ -21,7 +21,7 @@ One hero layer per product, same order in the architecture stack.
 
 | Product | Layer | Status |
 |---------|-------|--------|
-| menhir | L0 — Memory | **Launch** |
+| menhir | L0 — Memory | **v0.3.0** |
 | archolith-filter | L1 — Filter | Alpha |
 | archolith-skree | L2 — Audit | Beta install path |
 | archolith-peira | L3 — Bench | Active |
@@ -29,23 +29,20 @@ One hero layer per product, same order in the architecture stack.
 
 ## Content Sync
 
-Body copy for sections 01-09 mirrors [`menhir/README.md`](https://github.com/Archolith/menhir#readme).
-When that README changes materially, update the site in the same pass so the two stay
-aligned. Figures on the page are verified against the menhir repo rather than copied from
-prose: tool count from `menhir.mcp.tools.ALL_TOOLS`, resources from
-`menhir.mcp.resources.RESOURCE_TYPES`, preset weights from `domain/recall.py`, and the test
-figure from `pytest --collect-only`.
+Body copy for sections 01-09 is written from [`menhir/README.md`](https://github.com/Archolith/menhir#readme),
+last checked against menhir 0.3.0. When that README changes materially, update the site in
+the same pass so the two stay aligned. Figures on the page are verified against the menhir
+repo rather than copied from prose: tool count from the tool lists in `menhir.mcp.tools`
+(62 in 0.3.0), resources from `menhir.mcp.resources.RESOURCE_TYPES`, and preset weights from
+`domain/recall.py`.
 
 ## Install menhir
 
 menhir is public and self-hosted. The site shows the working path:
 
 ```bash
-git clone https://github.com/Archolith/menhir.git
-cd menhir && pip install -e .
-cp .env.example .env
-docker compose up -d
-menhir serve
+python -m pip install archolith-menhir
+menhir up --compose-neo4j --provider openai
 ```
 
 ## Install archolith-skree
@@ -71,7 +68,7 @@ The installer keeps runtime dependencies in managed venvs under `~/.archolith/ve
 
 ## Deploy
 
-Files are served from the yawn VPS via Caddy `file_server`. See [.agent/architecture.md](.agent/architecture.md) → Deployment for full details.
+Files are served from the VPS via Caddy `file_server`. See [.agent/architecture.md](.agent/architecture.md) → Deployment for full details.
 
 Deploy is git-first by default: commit the site change, push it, then copy the static payload.
 

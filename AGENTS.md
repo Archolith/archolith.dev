@@ -27,7 +27,7 @@ No build step, no framework, no dependencies. Just HTML, CSS, and vanilla JavaSc
 
 ## Code Style
 
-- 4 spaces indent for JS/CSS/HTML
+- 4 spaces indent for JS and `hero/` CSS; 2 spaces for HTML and the inline CSS in `index.html`
 - CSS custom properties in `:root` for design tokens
 - Vanilla JS only — no frameworks
 - Self-hosted fonts in `fonts/` with `Cache-Control: immutable`
@@ -39,7 +39,6 @@ No build step, no framework, no dependencies. Just HTML, CSS, and vanilla JavaSc
 - Deployment target: Caddy `file_server` on VPS (147.93.132.141), behind Cloudflare proxy.
 - The hero animation (`hero/`) is the signature visual — scroll-excavation strata bands.
 - Logo candidates are ranked in `logos/README.md`. Primary mark is K8 (dropping keystone).
-- Pre-launch state: all outbound links neutralized to `href="#"`, quickstart hidden.
 - Launch copy must label `archolith-context` experimental and use `menhir` for durable memory references.
 - Cloudflare caches JS/CSS aggressively. Purge CF cache or wait for revalidation after deploys.
 - No server-side state. No database. No API. Everything is client-side DOM and CSS toggles.

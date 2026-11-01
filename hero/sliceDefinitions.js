@@ -9,9 +9,9 @@
             name: "menhir",
             accent: "#82729e",
             depth: "02m",
-            measure: "launch",
+            measure: "v0.3.0",
             summary: "Graph memory agents can actually recall from.",
-            detail: "Long-term memory on Neo4j and Graphiti, served over MCP. Recall re-ranks candidates on graph adjacency, recency, prominence, and unresolved conflict, not similarity alone. It indexes your code graph for blast radius and structure-aware retrieval, then compresses, decays, and flags contradictions without being asked. 52 tools, 9 resources, Apache-2.0.",
+            detail: "Long-term memory on Neo4j and Graphiti, served over MCP. Recall re-ranks candidates on graph adjacency, recency, prominence, and unresolved conflict, not similarity alone. It indexes your code graph for blast radius and structure-aware retrieval, then compresses inactive memories and flags contradictions. 62 tools, 9 resources, Apache-2.0.",
             note: "menhir / graph memory"
         },
         {
@@ -43,8 +43,8 @@
             accent: "#a28670",
             depth: "25m",
             measure: "reproducible runs",
-            summary: "Every headline number has a source.",
-            detail: "Reproducible benchmark suite for recall quality, filter compression, and audit waste reduction. Scenario runner, corpus compression, and stack comparison arms. Public claims stay tied to tracked evidence artifacts.",
+            summary: "Benchmarks you can rerun.",
+            detail: "Reproducible benchmark suite for recall quality, filter compression, and audit waste reduction. Scenario runner, corpus compression, and stack comparison arms.",
             note: "archolith-peira / benchmark suite"
         },
         {
