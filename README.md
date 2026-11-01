@@ -1,6 +1,6 @@
 # archolith.dev
 
-Homepage for [**menhir**](https://github.com/Archolith/menhir), self-hosted graph memory for AI agents from [archolith&trade;](https://github.com/Archolith). A single-page static HTML site with a signature scroll-excavation hero animation.
+Homepage for [**menhir**](https://github.com/Archolith/menhir), self-hosted agent memory that shows its sources, from [archolith&trade;](https://github.com/Archolith). A single-page static HTML site with a signature scroll-excavation hero animation.
 
 ## Quick Start
 
@@ -19,7 +19,8 @@ No build step. No framework. No dependencies.
 
 The site covers menhir only (v0.3.0). Other Archolith projects stay off it until they are
 ready. The hero and the system section show the same five menhir layers in the same order:
-memory, recall, code graph, governance, lifecycle.
+memory, typed state, recall, code graph, provenance. Copy says you can check a value, never
+that it is verified, because some scalar kinds are not checked against the source yet.
 
 ## Content Sync
 

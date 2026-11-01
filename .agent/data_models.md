@@ -31,7 +31,7 @@ Defines the geological strata layers used in the scroll-excavation hero. **One s
 `.strata-slice[data-slice-key="<id>"] .strata-slice__plate`. Renaming a slice `id`
 silently drops its texture unless the matching CSS selector is renamed too. The
 textures are authored per accent color, so keep `id` ↔ `accent` ↔ selector aligned.
-Current ids: `memory`, `recall`, `codegraph`, `governance`, `lifecycle` — five slices, five selectors,
+Current ids: `memory`, `state`, `recall`, `codegraph`, `provenance` — five slices, five selectors,
 no orphans on either side.
 
 ## CSS Custom Properties

@@ -3,8 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>menhir by Archolith &mdash; Self-hosted graph memory for AI agents</title>
-<meta name="description" content="menhir is a self-hosted graph memory system for AI agents. Recall across sessions, structure-aware retrieval, compression of inactive memories and conflict detection. Served over MCP.">
+<title>menhir by Archolith &mdash; Self-hosted agent memory that shows its sources</title>
+<meta name="description" content="menhir is self-hosted agent memory that shows its sources. Recall across sessions, facts you can trace, typed current values and a code graph. Served over MCP.">
 <link rel="icon" type="image/svg+xml" href="favicon.svg">
 <link rel="icon" href="favicon.ico" sizes="any">
 <link rel="preload" as="style" href="fonts/fonts.css" onload="this.onload=null;this.rel='stylesheet'">
@@ -1531,8 +1531,24 @@ ul { list-style: none; }
         <ul>
           <li>Cross-session entity graph</li>
           <li>Non-blocking ingest</li>
-          <li>Scope + provenance</li>
-          <li>Namespaces</li>
+          <li>Scope + namespaces</li>
+          <li>Compression + conflict flags</li>
+        </ul>
+      </div>
+    </div>
+    <div class="slab">
+      <div class="slab__id">
+        typed state
+        <span class="slab__name">The current value</span>
+      </div>
+      <div class="slab__body">Prose summaries blur what changed and when. menhir turns statements into typed assertions with a source span, then a deterministic fold rebuilds the current value through later changes and corrections. Some kinds, such as durations and statuses, are the model's reading and are not checked against the source yet; see <a href="#limitations">known limitations</a>.</div>
+      <div class="slab__io">
+        <div class="slab__io-label">Owns</div>
+        <ul>
+          <li>Immutable typed assertions</li>
+          <li>Deterministic fold</li>
+          <li>Current + history views</li>
+          <li>Counting</li>
         </ul>
       </div>
     </div>
@@ -1570,33 +1586,17 @@ ul { list-style: none; }
     </div>
     <div class="slab">
       <div class="slab__id">
-        governance
-        <span class="slab__name">The trust rules</span>
+        provenance
+        <span class="slab__name">The receipts</span>
       </div>
-      <div class="slab__body">Stored text is not treated as equally authoritative. Candidates wait for human approval, promoted memory is operator-designated, and you can check where a recalled fact came from.</div>
+      <div class="slab__body"><code>get_provenance</code> expands a memory or derived value into its source episodes, any attached evidence and its code anchors. Stored text is not treated as equally authoritative: candidates wait for human approval, promoted memory is operator-designated, and superseded memories drop out of current recall by default.</div>
       <div class="slab__io">
         <div class="slab__io-label">Owns</div>
         <ul>
+          <li>get_provenance</li>
           <li>Candidate review</li>
           <li>Promotion</li>
-          <li>get_provenance</li>
           <li>Supersession</li>
-        </ul>
-      </div>
-    </div>
-    <div class="slab">
-      <div class="slab__id">
-        lifecycle
-        <span class="slab__name">The upkeep</span>
-      </div>
-      <div class="slab__body">Daily maintenance consolidates memory and compresses what has gone inactive. Contradictions get flagged, and deleting a memory stays a manual decision.</div>
-      <div class="slab__io">
-        <div class="slab__io-label">Owns</div>
-        <ul>
-          <li>Consolidation</li>
-          <li>Compression + rehydration</li>
-          <li>Conflict flags</li>
-          <li>Manual deletion</li>
         </ul>
       </div>
     </div>
@@ -1810,7 +1810,7 @@ ul { list-style: none; }
 <footer class="footer">
   <div>
     <div class="footer__brand">ARCHOLITH</div>
-    <p class="footer__tagline">Self-hosted graph memory for AI agents. Recall carries across sessions, the code graph comes along with it, and what goes inactive gets compressed.</p>
+    <p class="footer__tagline">Self-hosted agent memory that shows its sources. Recall carries across sessions, the code graph comes along with it, and what goes inactive gets compressed.</p>
   </div>
   <div>
     <h5>menhir</h5>

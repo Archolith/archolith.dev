@@ -658,7 +658,7 @@
 }
 
 
-.strata-slice[data-slice-key="lifecycle"] .strata-slice__plate {
+.strata-slice[data-slice-key="state"] .strata-slice__plate {
     background:
         linear-gradient(90deg, rgba(86, 168, 232, 0.08) 0 1px, transparent 1px 40px),
         linear-gradient(180deg, rgba(86, 168, 232, 0.08) 0 1px, transparent 1px 42px),
@@ -689,7 +689,7 @@
 }
 
 
-.strata-slice[data-slice-key="governance"] .strata-slice__plate {
+.strata-slice[data-slice-key="provenance"] .strata-slice__plate {
     background:
         linear-gradient(90deg, rgba(162, 134, 112, 0.09) 0 1px, transparent 1px 54px),
         linear-gradient(180deg, rgba(162, 134, 112, 0.09) 0 1px, transparent 1px 32px),

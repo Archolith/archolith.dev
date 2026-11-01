@@ -2,12 +2,12 @@
 
 ## Overview
 
-archolith.dev is the homepage for **menhir**, self-hosted graph memory for AI agents from Archolith. The site is a single-page static HTML file with vanilla JavaScript components. No build system, no framework, no server-side rendering.
+archolith.dev is the homepage for **menhir**, self-hosted agent memory that shows its sources, from Archolith. The site is a single-page static HTML file with vanilla JavaScript components. No build system, no framework, no server-side rendering.
 
 The site covers menhir only. Other Archolith projects stay off it until they are ready.
 
 The hero and the system section both show **one layer per part of menhir**, in the same order:
-memory, recall, code graph, governance, lifecycle.
+memory, typed state, recall, code graph, provenance. Section 03 covers lifecycle.
 
 The hero section features an interactive scroll-excavation animation built with vanilla JS that reveals geological strata layers as the user scrolls, each representing a menhir layer.
 
@@ -141,7 +141,7 @@ The public body content is wrapped in `<main id="main" tabindex="-1">`, with a k
 3. **02 Mechanism** — 5-step memory pipeline (ingest → extract → anchor → recall → lifecycle)
 4. **03 Lifecycle** — Session / Active / Compressed / Deleted state cells; automatic expiry is off, deletion is manual
 5. **04 Ranking** — Scoring formula, up to four signals beyond similarity, and the five preset weightings
-6. **05 System** — 5-slab menhir stack (memory, recall, code graph, governance, lifecycle) mirroring the hero order
+6. **05 System** — 5-slab menhir stack (memory, typed state, recall, code graph, provenance) mirroring the hero order
 7. **06 Demo** — Side-by-side recall comparison (cold start vs. menhir); illustrative, not benchmarked
 8. **07 Surface** — Six-group MCP tool catalog (ingestion, recall, code graph, conflicts, operations, retention)
 9. **08 Install** — PyPI install + `menhir up`, stdio client registration, loopback-auth callout, known limitations table, then the Docker test stack with its two caveats

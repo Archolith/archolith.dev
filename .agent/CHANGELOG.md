@@ -13,7 +13,9 @@ leads with `pip install archolith-menhir`.
 - `README.md`, `AGENTS.md` — Install path, content-sync method, indent rule, stale pre-launch line.
 - Site now covers menhir only: removed archolith-filter, skree, peira and context from the
   page, hero, footer and docs. The hero and system section keep five layers, now menhir's own
-  (memory, recall, code graph, governance, lifecycle); slice ids and CSS selectors renamed to match.
+  (memory, typed state, recall, code graph, provenance); slice ids and CSS selectors renamed to match.
+- Repositioned the headline from "graph memory" to "agent memory that shows its sources". Copy
+  says a value can be checked, not that it is verified, because of menhir#169.
 - Removed the origin IP from the repo's current files. `scripts/deploy.ps1` now reads
   `ARCHOLITH_VPS_HOST` or `-RemoteHost` and stops if neither is set. The IP remains in git history.
 
