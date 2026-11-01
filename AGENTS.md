@@ -39,6 +39,6 @@ No build step, no framework, no dependencies. Just HTML, CSS, and vanilla JavaSc
 - Deployment target: Caddy `file_server` on VPS (147.93.132.141), behind Cloudflare proxy.
 - The hero animation (`hero/`) is the signature visual — scroll-excavation strata bands.
 - Logo candidates are ranked in `logos/README.md`. Primary mark is K8 (dropping keystone).
-- Launch copy must label `archolith-context` experimental and use `menhir` for durable memory references.
+- The site covers `menhir` only. Other Archolith projects stay off it until they are ready.
 - Cloudflare caches JS/CSS aggressively. Purge CF cache or wait for revalidation after deploys.
 - No server-side state. No database. No API. Everything is client-side DOM and CSS toggles.

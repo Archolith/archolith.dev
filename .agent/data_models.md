@@ -16,7 +16,7 @@ var logos = {
 
 ## Slice Definitions (`hero/sliceDefinitions.js`)
 
-Defines the geological strata layers used in the scroll-excavation hero. **One slice per product**, ordered shallow → deep. Slices map to products, never to sub-components of a single product. Each slice has:
+Defines the geological strata layers used in the scroll-excavation hero. **One slice per menhir layer**, ordered shallow → deep. Each slice has:
 - `id` — unique identifier; emitted as `data-slice-key` by `StrataSlice.js`
 - `layerId` — display label (`L0`–`L5`) shown in ticks, readout, and layer card
 - `name` — display name
@@ -25,13 +25,13 @@ Defines the geological strata layers used in the scroll-excavation hero. **One s
 - `measure` — right-aligned metric annotation
 - `summary` — one-line hook shown on the active layer card
 - `detail` — longer description shown on the active layer card
-- `note` — product attribution line (e.g. `menhir / graph memory`)
+- `note` — attribution line (e.g. `menhir / memory`)
 
 **Coupling to watch:** `archolith-hero.css` defines per-slice plate textures via
 `.strata-slice[data-slice-key="<id>"] .strata-slice__plate`. Renaming a slice `id`
 silently drops its texture unless the matching CSS selector is renamed too. The
 textures are authored per accent color, so keep `id` ↔ `accent` ↔ selector aligned.
-Current ids: `menhir`, `filter`, `audit`, `bench`, `proxy` — five slices, five selectors,
+Current ids: `memory`, `recall`, `codegraph`, `governance`, `lifecycle` — five slices, five selectors,
 no orphans on either side.
 
 ## CSS Custom Properties

@@ -649,7 +649,7 @@
     opacity: 0;
 }
 
-.strata-slice[data-slice-key="audit"] .strata-slice__plate {
+.strata-slice[data-slice-key="codegraph"] .strata-slice__plate {
     background:
         repeating-linear-gradient(174deg, transparent 0 18px, rgba(142, 174, 213, 0.08) 18px 19px),
         repeating-linear-gradient(180deg, transparent 0 38px, rgba(142, 174, 213, 0.05) 38px 39px),
@@ -658,7 +658,7 @@
 }
 
 
-.strata-slice[data-slice-key="proxy"] .strata-slice__plate {
+.strata-slice[data-slice-key="lifecycle"] .strata-slice__plate {
     background:
         linear-gradient(90deg, rgba(86, 168, 232, 0.08) 0 1px, transparent 1px 40px),
         linear-gradient(180deg, rgba(86, 168, 232, 0.08) 0 1px, transparent 1px 42px),
@@ -668,7 +668,7 @@
 }
 
 
-.strata-slice[data-slice-key="menhir"] .strata-slice__plate {
+.strata-slice[data-slice-key="memory"] .strata-slice__plate {
     background:
         repeating-linear-gradient(60deg, transparent 0 18px, rgba(130, 114, 158, 0.08) 18px 19px),
         repeating-linear-gradient(-60deg, transparent 0 18px, rgba(130, 114, 158, 0.06) 18px 19px),
@@ -677,7 +677,7 @@
 }
 
 
-.strata-slice[data-slice-key="filter"] .strata-slice__plate {
+.strata-slice[data-slice-key="recall"] .strata-slice__plate {
     background:
         radial-gradient(circle at 10% 30%, rgba(194, 155, 88, 0.14) 0 1.2px, transparent 1.4px),
         radial-gradient(circle at 24% 68%, rgba(194, 155, 88, 0.12) 0 1.2px, transparent 1.4px),
@@ -689,7 +689,7 @@
 }
 
 
-.strata-slice[data-slice-key="bench"] .strata-slice__plate {
+.strata-slice[data-slice-key="governance"] .strata-slice__plate {
     background:
         linear-gradient(90deg, rgba(162, 134, 112, 0.09) 0 1px, transparent 1px 54px),
         linear-gradient(180deg, rgba(162, 134, 112, 0.09) 0 1px, transparent 1px 32px),

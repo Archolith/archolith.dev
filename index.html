@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Archolith &mdash; Self-hosted graph memory for AI agents</title>
+<title>menhir by Archolith &mdash; Self-hosted graph memory for AI agents</title>
 <meta name="description" content="menhir is a self-hosted graph memory system for AI agents. Recall across sessions, structure-aware retrieval, compression of inactive memories and conflict detection. Served over MCP.">
 <link rel="icon" type="image/svg+xml" href="favicon.svg">
 <link rel="icon" href="favicon.ico" sizes="any">
@@ -1517,90 +1517,86 @@ ul { list-style: none; }
      ============================================================ -->
 <section class="sec" id="system">
   <span class="sec__num">05 &middot; The system</span>
-  <h3 class="sec__title">From long-term memory out to the tooling around it &mdash; every layer has a job.</h3>
+  <h3 class="sec__title">Five layers, one service &mdash; every layer has a job.</h3>
   <div class="stack">
     <div class="slab slab--primary">
       <div class="slab__id">
-        menhir
+        memory
         <span class="slab__badge slab__badge--stable">v0.3.0</span>
-        <span class="slab__name">The memory</span>
+        <span class="slab__name">The store</span>
       </div>
-      <div class="slab__body">Graph-based long-term memory for AI agents, built on Neo4j and Graphiti and served over MCP. Memories are entities with relationships, and those relationships count during retrieval &mdash; a well-connected memory can outrank an isolated note with the same keywords. Index a project and its structure lands in the same database, so recall is code-aware and any file change comes with a blast radius. Memories keep their provenance, so you can check where a recalled fact came from. Apache-2.0, self-hosted, 62 tools and 9 resources.</div>
+      <div class="slab__body">Graph-based long-term memory for AI agents, built on Neo4j and Graphiti and served over MCP. Memories are entities with relationships, and writing one never blocks the agent: extraction happens in the background. Apache-2.0, self-hosted, 62 tools and 9 resources.</div>
       <div class="slab__io">
         <div class="slab__io-label">Owns</div>
         <ul>
           <li>Cross-session entity graph</li>
-          <li>Graph-aware recall scoring</li>
-          <li>Code graph + blast radius</li>
-          <li>Compression, retention, conflicts</li>
+          <li>Non-blocking ingest</li>
+          <li>Scope + provenance</li>
+          <li>Namespaces</li>
         </ul>
       </div>
     </div>
     <div class="slab">
       <div class="slab__id">
-        archolith-filter
-        <span class="slab__badge slab__badge--stable">alpha</span>
-        <span class="slab__name">The filter</span>
+        recall
+        <span class="slab__name">The ranking</span>
       </div>
-      <div class="slab__body">Token Reduction Toolkit &mdash; deterministic output filtering for LLM agent contexts. Layer 0 pre-filter pipeline (secrets, thinking, paths, binary, oversized) plus nine format-switch strategies for diffs, search, file reads, JSON, logs, stack traces, and build output. 50% average savings on real session data.</div>
+      <div class="slab__body">Relationships count during retrieval, so a well-connected memory can outrank an isolated note with the same keywords. Results still depend on what is stored, the provider, and index coverage.</div>
       <div class="slab__io">
         <div class="slab__io-label">Owns</div>
         <ul>
-          <li>Layer 0 pre-filter pipeline</li>
-          <li>Nine format-switch strategies</li>
-          <li>Token estimation + risk presets</li>
-          <li>Cross-turn deduplication</li>
+          <li>Hybrid candidate search</li>
+          <li>Graph-aware reranking</li>
+          <li>Five recall presets</li>
+          <li>file_context candidates</li>
         </ul>
       </div>
     </div>
     <div class="slab">
       <div class="slab__id">
-        archolith-skree
-        <span class="slab__badge slab__badge--stable">alpha</span>
-        <span class="slab__name">The diagnostics</span>
+        code graph
+        <span class="slab__name">The map</span>
       </div>
-      <div class="slab__body">MCP token usage audit system. Measures per-server token cost, detects waste patterns, and produces report cards with concrete optimization suggestions.</div>
+      <div class="slab__body">Index a project and its structure lands in the same database, so recall is code-aware and any file change comes with a blast radius.</div>
       <div class="slab__io">
         <div class="slab__io-label">Owns</div>
         <ul>
-          <li>Server attribution</li>
-          <li>Waste detection (6 types)</li>
-          <li>Report cards</li>
-          <li>CI threshold gates</li>
+          <li>ingest_project</li>
+          <li>Imports, endpoints, symbols</li>
+          <li>Blast radius</li>
+          <li>Affected tests</li>
         </ul>
       </div>
     </div>
-    <div class="slab slab--future">
+    <div class="slab">
       <div class="slab__id">
-        archolith-peira
-        <span class="slab__badge">benchmark</span>
-        <span class="slab__name">The yardstick</span>
+        governance
+        <span class="slab__name">The trust rules</span>
       </div>
-      <div class="slab__body">Reproducible benchmark suite measuring recall quality, filter compression, and MCP waste reduction across multi-turn coding scenarios.</div>
+      <div class="slab__body">Stored text is not treated as equally authoritative. Candidates wait for human approval, promoted memory is operator-designated, and you can check where a recalled fact came from.</div>
       <div class="slab__io">
         <div class="slab__io-label">Owns</div>
         <ul>
-          <li>Recall scenario runner</li>
-          <li>Filter corpus compression</li>
-          <li>Audit before/after</li>
-          <li>Stack comparison arms</li>
+          <li>Candidate review</li>
+          <li>Promotion</li>
+          <li>get_provenance</li>
+          <li>Supersession</li>
         </ul>
       </div>
     </div>
-    <div class="slab slab--future">
+    <div class="slab">
       <div class="slab__id">
-        archolith-context
-        <span class="slab__badge">coming</span>
-        <span class="slab__name">The proxy</span>
+        lifecycle
+        <span class="slab__name">The upkeep</span>
       </div>
-      <div class="slab__body">Research direction for curated context assembly at the request boundary. An OpenAI-compatible proxy would query the memory graph each turn and splice curated context in place of linear replay, with no harness code changes. Still experimental and not part of the launch.</div>
+      <div class="slab__body">Daily maintenance consolidates memory and compresses what has gone inactive. Contradictions get flagged, and deleting a memory stays a manual decision.</div>
       <div class="slab__io">
-        <div class="slab__io-label">Would own</div>
+        <div class="slab__io-label">Owns</div>
         <ul>
-          <li>/v1/chat/completions</li>
-          <li>SSE pass-through</li>
-          <li>Curator assembly</li>
-          <li>Trace API + dashboard</li>
+          <li>Consolidation</li>
+          <li>Compression + rehydration</li>
+          <li>Conflict flags</li>
+          <li>Manual deletion</li>
         </ul>
       </div>
     </div>
@@ -1729,9 +1725,7 @@ ul { list-style: none; }
       <span class="install-split__label">Install and run</span>
       <div class="quickstart"><span class="prompt">$</span> <span class="cmd">python -m pip install archolith-menhir</span>
 <span class="prompt">$</span> <span class="cmd">menhir up --compose-neo4j --provider openai</span>
-<span class="comment"># Docker runs the bundled Neo4j. First run creates ~/.menhir/.env</span>
-<span class="comment"># and asks for your OPENAI_API_KEY. Add it and run the command again.</span>
-<span class="comment"># Then serving on :8100, with the graph at /explorer.</span></div>
+<span class="comment"># add your API key when asked, re-run</span></div>
     </div>
     <div class="install-split__col">
       <span class="install-split__label">Register with your MCP client</span>
@@ -1749,13 +1743,14 @@ ul { list-style: none; }
 }</div>
     </div>
   </div>
+  <p class="install-note">The first run starts the bundled Neo4j in Docker, creates <code>~/.menhir/.env</code> and asks for your <code>OPENAI_API_KEY</code>. Add it and run the command again. menhir then serves on <code>:8100</code>, with the graph at <code>/explorer</code>.</p>
   <p class="install-note">menhir is a long-lived server. It holds the Neo4j pool, the background enrichment queue, and the maintenance scheduler, so you start it once and each client launches a small stdio bridge to it. Use the Python that menhir is installed in, or its absolute path. Requires Python 3.12+. Without Docker, skip <code>--compose-neo4j</code> and point <code>.env</code> at a Neo4j 5.26+ with APOC. <code>menhir check</code> and <code>menhir diagnostics</code> cover preflight, <code>menhir console</code> is the interactive shell. Upgrading from 0.2.3 or earlier? Install into a fresh virtual environment.</p>
 
   <div class="callout">
     <strong>Open auth is loopback-only.</strong> With no bearer key configured, the server refuses to bind to <code>0.0.0.0</code>, <code>::</code>, or any LAN address. Four key tiers &mdash; readonly, agent, operator, and the general API key &mdash; decide which tools a client can reach. The remote no-auth override exists, and it is meant for isolated lab networks and nothing else. Once any key is configured, pass one in the client's <code>env</code>; <code>MENHIR_AGENT_KEY</code> is the tier meant for automated clients.
   </div>
 
-  <h4 class="subhead" id="limitations">Known limitations in 0.3.0</h4>
+  <h4 class="subhead" id="limitations" style="margin-top:40px;">Known limitations in 0.3.0</h4>
   <div class="table-wrap">
     <table class="gtable">
       <thead>
@@ -1778,36 +1773,6 @@ ul { list-style: none; }
 <span class="prompt">$</span> <span class="cmd">docker compose -f deploy/docker-compose.full.yml up -d</span>
 <span class="prompt">$</span> <span class="cmd">curl -fsS http://127.0.0.1:8099/api/health</span></div>
   <p class="install-note">Two details matter in Docker. The code graph records absolute paths as it scans, so a containerized server indexes container paths while your client reports host paths &mdash; <code>file_context</code> and <code>blast_radius</code> only line up if you mount your code at an identical path. And a local LLM on the host is not at <code>127.0.0.1</code> from inside the container, so point <code>LOCAL_LLM_BASE_URL</code> at <code>host.docker.internal</code>.</p>
-
-  <h4 class="subhead">archolith-skree installs today too</h4>
-  <p class="install-tile__copy" style="max-width:640px;">The MCP audit plugin is a one-command install and measures where your context budget is actually going.</p>
-  <div class="install-grid">
-    <div class="install-tile">
-      <div class="install-tile__head">
-        <div class="install-tile__name">Claude Code</div>
-        <div class="install-tile__state">beta</div>
-      </div>
-      <p class="install-tile__copy">Native Claude plugin install with managed Python runtime bootstrap.</p>
-      <div class="install-cmd">curl -fsSL https://raw.githubusercontent.com/Archolith/archolith-mcp-audit/master/scripts/install.sh | bash -s -- claude</div>
-    </div>
-    <div class="install-tile">
-      <div class="install-tile__head">
-        <div class="install-tile__name">Codex</div>
-        <div class="install-tile__state">beta</div>
-      </div>
-      <p class="install-tile__copy">Clones the public Codex plugin and registers the audit MCP server.</p>
-      <div class="install-cmd">curl -fsSL https://raw.githubusercontent.com/Archolith/archolith-mcp-audit/master/scripts/install.sh | bash -s -- codex</div>
-    </div>
-    <div class="install-tile">
-      <div class="install-tile__head">
-        <div class="install-tile__name">OpenCode</div>
-        <div class="install-tile__state">beta</div>
-      </div>
-      <p class="install-tile__copy">Clones the public OpenCode plugin and writes the local plugin + MCP config.</p>
-      <div class="install-cmd">curl -fsSL https://raw.githubusercontent.com/Archolith/archolith-mcp-audit/master/scripts/install.sh | bash -s -- opencode</div>
-    </div>
-  </div>
-  <p class="install-note">Each install keeps runtime dependencies in an isolated venv under ~/.archolith/venvs/. Gemini CLI is omitted because that CLI is deprecated.</p>
 </section>
 
 <!-- ============================================================
@@ -1848,13 +1813,12 @@ ul { list-style: none; }
     <p class="footer__tagline">Self-hosted graph memory for AI agents. Recall carries across sessions, the code graph comes along with it, and what goes inactive gets compressed.</p>
   </div>
   <div>
-    <h5>Products</h5>
+    <h5>menhir</h5>
     <ul>
-      <li><a href="https://github.com/Archolith/menhir">menhir</a> <span style="color:var(--ink-mute)">&middot; v0.3.0</span></li>
-      <li><a href="https://github.com/Archolith/archolith-filter">archolith-filter</a></li>
-      <li><a href="https://github.com/Archolith/archolith-mcp-audit">archolith-skree</a></li>
-      <li><a href="https://github.com/ctharvey/archolith-bench">archolith-peira</a></li>
-      <li>archolith-context <span style="color:var(--ink-mute)">&middot; coming</span></li>
+      <li><a href="https://github.com/Archolith/menhir">Source</a> <span style="color:var(--ink-mute)">&middot; v0.3.0</span></li>
+      <li><a href="https://pypi.org/project/archolith-menhir/">PyPI</a></li>
+      <li><a href="https://github.com/Archolith/menhir/blob/main/CHANGELOG.md">Changelog</a></li>
+      <li><a href="https://github.com/Archolith/menhir/issues">Issues</a></li>
     </ul>
   </div>
   <div>
@@ -1871,8 +1835,6 @@ ul { list-style: none; }
     <h5>Source</h5>
     <ul>
       <li><a href="https://github.com/Archolith">GitHub</a></li>
-      <li><a href="https://pypi.org/project/archolith-menhir/">PyPI</a></li>
-      <li><a href="https://github.com/Archolith/menhir/issues">Issues</a></li>
       <li><a href="privacy.html">Privacy</a></li>
       <li>menhir &middot; <a href="https://www.apache.org/licenses/LICENSE-2.0">Apache-2.0</a></li>
       <li>this site &middot; <a href="https://polyformproject.org/licenses/noncommercial/1.0.0">PolyForm NC</a></li>

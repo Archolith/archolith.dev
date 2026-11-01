@@ -1,6 +1,6 @@
 # archolith.dev
 
-Marketing homepage for the [archolith&trade;](https://github.com/Archolith) suite — self-hosted graph memory and context tooling for AI agents. Launch copy leads with **menhir**, the graph memory system. A single-page static HTML site with a signature scroll-excavation hero animation.
+Homepage for [**menhir**](https://github.com/Archolith/menhir), self-hosted graph memory for AI agents from [archolith&trade;](https://github.com/Archolith). A single-page static HTML site with a signature scroll-excavation hero animation.
 
 ## Quick Start
 
@@ -15,17 +15,11 @@ start index.html  # Windows
 
 No build step. No framework. No dependencies.
 
-## Products Featured
+## What the Site Covers
 
-One hero layer per product, same order in the architecture stack.
-
-| Product | Layer | Status |
-|---------|-------|--------|
-| menhir | L0 — Memory | **v0.3.0** |
-| archolith-filter | L1 — Filter | Alpha |
-| archolith-skree | L2 — Audit | Beta install path |
-| archolith-peira | L3 — Bench | Active |
-| archolith-context | L4 — Proxy | Coming / research direction |
+The site covers menhir only (v0.3.0). Other Archolith projects stay off it until they are
+ready. The hero and the system section show the same five menhir layers in the same order:
+memory, recall, code graph, governance, lifecycle.
 
 ## Content Sync
 
@@ -44,18 +38,6 @@ menhir is public and self-hosted. The site shows the working path:
 python -m pip install archolith-menhir
 menhir up --compose-neo4j --provider openai
 ```
-
-## Install archolith-skree
-
-The public site links to the one-command audit plugin installer:
-
-```bash
-curl -fsSL https://raw.githubusercontent.com/Archolith/archolith-mcp-audit/master/scripts/install.sh | bash -s -- claude
-curl -fsSL https://raw.githubusercontent.com/Archolith/archolith-mcp-audit/master/scripts/install.sh | bash -s -- codex
-curl -fsSL https://raw.githubusercontent.com/Archolith/archolith-mcp-audit/master/scripts/install.sh | bash -s -- opencode
-```
-
-The installer keeps runtime dependencies in managed venvs under `~/.archolith/venvs/` and does not support Gemini CLI.
 
 ## Documentation
 
@@ -87,8 +69,7 @@ Current local Lighthouse baseline is documented in [.agent/architecture.md](.age
 
 ## License
 
-This site is source-available under the PolyForm Noncommercial License 1.0.0. Product
-licenses differ: menhir and archolith-skree are Apache-2.0; archolith-filter,
-archolith-peira, and archolith-context are PolyForm Noncommercial 1.0.0.
+This site is source-available under the PolyForm Noncommercial License 1.0.0. menhir itself
+is Apache-2.0.
 
 archolith&trade; is a trademark of Charles Harvey.

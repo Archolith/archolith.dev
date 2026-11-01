@@ -11,6 +11,9 @@ leads with `pip install archolith-menhir`.
   table. Dropped the stale test count, "0 manual graph upkeep" and the evidence-artifact line.
   Footer Docs links to real docs. Hero cache key bumped to `20261101a`.
 - `README.md`, `AGENTS.md` — Install path, content-sync method, indent rule, stale pre-launch line.
+- Site now covers menhir only: removed archolith-filter, skree, peira and context from the
+  page, hero, footer and docs. The hero and system section keep five layers, now menhir's own
+  (memory, recall, code graph, governance, lifecycle); slice ids and CSS selectors renamed to match.
 
 ## 2026-08-10 — Mirror the menhir README onto the site
 
