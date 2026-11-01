@@ -9,6 +9,8 @@
 - `AGENTS.md`, `logos/README.md`, `.agent/` — Record S5 as the mark in use, matching the site.
 - `index.html` — Removed `.subhead:first-of-type`, which left the Ranking subheading flush against
   the table above it, and the inline margin that worked around it on Known limitations.
+- `index.html` — Dropped the Automatic expiry and Beacon rows from Known limitations. Section 02
+  already says delete is manual, and Beacon is not on the page otherwise; the README keeps Beacon.
 
 ## 2026-11-01 — Correct menhir copy for 0.3.0
 
