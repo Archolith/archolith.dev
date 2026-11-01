@@ -54,6 +54,8 @@ Files are served from the VPS via Caddy `file_server`. See [.agent/architecture.
 
 Deploy is git-first by default: commit the site change, push it, then copy the static payload.
 
+Set `ARCHOLITH_VPS_HOST` to the VPS address first. It is kept out of this public repo.
+
 ```powershell
 .\scripts\deploy.ps1 -PlanOnly
 .\scripts\deploy.ps1

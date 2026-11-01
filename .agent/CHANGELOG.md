@@ -14,6 +14,8 @@ leads with `pip install archolith-menhir`.
 - Site now covers menhir only: removed archolith-filter, skree, peira and context from the
   page, hero, footer and docs. The hero and system section keep five layers, now menhir's own
   (memory, recall, code graph, governance, lifecycle); slice ids and CSS selectors renamed to match.
+- Removed the origin IP from the repo's current files. `scripts/deploy.ps1` now reads
+  `ARCHOLITH_VPS_HOST` or `-RemoteHost` and stops if neither is set. The IP remains in git history.
 
 ## 2026-08-10 — Mirror the menhir README onto the site
 

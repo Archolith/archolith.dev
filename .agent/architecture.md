@@ -19,7 +19,7 @@ The hero section features an interactive scroll-excavation animation built with 
 | Styling | Hand-written CSS (no preprocessor) |
 | Scripting | Vanilla JavaScript (no framework) |
 | Fonts | Self-hosted WOFF2 — Space Grotesk, IBM Plex Sans, IBM Plex Serif, IBM Plex Mono, JetBrains Mono (latin + latin-ext subsets, `fonts/` dir, served with `Cache-Control: immutable`) |
-| Hosting | Caddy `file_server` on VPS (147.93.132.141), Cloudflare proxy |
+| Hosting | Caddy `file_server` on VPS, Cloudflare proxy |
 | Analytics | Cloudflare dashboard/Web Analytics only; no on-page Google Analytics tag |
 | Build | None — deploy `index.html` + assets as-is |
 | TLS | Let's Encrypt via Caddy auto-HTTPS (Cloudflare Full strict) |
@@ -164,7 +164,7 @@ The site is served from the yawn VPS via Caddy's built-in `file_server`, not a s
 
 | Item | Value |
 |------|-------|
-| VPS IP | `147.93.132.141` (user: `thron`) |
+| VPS host | `ARCHOLITH_VPS_HOST` environment variable; never commit the origin IP |
 | VPS files | `/var/www/html/archolith-dev/` (mounted into Caddy at `/srv/static/archolith-dev`) |
 | Caddy block | `archolith.dev` site block in `/srv/yawn/projects/yawn.deploy/Caddyfile` |
 | Caddy container | `yawndeploy-caddy-1` |
