@@ -2,21 +2,14 @@
 
 ## Overview
 
-archolith.dev is the marketing homepage for the Archolith suite — self-hosted graph memory and context tooling for AI agents. The site is a single-page static HTML file with vanilla JavaScript components. No build system, no framework, no server-side rendering.
+archolith.dev is the homepage for **menhir**, self-hosted agent memory that shows its sources, from Archolith. The site is a single-page static HTML file with vanilla JavaScript components. No build system, no framework, no server-side rendering.
 
-Launch positioning leads with **menhir**. `archolith-context` is presented as a future research direction, not the flagship.
+The site covers menhir only. Other Archolith projects stay off it until they are ready.
 
-The hero and the architecture stack both run **one layer per product**, in the same order.
-Layers map to products, never to sub-components of a single product.
+The hero and the system section both show **one layer per part of menhir**, in the same order:
+memory, typed state, recall, code graph, provenance. Section 03 covers lifecycle.
 
-The site currently presents five Archolith products:
-1. **menhir** (launch) — Graph-based long-term memory on Neo4j + Graphiti, served over MCP; includes the code graph and retention lifecycle
-2. **archolith-filter** (alpha) — Layer 0 pre-filter pipeline; nine format-switch strategies for token reduction
-3. **archolith-skree** (beta install path) — MCP token usage audit system; waste detection and report cards
-4. **archolith-bench** (benchmark) — Reproducible benchmark suite; keeps public claims tied to tracked evidence
-5. **archolith-context** (coming) — Curated-context proxy at the request boundary; experimental, not part of launch
-
-The hero section features an interactive scroll-excavation animation built with vanilla JS that reveals geological strata layers as the user scrolls, each representing a product/suite layer.
+The hero section features an interactive scroll-excavation animation built with vanilla JS that reveals geological strata layers as the user scrolls, each representing a menhir layer.
 
 ## Tech Stack
 
@@ -26,7 +19,7 @@ The hero section features an interactive scroll-excavation animation built with 
 | Styling | Hand-written CSS (no preprocessor) |
 | Scripting | Vanilla JavaScript (no framework) |
 | Fonts | Self-hosted WOFF2 — Space Grotesk, IBM Plex Sans, IBM Plex Serif, IBM Plex Mono, JetBrains Mono (latin + latin-ext subsets, `fonts/` dir, served with `Cache-Control: immutable`) |
-| Hosting | Caddy `file_server` on VPS (147.93.132.141), Cloudflare proxy |
+| Hosting | Caddy `file_server` on VPS, Cloudflare proxy |
 | Analytics | Cloudflare dashboard/Web Analytics only; no on-page Google Analytics tag |
 | Build | None — deploy `index.html` + assets as-is |
 | TLS | Let's Encrypt via Caddy auto-HTTPS (Cloudflare Full strict) |
@@ -146,12 +139,12 @@ The public body content is wrapped in `<main id="main" tabindex="-1">`, with a k
 1. **Hero** — Scroll-excavation strata animation
 2. **01 Problem** — "The broken model" — cold-start memory loss stats
 3. **02 Mechanism** — 5-step memory pipeline (ingest → extract → anchor → recall → lifecycle)
-4. **03 Lifecycle** — Session / Active / Compressed / Gone state cells, mirroring the README lifecycle diagram
-5. **04 Ranking** — Scoring formula, the four signals beyond similarity, and the five preset weightings
-6. **05 Architecture** — 5-slab product stack (menhir, filter, skree, peira, context) mirroring the hero order
+4. **03 Lifecycle** — Session / Active / Compressed / Deleted state cells; automatic expiry is off, deletion is manual
+5. **04 Ranking** — Scoring formula, up to four signals beyond similarity, and the five preset weightings
+6. **05 System** — 5-slab menhir stack (memory, typed state, recall, code graph, provenance) mirroring the hero order
 7. **06 Demo** — Side-by-side recall comparison (cold start vs. menhir); illustrative, not benchmarked
 8. **07 Surface** — Six-group MCP tool catalog (ingestion, recall, code graph, conflicts, operations, retention)
-9. **08 Install** — menhir clone/run + MCP client registration, Docker path with its two caveats, loopback-auth callout, then the archolith-skree one-command installers
+9. **08 Install** — PyPI install + `menhir up`, stdio client registration, loopback-auth callout, known limitations table, then the Docker test stack with its two caveats
 10. **09 Stack** — Component/technology table mirroring the README stack table
 11. **Footer** — Links point to current Archolith org/repo/license/privacy targets
 
@@ -161,7 +154,7 @@ changes materially, mirror it here rather than letting the two drift.
 Numbers on the site are verified against the menhir repo, not copied from prose:
 tool count from `menhir.mcp.tools.ALL_TOOLS`, resource count from
 `menhir.mcp.resources.RESOURCE_TYPES`, preset weights from `domain/recall.py`
-`PRESET_WEIGHTS`, and the test figure from `pytest --collect-only`.
+and `PRESET_WEIGHTS`.
 
 ## Deployment
 
@@ -171,7 +164,7 @@ The site is served from the yawn VPS via Caddy's built-in `file_server`, not a s
 
 | Item | Value |
 |------|-------|
-| VPS IP | `147.93.132.141` (user: `thron`) |
+| VPS host | `ARCHOLITH_VPS_HOST` environment variable; never commit the origin IP |
 | VPS files | `/var/www/html/archolith-dev/` (mounted into Caddy at `/srv/static/archolith-dev`) |
 | Caddy block | `archolith.dev` site block in `/srv/yawn/projects/yawn.deploy/Caddyfile` |
 | Caddy container | `yawndeploy-caddy-1` |

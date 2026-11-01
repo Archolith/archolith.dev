@@ -13,7 +13,7 @@ Read everything in this directory before starting work.
 
 ## Deployment
 
-The site is deployed on the yawn VPS (`147.93.132.141`) via Caddy `file_server`. See `architecture.md` → Deployment section for full details including VPS paths, Caddy config, DNS/TLS setup, and deploy workflow.
+The site is deployed on the yawn VPS via Caddy `file_server`. See `architecture.md` → Deployment section for full details including VPS paths, Caddy config, DNS/TLS setup, and deploy workflow.
 
 ## Maintenance Rules
 

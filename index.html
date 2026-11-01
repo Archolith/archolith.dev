@@ -3,16 +3,16 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Archolith &mdash; Self-hosted graph memory for AI agents</title>
-<meta name="description" content="menhir is a self-hosted graph memory system for AI agents. Recall across sessions, structure-aware retrieval, automatic decay and conflict detection. Served over MCP.">
+<title>menhir by Archolith &mdash; Self-hosted agent memory that shows its sources</title>
+<meta name="description" content="menhir is self-hosted agent memory that shows its sources. Recall across sessions, facts you can trace, typed current values and a code graph. Served over MCP.">
 <link rel="icon" type="image/svg+xml" href="favicon.svg">
 <link rel="icon" href="favicon.ico" sizes="any">
 <link rel="preload" as="style" href="fonts/fonts.css" onload="this.onload=null;this.rel='stylesheet'">
-<link rel="preload" as="style" href="hero/archolith-hero.css?v=20260810a" onload="this.onload=null;this.rel='stylesheet'">
+<link rel="preload" as="style" href="hero/archolith-hero.css?v=20261101a" onload="this.onload=null;this.rel='stylesheet'">
 <link rel="preload" as="image" href="logos/05-strata-column.svg">
 <noscript>
   <link rel="stylesheet" href="fonts/fonts.css">
-  <link rel="stylesheet" href="hero/archolith-hero.css?v=20260810a">
+  <link rel="stylesheet" href="hero/archolith-hero.css?v=20261101a">
 </noscript>
 
 <style>
@@ -1380,24 +1380,24 @@ ul { list-style: none; }
   <div class="problem-grid">
     <div>
       <h2 class="problem__heading">Every session starts cold. Decisions, preferences, and hard-won project knowledge <em>vanish when the window closes</em>.</h2>
-      <p class="problem__body">Stuffing the context window doesn't scale &mdash; it fills up. Flat markdown files go stale and nobody prunes them. Vector databases find text that looks similar but have no concept of how memories relate to each other, so an isolated note outranks the decision it contradicts. Agents need a graph, not a bigger bucket.</p>
+      <p class="problem__body">Stuffing the context window doesn't scale &mdash; it fills up. Flat markdown files go stale and nobody prunes them. Similarity alone finds text that looks alike without saying how memories relate to each other, so an isolated note can outrank the decision it contradicts. menhir adds the graph to the ranking.</p>
     </div>
     <div class="stats">
       <div class="stats__cell">
-        <div class="stats__num">52</div>
+        <div class="stats__num">62</div>
         <div class="stats__label">MCP tools shipped</div>
       </div>
       <div class="stats__cell">
         <div class="stats__num">4</div>
-        <div class="stats__label">recall signals beyond similarity</div>
+        <div class="stats__label">max recall signals beyond similarity</div>
       </div>
       <div class="stats__cell">
-        <div class="stats__num">5,900+</div>
-        <div class="stats__label">tests in the suite</div>
+        <div class="stats__num">9</div>
+        <div class="stats__label">MCP resources</div>
       </div>
       <div class="stats__cell">
-        <div class="stats__num">0</div>
-        <div class="stats__label">manual graph upkeep</div>
+        <div class="stats__num">5</div>
+        <div class="stats__label">recall presets</div>
       </div>
     </div>
   </div>
@@ -1425,7 +1425,7 @@ ul { list-style: none; }
     <div class="seq__row">
       <span class="seq__step">03 &middot; anchor</span>
       <span class="seq__cell"><span class="seq__pip"></span>detect file paths in text</span>
-      <span class="seq__cell">link to the code graph</span>
+      <span class="seq__cell">link to the code graph after ingest_project</span>
       <span class="seq__cell is-on">ANCHORED_TO edge</span>
     </div>
     <div class="seq__row">
@@ -1436,8 +1436,8 @@ ul { list-style: none; }
     </div>
     <div class="seq__row">
       <span class="seq__step">05 &middot; lifecycle</span>
-      <span class="seq__cell"><span class="seq__pip"></span>promote &middot; compress &middot; expire</span>
-      <span class="seq__cell">bridge neighbors before delete</span>
+      <span class="seq__cell"><span class="seq__pip"></span>promote &middot; compress &middot; rehydrate</span>
+      <span class="seq__cell">delete is manual only</span>
       <span class="seq__cell is-on">contradictions flagged</span>
     </div>
   </div>
@@ -1448,7 +1448,7 @@ ul { list-style: none; }
      ============================================================ -->
 <section class="sec" id="lifecycle">
   <span class="sec__num">03 &middot; Lifecycle</span>
-  <h3 class="sec__title">Memories are supposed to fade. Most systems never let them.</h3>
+  <h3 class="sec__title">Inactive memories compress. Automatic expiry is off.</h3>
   <div class="life">
     <div class="life__cell">
       <span class="life__state">Session</span>
@@ -1462,16 +1462,16 @@ ul { list-style: none; }
     </div>
     <div class="life__cell">
       <span class="life__state">Compressed</span>
-      <div class="life__body">Content swapped for an LLM summary once it stops being accessed. Rehydrates on its own the next time something recalls it.</div>
-      <span class="life__arrow">expiry &rarr;</span>
+      <div class="life__body">Content swapped for an LLM summary once it stops being accessed. It can be rehydrated when new context arrives.</div>
+      <span class="life__arrow">your call &rarr;</span>
     </div>
     <div class="life__cell life__cell--end">
-      <span class="life__state">Gone</span>
-      <div class="life__body">Queued for deletion. Neighbors get bridged first, so removing a node doesn't cut the graph in half.</div>
-      <span class="life__arrow">deleted</span>
+      <span class="life__state">Deleted</span>
+      <div class="life__body">Only when an operator asks. Automatic expiry is disabled until a safe policy is validated, so decay favors keeping memories. See <a href="#limitations">known limitations</a> for what erasure leaves behind.</div>
+      <span class="life__arrow">manual only</span>
     </div>
   </div>
-  <p class="life__note">Contradictions get flagged instead of quietly coexisting. Nothing in this loop needs a human: recall keeps a memory sharp, and everything else thins out.</p>
+  <p class="life__note">Contradictions get flagged instead of quietly coexisting, and they stay visible until they are resolved. Daily maintenance handles consolidation and compression.</p>
 </section>
 
 <!-- ============================================================
@@ -1490,7 +1490,7 @@ ul { list-style: none; }
         <tr><td class="key">adjacency</td><td>How many other strong candidates this memory connects to. A cluster of related memories pulls its own members up.</td></tr>
         <tr><td class="key">recency</td><td>Last access. Work you touched this week outranks work you touched in March.</td></tr>
         <tr><td class="key">prominence</td><td>Total edge count. A hub memory is treated as more central than a leaf with the same wording.</td></tr>
-        <tr><td class="key">conflict</td><td>Whether the memory sits inside an unresolved contradiction that's worth showing you.</td></tr>
+        <tr><td class="key">conflict</td><td>Whether the memory sits inside an unresolved contradiction that's worth showing you. Only the conflict preset weights this signal.</td></tr>
       </tbody>
     </table>
   </div>
@@ -1509,7 +1509,7 @@ ul { list-style: none; }
       </tbody>
     </table>
   </div>
-  <p class="life__note">Pass <code>file_context</code> to any recall and memories anchored to that file &mdash; and to its import neighborhood &mdash; join the candidate pool, whether or not the query text has anything to do with the code.</p>
+  <p class="life__note">Index the project with <code>ingest_project</code>, then pass <code>file_context</code> to any recall and memories anchored to that file &mdash; and to its import neighborhood &mdash; join the candidate pool, whether or not the query text has anything to do with the code.</p>
 </section>
 
 <!-- ============================================================
@@ -1517,90 +1517,86 @@ ul { list-style: none; }
      ============================================================ -->
 <section class="sec" id="system">
   <span class="sec__num">05 &middot; The system</span>
-  <h3 class="sec__title">From long-term memory out to the tooling around it &mdash; every layer has a job.</h3>
+  <h3 class="sec__title">Five layers, one service &mdash; every layer has a job.</h3>
   <div class="stack">
     <div class="slab slab--primary">
       <div class="slab__id">
-        menhir
-        <span class="slab__badge slab__badge--stable">launch</span>
-        <span class="slab__name">The memory</span>
+        memory
+        <span class="slab__badge slab__badge--stable">v0.3.0</span>
+        <span class="slab__name">The store</span>
       </div>
-      <div class="slab__body">Graph-based long-term memory for AI agents, built on Neo4j and Graphiti and served over MCP. Memories are entities with relationships, and those relationships count during retrieval &mdash; a well-connected memory outranks an isolated note with the same keywords. Project structure lands in the same database, so recall is code-aware and any file change comes with a blast radius. Apache-2.0, self-hosted, 52 tools and 9 resources.</div>
+      <div class="slab__body">Graph-based long-term memory for AI agents, built on Neo4j and Graphiti and served over MCP. Memories are entities with relationships, and writing one never blocks the agent: extraction happens in the background. Apache-2.0, self-hosted, 62 tools and 9 resources.</div>
       <div class="slab__io">
         <div class="slab__io-label">Owns</div>
         <ul>
           <li>Cross-session entity graph</li>
-          <li>Four-signal recall scoring</li>
-          <li>Code graph + blast radius</li>
-          <li>Decay, compression, conflicts</li>
+          <li>Non-blocking ingest</li>
+          <li>Scope + namespaces</li>
+          <li>Compression + conflict flags</li>
         </ul>
       </div>
     </div>
     <div class="slab">
       <div class="slab__id">
-        archolith-filter
-        <span class="slab__badge slab__badge--stable">alpha</span>
-        <span class="slab__name">The filter</span>
+        typed state
+        <span class="slab__name">The current value</span>
       </div>
-      <div class="slab__body">Token Reduction Toolkit &mdash; deterministic output filtering for LLM agent contexts. Layer 0 pre-filter pipeline (secrets, thinking, paths, binary, oversized) plus nine format-switch strategies for diffs, search, file reads, JSON, logs, stack traces, and build output. 50% average savings on real session data.</div>
+      <div class="slab__body">Prose summaries blur what changed and when. menhir turns statements into typed assertions with a source span, then a deterministic fold rebuilds the current value through later changes and corrections. Some kinds, such as durations and statuses, are the model's reading and are not checked against the source yet; see <a href="#limitations">known limitations</a>.</div>
       <div class="slab__io">
         <div class="slab__io-label">Owns</div>
         <ul>
-          <li>Layer 0 pre-filter pipeline</li>
-          <li>Nine format-switch strategies</li>
-          <li>Token estimation + risk presets</li>
-          <li>Cross-turn deduplication</li>
+          <li>Immutable typed assertions</li>
+          <li>Deterministic fold</li>
+          <li>Current + history views</li>
+          <li>Counting</li>
         </ul>
       </div>
     </div>
     <div class="slab">
       <div class="slab__id">
-        archolith-skree
-        <span class="slab__badge slab__badge--stable">alpha</span>
-        <span class="slab__name">The diagnostics</span>
+        recall
+        <span class="slab__name">The ranking</span>
       </div>
-      <div class="slab__body">MCP token usage audit system. Measures per-server token cost, detects waste patterns, and produces report cards with concrete optimization suggestions.</div>
+      <div class="slab__body">Relationships count during retrieval, so a well-connected memory can outrank an isolated note with the same keywords. Results still depend on what is stored, the provider, and index coverage.</div>
       <div class="slab__io">
         <div class="slab__io-label">Owns</div>
         <ul>
-          <li>Server attribution</li>
-          <li>Waste detection (6 types)</li>
-          <li>Report cards</li>
-          <li>CI threshold gates</li>
+          <li>Hybrid candidate search</li>
+          <li>Graph-aware reranking</li>
+          <li>Five recall presets</li>
+          <li>file_context candidates</li>
         </ul>
       </div>
     </div>
-    <div class="slab slab--future">
+    <div class="slab">
       <div class="slab__id">
-        archolith-peira
-        <span class="slab__badge">benchmark</span>
-        <span class="slab__name">The yardstick</span>
+        code graph
+        <span class="slab__name">The map</span>
       </div>
-      <div class="slab__body">Reproducible benchmark suite measuring recall quality, filter compression, and MCP waste reduction across multi-turn coding scenarios. Public claims stay tied to tracked evidence artifacts.</div>
+      <div class="slab__body">Index a project and its structure lands in the same database, so recall is code-aware and any file change comes with a blast radius.</div>
       <div class="slab__io">
         <div class="slab__io-label">Owns</div>
         <ul>
-          <li>Recall scenario runner</li>
-          <li>Filter corpus compression</li>
-          <li>Audit before/after</li>
-          <li>Stack comparison arms</li>
+          <li>ingest_project</li>
+          <li>Imports, endpoints, symbols</li>
+          <li>Blast radius</li>
+          <li>Affected tests</li>
         </ul>
       </div>
     </div>
-    <div class="slab slab--future">
+    <div class="slab">
       <div class="slab__id">
-        archolith-context
-        <span class="slab__badge">coming</span>
-        <span class="slab__name">The proxy</span>
+        provenance
+        <span class="slab__name">The receipts</span>
       </div>
-      <div class="slab__body">Research direction for curated context assembly at the request boundary. An OpenAI-compatible proxy would query the memory graph each turn and splice curated context in place of linear replay, with no harness code changes. Still experimental and not part of the launch.</div>
+      <div class="slab__body"><code>get_provenance</code> expands a memory or derived value into its source episodes, any attached evidence and its code anchors. Stored text is not treated as equally authoritative: candidates wait for human approval, promoted memory is operator-designated, and superseded memories drop out of current recall by default.</div>
       <div class="slab__io">
-        <div class="slab__io-label">Would own</div>
+        <div class="slab__io-label">Owns</div>
         <ul>
-          <li>/v1/chat/completions</li>
-          <li>SSE pass-through</li>
-          <li>Curator assembly</li>
-          <li>Trace API + dashboard</li>
+          <li>get_provenance</li>
+          <li>Candidate review</li>
+          <li>Promotion</li>
+          <li>Supersession</li>
         </ul>
       </div>
     </div>
@@ -1638,7 +1634,7 @@ ul { list-style: none; }
       <div class="demo-pane demo-pane--proxy">
         <h5 class="demo-pane__title">B &middot; With menhir <span class="demo-pane__badge">graph recall</span></h5>
         <div class="demo-meter demo-meter--good"><span>prior sessions visible</span><b>all persistent</b></div>
-        <div class="demo-meter demo-meter--good"><span>recall signals</span><b>4 <span class="delta">beyond similarity</span></b></div>
+        <div class="demo-meter demo-meter--good"><span>recall signals</span><b>up to 4 <span class="delta">beyond similarity</span></b></div>
         <div class="demo-meter demo-meter--good"><span>code graph</span><b>anchored</b></div>
         <div class="demo-bars demo-bars--flat">
           <span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span>
@@ -1647,7 +1643,7 @@ ul { list-style: none; }
       </div>
     </div>
   </div>
-  <p style="margin-top:14px; font-family:var(--f-mono); font-size:10px; color:var(--ink-mute); letter-spacing:0.08em;">Illustrative of the recall path. Benchmarked figures stay tied to tracked archolith-peira evidence artifacts.</p>
+  <p style="margin-top:14px; font-family:var(--f-mono); font-size:10px; color:var(--ink-mute); letter-spacing:0.08em;">Illustrative of the recall path, not a measured result.</p>
 </section>
 
 <!-- ============================================================
@@ -1655,7 +1651,7 @@ ul { list-style: none; }
      ============================================================ -->
 <section class="sec" id="tools">
   <span class="sec__num">07 &middot; Surface</span>
-  <h3 class="sec__title">52 tools and 9 resources, all over MCP.</h3>
+  <h3 class="sec__title">62 tools and 9 resources, all over MCP.</h3>
   <div class="tools">
     <div class="tools__group">
       <span class="tools__label">Ingestion</span>
@@ -1715,7 +1711,7 @@ ul { list-style: none; }
       </ul>
     </div>
   </div>
-  <p class="life__note">Every enrichment pass, scoring decision, and lifecycle transition writes to a SQLite sidecar, so when recall returns something strange there is a trace to read.</p>
+  <p class="life__note">Which tools a client sees depends on its key tier. Enrichment and lifecycle work is traced, so when recall returns something strange there is a trace to read. <code>delete_memory</code> does not remove extracted entities or facts; see <a href="#limitations">known limitations</a>.</p>
 </section>
 
 <!-- ============================================================
@@ -1726,69 +1722,57 @@ ul { list-style: none; }
   <h3 class="sec__title">Self-hosted. Neo4j, an LLM backend, and your MCP client.</h3>
   <div class="install-split">
     <div class="install-split__col">
-      <span class="install-split__label">Clone and run</span>
-      <div class="quickstart"><span class="prompt">$</span> <span class="cmd">git clone https://github.com/Archolith/menhir.git</span>
-<span class="prompt">$</span> <span class="cmd">cd menhir &amp;&amp; pip install -e .</span>
-<span class="prompt">$</span> <span class="cmd">cp .env.example .env</span>      <span class="comment"># Neo4j + LLM settings</span>
-<span class="prompt">$</span> <span class="cmd">docker compose up -d</span>      <span class="comment"># local Neo4j with APOC</span>
-<span class="prompt">$</span> <span class="cmd">menhir serve</span>              <span class="comment"># :8100 + /explorer</span></div>
+      <span class="install-split__label">Install and run</span>
+      <div class="quickstart"><span class="prompt">$</span> <span class="cmd">python -m pip install archolith-menhir</span>
+<span class="prompt">$</span> <span class="cmd">menhir up --compose-neo4j --provider openai</span>
+<span class="comment"># add your API key when asked, re-run</span></div>
     </div>
     <div class="install-split__col">
       <span class="install-split__label">Register with your MCP client</span>
       <div class="quickstart">{
   <span class="cmd">"mcpServers"</span>: {
     <span class="cmd">"memory"</span>: {
-      <span class="cmd">"type"</span>: "http",
-      <span class="cmd">"url"</span>: "http://127.0.0.1:8100/mcp-http",
-      <span class="cmd">"headers"</span>: {
-        <span class="cmd">"Authorization"</span>: "Bearer &lt;key&gt;"
+      <span class="cmd">"type"</span>: "stdio",
+      <span class="cmd">"command"</span>: "python",
+      <span class="cmd">"args"</span>: ["-m", "menhir.mcp.server"],
+      <span class="cmd">"env"</span>: {
+        <span class="cmd">"MENHIR_BACKEND_URL"</span>: "http://127.0.0.1:8100"
       }
     }
   }
 }</div>
     </div>
   </div>
-  <p class="install-note">menhir is a long-lived server. It holds the Neo4j pool, the background enrichment queue, and the maintenance scheduler, so you start it once instead of spawning one per client session. <code>menhir check</code> and <code>menhir diagnostics</code> cover preflight, <code>menhir console</code> is the interactive shell. Installing pulls two first-party dependencies from GitHub, so <code>git</code> has to be on your PATH.</p>
+  <p class="install-note">The first run starts the bundled Neo4j in Docker, creates <code>~/.menhir/.env</code> and asks for your <code>OPENAI_API_KEY</code>. Add it and run the command again. menhir then serves on <code>:8100</code>, with the graph at <code>/explorer</code>.</p>
+  <p class="install-note">menhir is a long-lived server. It holds the Neo4j pool, the background enrichment queue, and the maintenance scheduler, so you start it once and each client launches a small stdio bridge to it. Use the Python that menhir is installed in, or its absolute path. Requires Python 3.12+. Without Docker, skip <code>--compose-neo4j</code> and point <code>.env</code> at a Neo4j 5.26+ with APOC. <code>menhir check</code> and <code>menhir diagnostics</code> cover preflight, <code>menhir console</code> is the interactive shell. Upgrading from 0.2.3 or earlier? Install into a fresh virtual environment.</p>
 
   <div class="callout">
-    <strong>Open auth is loopback-only.</strong> With no bearer key configured, the server refuses to bind to <code>0.0.0.0</code>, <code>::</code>, or any LAN address. Four key tiers &mdash; readonly, agent, operator, and the general API key &mdash; decide which tools a client can reach. The remote no-auth override exists, and it is meant for isolated lab networks and nothing else.
+    <strong>Open auth is loopback-only.</strong> With no bearer key configured, the server refuses to bind to <code>0.0.0.0</code>, <code>::</code>, or any LAN address. Four key tiers &mdash; readonly, agent, operator, and the general API key &mdash; decide which tools a client can reach. The remote no-auth override exists, and it is meant for isolated lab networks and nothing else. Once any key is configured, pass one in the client's <code>env</code>; <code>MENHIR_AGENT_KEY</code> is the tier meant for automated clients.
   </div>
 
-  <h4 class="subhead">Or run the whole thing in Docker</h4>
+  <h4 class="subhead" id="limitations" style="margin-top:40px;">Known limitations in 0.3.0</h4>
+  <div class="table-wrap">
+    <table class="gtable">
+      <thead>
+        <tr><th>Limitation</th><th>What it means</th></tr>
+      </thead>
+      <tbody>
+        <tr><td class="key"><a href="https://github.com/Archolith/menhir/issues/417">Erasure</a></td><td>Deleting a memory leaves behind the entities and fact edges extracted from it, and they can restate the erased content. To remove everything, delete the whole namespace.</td></tr>
+        <tr><td class="key"><a href="https://github.com/Archolith/menhir/issues/169">Scalar values</a></td><td>Duration, frequency, weekday, status and boolean values are the model's reading and are not checked against the source. Turning the scalar lane off is the only switch.</td></tr>
+        <tr><td class="key">Automatic expiry</td><td>Disabled. Compressed memories stay until an operator deletes them.</td></tr>
+        <tr><td class="key">Supported setup</td><td>One operator, with clients on the local stdio bridge.</td></tr>
+        <tr><td class="key"><a href="https://github.com/Archolith/menhir/issues/120">Beacon provider</a></td><td>Deferred. <code>get_beacon_evidence</code> and <code>menhir beacon generate</code> ship but are not part of the supported surface.</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p class="install-note">Details are in the <a href="https://github.com/Archolith/menhir#known-limitations">menhir README</a>.</p>
+
+  <h4 class="subhead">Docker test stack</h4>
+  <p class="install-note">A disposable check for an already built image, not an install path. The image does not build from a plain clone, so load or tag a verified image as <code>menhir:test</code> first, and set <code>OPENAI_API_KEY</code> and <code>MENHIR_OPERATOR_KEY</code> in <code>deploy/.env.deploy</code>. Do not point it at a graph you want to keep.</p>
   <div class="quickstart"><span class="prompt">$</span> <span class="cmd">cp deploy/.env.deploy.example deploy/.env.deploy</span>
-<span class="prompt">$</span> <span class="cmd">docker compose -f deploy/docker-compose.full.yml up -d --build</span>
+<span class="prompt">$</span> <span class="cmd">docker compose -f deploy/docker-compose.full.yml up -d</span>
 <span class="prompt">$</span> <span class="cmd">curl -fsS http://127.0.0.1:8099/api/health</span></div>
-  <p class="install-note">Two things to know before picking this over a local install. The code graph records absolute paths as it scans, so a containerized server indexes container paths while your client reports host paths &mdash; <code>file_context</code> and <code>blast_radius</code> only line up if you mount your code at an identical path. And a local LLM on the host is not at <code>127.0.0.1</code> from inside the container, so point <code>LOCAL_LLM_BASE_URL</code> at <code>host.docker.internal</code>.</p>
-
-  <h4 class="subhead">archolith-skree installs today too</h4>
-  <p class="install-tile__copy" style="max-width:640px;">The MCP audit plugin is a one-command install and measures where your context budget is actually going.</p>
-  <div class="install-grid">
-    <div class="install-tile">
-      <div class="install-tile__head">
-        <div class="install-tile__name">Claude Code</div>
-        <div class="install-tile__state">beta</div>
-      </div>
-      <p class="install-tile__copy">Native Claude plugin install with managed Python runtime bootstrap.</p>
-      <div class="install-cmd">curl -fsSL https://raw.githubusercontent.com/Archolith/archolith-mcp-audit/master/scripts/install.sh | bash -s -- claude</div>
-    </div>
-    <div class="install-tile">
-      <div class="install-tile__head">
-        <div class="install-tile__name">Codex</div>
-        <div class="install-tile__state">beta</div>
-      </div>
-      <p class="install-tile__copy">Clones the public Codex plugin and registers the audit MCP server.</p>
-      <div class="install-cmd">curl -fsSL https://raw.githubusercontent.com/Archolith/archolith-mcp-audit/master/scripts/install.sh | bash -s -- codex</div>
-    </div>
-    <div class="install-tile">
-      <div class="install-tile__head">
-        <div class="install-tile__name">OpenCode</div>
-        <div class="install-tile__state">beta</div>
-      </div>
-      <p class="install-tile__copy">Clones the public OpenCode plugin and writes the local plugin + MCP config.</p>
-      <div class="install-cmd">curl -fsSL https://raw.githubusercontent.com/Archolith/archolith-mcp-audit/master/scripts/install.sh | bash -s -- opencode</div>
-    </div>
-  </div>
-  <p class="install-note">Each install keeps runtime dependencies in an isolated venv under ~/.archolith/venvs/. Gemini CLI is omitted because that CLI is deprecated.</p>
+  <p class="install-note">Two details matter in Docker. The code graph records absolute paths as it scans, so a containerized server indexes container paths while your client reports host paths &mdash; <code>file_context</code> and <code>blast_radius</code> only line up if you mount your code at an identical path. And a local LLM on the host is not at <code>127.0.0.1</code> from inside the container, so point <code>LOCAL_LLM_BASE_URL</code> at <code>host.docker.internal</code>.</p>
 </section>
 
 <!-- ============================================================
@@ -1804,11 +1788,11 @@ ul { list-style: none; }
       </thead>
       <tbody>
         <tr><td class="key">Language</td><td>Python 3.12+</td></tr>
-        <tr><td class="key">Graph database</td><td>Neo4j 5</td></tr>
-        <tr><td class="key">Graph memory framework</td><td>graphiti-core 0.29+</td></tr>
-        <tr><td class="key">LLM backends</td><td>Local llama.cpp (OpenAI-compatible), OpenAI, Gemini</td></tr>
+        <tr><td class="key">Graph database</td><td>Neo4j 5.26+ with APOC</td></tr>
+        <tr><td class="key">Graph memory framework</td><td>archolith-graphiti-core 0.31.2.post1 (Graphiti fork)</td></tr>
+        <tr><td class="key">LLM backends</td><td>OpenAI, or any OpenAI-compatible server such as llama.cpp</td></tr>
         <tr><td class="key">Embeddings</td><td>Local or OpenAI, configurable</td></tr>
-        <tr><td class="key">Protocol</td><td>Model Context Protocol over HTTP at /mcp-http</td></tr>
+        <tr><td class="key">Protocol</td><td>Model Context Protocol, through the local stdio bridge or HTTP at /mcp-http</td></tr>
         <tr><td class="key">Observability</td><td>SQLite sidecar, optional Langfuse tracing</td></tr>
         <tr><td class="key">Visualization</td><td>FastAPI explorer with Cytoscape.js, mounted at /explorer</td></tr>
         <tr><td class="key">License</td><td>Apache-2.0</td></tr>
@@ -1826,33 +1810,31 @@ ul { list-style: none; }
 <footer class="footer">
   <div>
     <div class="footer__brand">ARCHOLITH</div>
-    <p class="footer__tagline">Self-hosted graph memory for AI agents. Recall carries across sessions, the code graph comes along with it, and what stopped mattering gets forgotten.</p>
+    <p class="footer__tagline">Self-hosted agent memory that shows its sources. Recall carries across sessions, the code graph comes along with it, and what goes inactive gets compressed.</p>
   </div>
   <div>
-    <h5>Products</h5>
+    <h5>menhir</h5>
     <ul>
-      <li><a href="https://github.com/Archolith/menhir">menhir</a> <span style="color:var(--ink-mute)">&middot; launch</span></li>
-      <li><a href="https://github.com/Archolith/archolith-filter">archolith-filter</a></li>
-      <li><a href="https://github.com/Archolith/archolith-mcp-audit">archolith-skree</a></li>
-      <li><a href="https://github.com/ctharvey/archolith-bench">archolith-peira</a></li>
-      <li>archolith-context <span style="color:var(--ink-mute)">&middot; coming</span></li>
+      <li><a href="https://github.com/Archolith/menhir">Source</a> <span style="color:var(--ink-mute)">&middot; v0.3.0</span></li>
+      <li><a href="https://pypi.org/project/archolith-menhir/">PyPI</a></li>
+      <li><a href="https://github.com/Archolith/menhir/blob/main/CHANGELOG.md">Changelog</a></li>
+      <li><a href="https://github.com/Archolith/menhir/issues">Issues</a></li>
     </ul>
   </div>
   <div>
     <h5>Docs</h5>
     <ul>
-      <li><a href="#mechanism">How a memory moves</a></li>
-      <li><a href="#ranking">Ranking and presets</a></li>
-      <li><a href="#tools">MCP tool surface</a></li>
       <li><a href="#install">Install menhir</a></li>
-      <li><a href="#stack">Stack</a></li>
+      <li><a href="https://github.com/Archolith/menhir#readme">menhir README</a></li>
+      <li><a href="https://github.com/Archolith/menhir/blob/main/docs/post-install.md">After installing</a></li>
+      <li><a href="https://github.com/Archolith/menhir/blob/main/docs/security-posture.md">Security posture</a></li>
+      <li><a href="https://github.com/Archolith/menhir/blob/main/docs/evaluation.md">Evaluation</a></li>
     </ul>
   </div>
   <div>
     <h5>Source</h5>
     <ul>
       <li><a href="https://github.com/Archolith">GitHub</a></li>
-      <li><a href="https://github.com/Archolith/menhir/issues">Issues</a></li>
       <li><a href="privacy.html">Privacy</a></li>
       <li>menhir &middot; <a href="https://www.apache.org/licenses/LICENSE-2.0">Apache-2.0</a></li>
       <li>this site &middot; <a href="https://polyformproject.org/licenses/noncommercial/1.0.0">PolyForm NC</a></li>
@@ -1863,10 +1845,10 @@ ul { list-style: none; }
 <!-- ============================================================
      SCRIPTS
      ============================================================ -->
-<script defer src="hero/sliceDefinitions.js?v=20260810a"></script>
-<script defer src="hero/StrataSlice.js?v=20260810a"></script>
-<script defer src="hero/StrataField.js?v=20260810a"></script>
-<script defer src="hero/ArcholithHero.js?v=20260810a"></script>
+<script defer src="hero/sliceDefinitions.js?v=20261101a"></script>
+<script defer src="hero/StrataSlice.js?v=20261101a"></script>
+<script defer src="hero/StrataField.js?v=20261101a"></script>
+<script defer src="hero/ArcholithHero.js?v=20261101a"></script>
 <script>
 document.addEventListener("DOMContentLoaded", function() {
   /* Hero */

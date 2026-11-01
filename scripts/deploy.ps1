@@ -1,6 +1,6 @@
 param(
     [string]$RemoteUser = "thron",
-    [string]$RemoteHost = "147.93.132.141",
+    [string]$RemoteHost = $env:ARCHOLITH_VPS_HOST,
     [string]$RemotePath = "/var/www/html/archolith-dev",
     [switch]$AllowDirty,
     [switch]$PlanOnly,
@@ -8,6 +8,10 @@ param(
 )
 
 $ErrorActionPreference = "Stop"
+
+if (-not $RemoteHost) {
+    throw "No deploy host. Set ARCHOLITH_VPS_HOST or pass -RemoteHost."
+}
 
 $repoRoot = Resolve-Path (Join-Path $PSScriptRoot "..")
 $workspaceRoot = Resolve-Path (Join-Path $repoRoot "..\..\..")

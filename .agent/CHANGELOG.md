@@ -1,5 +1,24 @@
 # Changelog — archolith.dev
 
+## 2026-11-01 — Correct menhir copy for 0.3.0
+
+Accuracy pass against menhir 0.3.0. Deploy only after 0.3.0 is on PyPI, because the page now
+leads with `pip install archolith-menhir`.
+
+- `index.html`, `hero/` — Lifecycle no longer claims automatic expiry. 62 tools, v0.3.0, Neo4j
+  5.26+, the Graphiti fork, no Gemini. Install leads with PyPI and `menhir up`; clients use the
+  stdio bridge. Docker is labelled a test stack and loses `--build`. New known limitations
+  table. Dropped the stale test count, "0 manual graph upkeep" and the evidence-artifact line.
+  Footer Docs links to real docs. Hero cache key bumped to `20261101a`.
+- `README.md`, `AGENTS.md` — Install path, content-sync method, indent rule, stale pre-launch line.
+- Site now covers menhir only: removed archolith-filter, skree, peira and context from the
+  page, hero, footer and docs. The hero and system section keep five layers, now menhir's own
+  (memory, typed state, recall, code graph, provenance); slice ids and CSS selectors renamed to match.
+- Repositioned the headline from "graph memory" to "agent memory that shows its sources". Copy
+  says a value can be checked, not that it is verified, because of menhir#169.
+- Removed the origin IP from the repo's current files. `scripts/deploy.ps1` now reads
+  `ARCHOLITH_VPS_HOST` or `-RemoteHost` and stops if neither is set. The IP remains in git history.
+
 ## 2026-08-10 — Mirror the menhir README onto the site
 
 menhir went public (Apache-2.0, `github.com/Archolith/menhir`), and its README was rewritten
