@@ -1,5 +1,18 @@
 # Changelog — archolith.dev
 
+## 2026-11-01 — Deployed for menhir 0.3.1; deploy script line-ending fix
+
+Deployed `912219e` to the VPS: `ec973b1` plus a local `.gitattributes` commit that is not on
+origin, so the site files match `ec973b1`. Run with `-AllowDirty` for an untracked `.agent/.gitignore`,
+which is not in the payload.
+
+- The upload worked but the post-upload step exited 1, leaving directories at 700 and
+  `deploy-files.txt` publicly readable until its commands were run by hand: 0 stale files,
+  permissions normalised, list removed.
+- `scripts/deploy.ps1` — Strip carriage returns from the remote script. A CRLF checkout sent them
+  to bash, where `cd` then failed on the path.
+- `index.html` — Known limitations now names 0.3.1 and links menhir#411.
+
 ## 2026-11-01 — Fit the hero card above the fold
 
 - `hero/` — The layer card now ends above the fold at 1440x900, so the typed state caveat is

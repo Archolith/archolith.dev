@@ -193,6 +193,9 @@ rm -f deploy-files.txt
 echo 'Permissions normalised to 755/644.'
 "@
 
+    # A CRLF checkout puts CRs in the here-string; bash then sees target='...\r' and cd fails.
+    $remoteScript = $remoteScript -replace "`r", ""
+
     $previousVpsHost = $env:YAWN_VPS_HOST
     $env:YAWN_VPS_HOST = "${RemoteUser}@${RemoteHost}"
     try {
