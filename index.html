@@ -1521,7 +1521,7 @@ ul { list-style: none; }
     <div class="slab slab--primary">
       <div class="slab__id">
         memory
-        <span class="slab__badge slab__badge--stable">v0.3.0</span>
+        <span class="slab__badge slab__badge--stable">v0.3.1</span>
         <span class="slab__name">The store</span>
       </div>
       <div class="slab__body">Graph-based long-term memory for AI agents, built on Neo4j and Graphiti and served over MCP. Memories are entities with relationships, and writing one never blocks the agent: extraction happens in the background. Apache-2.0, self-hosted, 62 tools and 9 resources.</div>
@@ -1749,7 +1749,7 @@ ul { list-style: none; }
     <strong>Open auth is loopback-only.</strong> With no bearer key configured, the server refuses to bind to <code>0.0.0.0</code>, <code>::</code>, or any LAN address. Four key tiers &mdash; readonly, agent, operator, and the general API key &mdash; decide which tools a client can reach. The remote no-auth override exists, and it is meant for isolated lab networks and nothing else. Once any key is configured, pass one in the client's <code>env</code>; <code>MENHIR_AGENT_KEY</code> is the tier meant for automated clients.
   </div>
 
-  <h4 class="subhead" id="limitations">Known limitations in 0.3.0</h4>
+  <h4 class="subhead" id="limitations">Known limitations in 0.3.1</h4>
   <div class="table-wrap">
     <table class="gtable">
       <thead>
@@ -1757,7 +1757,7 @@ ul { list-style: none; }
       </thead>
       <tbody>
         <tr><td class="key"><a href="https://github.com/Archolith/menhir/issues/417">Erasure</a></td><td>Deleting a memory leaves behind the entities and fact edges extracted from it, and they can restate the erased content. To remove everything, delete the whole namespace.</td></tr>
-        <tr><td class="key"><a href="https://github.com/Archolith/menhir/issues/169">Scalar values</a></td><td>Duration, frequency, weekday, status and boolean values are the model's reading and are not checked against the source. Turning the scalar lane off is the only switch.</td></tr>
+        <tr><td class="key"><a href="https://github.com/Archolith/menhir/issues/411">Scalar values</a></td><td>The source checks on duration, frequency, weekday, status and boolean values are English patterns. They can miss a true fact, and they confirm the words are present, not who they are about. Values stored before 0.3.1 are not rechecked.</td></tr>
         <tr><td class="key">Supported setup</td><td>One operator, with clients on the local stdio bridge.</td></tr>
       </tbody>
     </table>
@@ -1812,7 +1812,7 @@ ul { list-style: none; }
   <div>
     <h5>menhir</h5>
     <ul>
-      <li><a href="https://github.com/Archolith/menhir">Source</a> <span style="color:var(--ink-mute)">&middot; v0.3.0</span></li>
+      <li><a href="https://github.com/Archolith/menhir">Source</a> <span style="color:var(--ink-mute)">&middot; v0.3.1</span></li>
       <li><a href="https://pypi.org/project/archolith-menhir/">PyPI</a></li>
       <li><a href="https://github.com/Archolith/menhir/blob/main/CHANGELOG.md">Changelog</a></li>
       <li><a href="https://github.com/Archolith/menhir/issues">Issues</a></li>
