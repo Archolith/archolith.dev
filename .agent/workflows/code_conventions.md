@@ -54,11 +54,11 @@ archolith.dev/
 │   ├── StrataSlice.js      # Individual strata band component
 │   └── sliceDefinitions.js # Live layer definitions; no TypeScript build step
 ├── logos/
-│   ├── 01-k8-dropping-keystone.svg    # Primary logo
+│   ├── 01-k8-dropping-keystone.svg    # Keystone candidate
 │   ├── 02-k2-minimal-keystone.svg     # Favicon-scale
 │   ├── 03-k1-classic-keystone.svg     # Classic mark
 │   ├── 04-doorway.svg                 # Doorway variant
-│   ├── 05-strata-column.svg           # Strata variant
+│   ├── 05-strata-column.svg           # Mark in use
 │   └── README.md                      # Logo ranking and notes
 └── screenshots/
     └── *.png                         # Current public visual references only

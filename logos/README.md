@@ -2,6 +2,9 @@
 
 These are the five logo directions I would carry forward from the concept work.
 
+The site currently uses `05-strata-column.svg` in the nav and hero. The ranking below is the
+original concept work, not the choice in use.
+
 ## Ranking
 
 1. `01-k8-dropping-keystone.svg`

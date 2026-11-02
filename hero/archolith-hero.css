@@ -27,7 +27,7 @@
 
 .archolith-hero__copy {
     z-index: 2;
-    padding: 64px 44px 52px 56px;
+    padding: 40px 44px 40px 56px;
     border-right: 1px solid rgba(214, 221, 232, 0.2);
     background:
         linear-gradient(180deg, rgba(10, 15, 22, 0.96), rgba(10, 15, 22, 0.985)),
@@ -63,7 +63,7 @@
     grid-template-columns: 88px 1fr;
     gap: 16px;
     align-items: center;
-    margin-bottom: 26px;
+    margin-bottom: 18px;
     padding: 14px 16px;
     background:
         linear-gradient(180deg, rgba(142, 174, 213, 0.08), rgba(142, 174, 213, 0.02)),
@@ -94,9 +94,7 @@
 }
 
 .archolith-hero__brand-kicker,
-.archolith-hero__crumb,
-.archolith-hero__layer-note,
-.archolith-hero__layer-measure {
+.archolith-hero__layer-note {
     font-family: var(--f-mono);
     font-size: 11px;
     line-height: 1.45;
@@ -104,8 +102,7 @@
     text-transform: uppercase;
 }
 
-.archolith-hero__brand-kicker,
-.archolith-hero__crumb {
+.archolith-hero__brand-kicker {
     color: var(--ink-mute);
 }
 
@@ -114,10 +111,6 @@
     font-size: 24px;
     font-weight: 700;
     letter-spacing: -0.02em;
-}
-
-.archolith-hero__crumb {
-    margin-bottom: 14px;
 }
 
 .archolith-hero__copy h1 {
@@ -234,10 +227,6 @@
     line-height: 1.6;
     color: var(--ink-2);
     margin-bottom: 14px;
-}
-
-.archolith-hero__layer-measure {
-    color: var(--active-accent);
 }
 
 .archolith-hero__visual {

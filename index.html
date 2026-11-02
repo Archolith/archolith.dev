@@ -8,11 +8,11 @@
 <link rel="icon" type="image/svg+xml" href="favicon.svg">
 <link rel="icon" href="favicon.ico" sizes="any">
 <link rel="preload" as="style" href="fonts/fonts.css" onload="this.onload=null;this.rel='stylesheet'">
-<link rel="preload" as="style" href="hero/archolith-hero.css?v=20261101a" onload="this.onload=null;this.rel='stylesheet'">
+<link rel="preload" as="style" href="hero/archolith-hero.css?v=20261101b" onload="this.onload=null;this.rel='stylesheet'">
 <link rel="preload" as="image" href="logos/05-strata-column.svg">
 <noscript>
   <link rel="stylesheet" href="fonts/fonts.css">
-  <link rel="stylesheet" href="hero/archolith-hero.css?v=20261101a">
+  <link rel="stylesheet" href="hero/archolith-hero.css?v=20261101b">
 </noscript>
 
 <style>
@@ -1140,7 +1140,6 @@ ul { list-style: none; }
   letter-spacing: -0.01em;
   margin: 44px 0 16px;
 }
-.subhead:first-of-type { margin-top: 0; }
 
 /* ============================================================
    TOOL SURFACE
@@ -1750,7 +1749,7 @@ ul { list-style: none; }
     <strong>Open auth is loopback-only.</strong> With no bearer key configured, the server refuses to bind to <code>0.0.0.0</code>, <code>::</code>, or any LAN address. Four key tiers &mdash; readonly, agent, operator, and the general API key &mdash; decide which tools a client can reach. The remote no-auth override exists, and it is meant for isolated lab networks and nothing else. Once any key is configured, pass one in the client's <code>env</code>; <code>MENHIR_AGENT_KEY</code> is the tier meant for automated clients.
   </div>
 
-  <h4 class="subhead" id="limitations" style="margin-top:40px;">Known limitations in 0.3.0</h4>
+  <h4 class="subhead" id="limitations">Known limitations in 0.3.0</h4>
   <div class="table-wrap">
     <table class="gtable">
       <thead>
@@ -1759,9 +1758,7 @@ ul { list-style: none; }
       <tbody>
         <tr><td class="key"><a href="https://github.com/Archolith/menhir/issues/417">Erasure</a></td><td>Deleting a memory leaves behind the entities and fact edges extracted from it, and they can restate the erased content. To remove everything, delete the whole namespace.</td></tr>
         <tr><td class="key"><a href="https://github.com/Archolith/menhir/issues/169">Scalar values</a></td><td>Duration, frequency, weekday, status and boolean values are the model's reading and are not checked against the source. Turning the scalar lane off is the only switch.</td></tr>
-        <tr><td class="key">Automatic expiry</td><td>Disabled. Compressed memories stay until an operator deletes them.</td></tr>
         <tr><td class="key">Supported setup</td><td>One operator, with clients on the local stdio bridge.</td></tr>
-        <tr><td class="key"><a href="https://github.com/Archolith/menhir/issues/120">Beacon provider</a></td><td>Deferred. <code>get_beacon_evidence</code> and <code>menhir beacon generate</code> ship but are not part of the supported surface.</td></tr>
       </tbody>
     </table>
   </div>
@@ -1845,10 +1842,10 @@ ul { list-style: none; }
 <!-- ============================================================
      SCRIPTS
      ============================================================ -->
-<script defer src="hero/sliceDefinitions.js?v=20261101a"></script>
-<script defer src="hero/StrataSlice.js?v=20261101a"></script>
-<script defer src="hero/StrataField.js?v=20261101a"></script>
-<script defer src="hero/ArcholithHero.js?v=20261101a"></script>
+<script defer src="hero/sliceDefinitions.js?v=20261101b"></script>
+<script defer src="hero/StrataSlice.js?v=20261101b"></script>
+<script defer src="hero/StrataField.js?v=20261101b"></script>
+<script defer src="hero/ArcholithHero.js?v=20261101b"></script>
 <script>
 document.addEventListener("DOMContentLoaded", function() {
   /* Hero */

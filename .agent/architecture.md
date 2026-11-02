@@ -112,12 +112,12 @@ When `prefers-reduced-motion: reduce` is active, `ArcholithHero.js` skips scroll
 
 ### Logo System (`logos/`)
 
-5 SVG logo candidates ranked in `logos/README.md`:
-1. **K8** — Dropping keystone (primary, narrative strongest)
+The site uses **S5** in the nav and hero. The 5 SVG logo candidates are ranked in `logos/README.md`:
+1. **K8** — Dropping keystone (narrative strongest)
 2. **K2** — Minimal keystone (best for favicon)
 3. **K1** — Classic keystone (safest primary mark)
 4. **D4** — Doorway (non-keystone branch)
-5. **S5** — Strata column (supporting-system mark)
+5. **S5** — Strata column (in use)
 
 Logo exploration variants and utility HTML files were archived outside the public `archolith.dev` repo on 2026-07-07.
 
